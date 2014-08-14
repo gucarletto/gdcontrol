@@ -1,4 +1,4 @@
-package br.udesc.empds.dao;
+package java.br.udesc.gdc.dao;
 
 import java.util.List;
 
