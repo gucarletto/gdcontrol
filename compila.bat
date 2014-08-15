@@ -6,4 +6,4 @@ if not exist bin (
 )
 
 echo *** Compilando projeto ***
-javac -sourcepath src -d bin src/**.java
+javac -cp lib/jdom-2.0.5.jar -sourcepath src -d bin src\java\br\udesc\gdc\GDC.java

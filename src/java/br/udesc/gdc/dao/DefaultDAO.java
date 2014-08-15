@@ -2,6 +2,10 @@ package java.br.udesc.gdc.dao;
 
 import java.util.List;
 
+/**
+ * 
+ * @author gustavo
+ */
 public interface DefaultDAO<T extends Object> {
     
     public boolean inserir(T t);
