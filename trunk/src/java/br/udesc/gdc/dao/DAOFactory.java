@@ -1,5 +1,9 @@
 package java.br.udesc.gdc.dao;
 
+/**
+ * 
+ * @author gustavo
+ */
 public abstract class DAOFactory {
 
     public static final int XML = 1;
