@@ -10,12 +10,13 @@ public class Alimento {
     private int caloria;
     private int carboidrato;
     private int gordura;
-    private String nome;
     private int proteina;
+    private String nome;
+    private String medidaExata;
+    private String medidaUsual;
+    private String unidadeMedida;
     
     private GrupoAlimento grupoAlimento;
-    private MedidaExata medidaExata;
-    private MedidaUsual medidaUsual;
 
     public int getId() {
         return id;
@@ -57,12 +58,36 @@ public class Alimento {
         this.nome = nome;
     }
 
+    public String getMedidaExata() {
+        return medidaExata;
+    }
+
+    public void setMedidaExata(String medidaExata) {
+        this.medidaExata = medidaExata;
+    }
+
+    public String getMedidaUsual() {
+        return medidaUsual;
+    }
+
+    public void setMedidaUsual(String medidaUsual) {
+        this.medidaUsual = medidaUsual;
+    }
+
     public int getProteina() {
         return proteina;
     }
 
     public void setProteina(int proteina) {
         this.proteina = proteina;
+    }
+
+    public String getUnidadeMedida() {
+        return unidadeMedida;
+    }
+
+    public void setUnidadeMedida(String unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
     }
     
     public GrupoAlimento getGrupoAlimento() {
@@ -71,21 +96,5 @@ public class Alimento {
 
     public void setGrupoAlimento(GrupoAlimento grupoAlimento) {
         this.grupoAlimento = grupoAlimento;
-    }
-
-    public MedidaExata getMedidaExata() {
-        return medidaExata;
-    }
-
-    public void setMedidaExata(MedidaExata medidaExata) {
-        this.medidaExata = medidaExata;
-    }
-
-    public MedidaUsual getMedidaUsual() {
-        return medidaUsual;
-    }
-
-    public void setMedidaUsual(MedidaUsual medidaUsual) {
-        this.medidaUsual = medidaUsual;
     }
 }
