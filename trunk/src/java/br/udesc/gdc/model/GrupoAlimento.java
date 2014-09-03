@@ -8,7 +8,7 @@ public class GrupoAlimento {
     
     
     private int id;
-    private String descricao;
+    private String nome;
 
     public int getId() {
         return id;
@@ -18,11 +18,11 @@ public class GrupoAlimento {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
