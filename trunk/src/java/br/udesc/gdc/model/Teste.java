@@ -14,6 +14,8 @@ public class Teste {
     private Time hora;
     private String observacao;
     private float valor;
+    
+    private TipoTeste tipoTeste;
 
     public int getId() {
         return id;
@@ -53,5 +55,13 @@ public class Teste {
 
     public void setValor(float valor) {
         this.valor = valor;
+    }
+
+    public TipoTeste getTipoTeste() {
+        return tipoTeste;
+    }
+
+    public void setTipoTeste(TipoTeste tipoTeste) {
+        this.tipoTeste = tipoTeste;
     }
 }

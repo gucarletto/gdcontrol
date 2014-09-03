@@ -7,10 +7,11 @@ package java.br.udesc.gdc.model;
 public class Medicacao {
 
     private int id;
-    private String composicao;
     private String marca;
-    private String nomeFantasia;
-    private int tipo;
+    private String formaUso;
+    private String nomeComercial;
+    private String nomeQuimico;
+    private String observacao;
     private String unidade;
 
     public int getId() {
@@ -21,14 +22,6 @@ public class Medicacao {
         this.id = id;
     }
 
-    public String getComposicao() {
-        return composicao;
-    }
-
-    public void setComposicao(String composicao) {
-        this.composicao = composicao;
-    }
-
     public String getMarca() {
         return marca;
     }
@@ -37,20 +30,36 @@ public class Medicacao {
         this.marca = marca;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public String getFormaUso() {
+        return formaUso;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setFormaUso(String formaUso) {
+        this.formaUso = formaUso;
     }
 
-    public int getTipo() {
-        return tipo;
+    public String getNomeComercial() {
+        return nomeComercial;
     }
 
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
+    public void setNomeComercial(String nomeComercial) {
+        this.nomeComercial = nomeComercial;
+    }
+
+    public String getNomeQuimico() {
+        return nomeQuimico;
+    }
+
+    public void setNomeQuimico(String nomeQuimico) {
+        this.nomeQuimico = nomeQuimico;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     public String getUnidade() {
