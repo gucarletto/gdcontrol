@@ -11,7 +11,6 @@ public class Refeicao {
     
     private int id;
     private Date data;
-    private String local;
     
     private ArrayList<ItemRefeicao> itens;
 
@@ -29,14 +28,6 @@ public class Refeicao {
 
     public void setData(Date data) {
         this.data = data;
-    }
-
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
     }
 
     public ArrayList<ItemRefeicao> getItens() {

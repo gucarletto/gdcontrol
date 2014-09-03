@@ -12,12 +12,10 @@ public class Evento {
     private int id;
     private Date dataInicio;
     private Date dataFim;
-    private Time horaInicio;
-    private Time horaFim;
+    private Time hora;
     private String observacao;
     private int valor;
     
-    private Usuario usuario;
     private TipoEvento tipoEvento;
 
     public int getId() {
@@ -44,20 +42,12 @@ public class Evento {
         this.dataFim = dataFim;
     }
 
-    public Time getHoraInicio() {
-        return horaInicio;
+    public Time getHora() {
+        return hora;
     }
 
-    public void setHoraInicio(Time horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public Time getHoraFim() {
-        return horaFim;
-    }
-
-    public void setHoraFim(Time horaFim) {
-        this.horaFim = horaFim;
+    public void setHora(Time hora) {
+        this.hora = hora;
     }
 
     public String getObservacao() {
@@ -74,14 +64,6 @@ public class Evento {
 
     public void setValor(int valor) {
         this.valor = valor;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public TipoEvento getTipoEvento() {

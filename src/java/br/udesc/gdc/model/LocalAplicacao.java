@@ -4,10 +4,10 @@ package java.br.udesc.gdc.model;
  *
  * @author gustavo
  */
-public class TipoTeste {
-
+public class LocalAplicacao {
+    
     private int id;
-    private String descricao;
+    private int descricao;
 
     public int getId() {
         return id;
@@ -17,11 +17,11 @@ public class TipoTeste {
         this.id = id;
     }
 
-    public String getDescricao() {
+    public int getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(int descricao) {
         this.descricao = descricao;
     }
 }
