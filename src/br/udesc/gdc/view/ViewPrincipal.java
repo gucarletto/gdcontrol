@@ -29,6 +29,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
         menuRelatorios = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GD-Control");
+        setName("viewPrincipal"); // NOI18N
 
         menuCadastros.setText("Cadastros");
 
@@ -70,7 +72,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemGrupoAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGrupoAlimentoActionPerformed
-        // TODO add your handling code here:
+        ViewGrupoAlimento viewGrupoAlimento = new ViewGrupoAlimento(this, true);
+        viewGrupoAlimento.setVisible(true);
     }//GEN-LAST:event_itemGrupoAlimentoActionPerformed
 
     private void itemAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAlimentoActionPerformed
