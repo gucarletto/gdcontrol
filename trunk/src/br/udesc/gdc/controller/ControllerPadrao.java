@@ -1,6 +1,6 @@
-package java.br.udesc.gdc.controller;
+package br.udesc.gdc.controller;
 
-import java.br.udesc.gdc.dao.DAOFactory;
+import br.udesc.gdc.dao.DAOFactory;
 
 /**
  *

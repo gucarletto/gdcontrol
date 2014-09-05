@@ -1,4 +1,4 @@
-package java.br.udesc.gdc.dao;
+package br.udesc.gdc.dao;
 
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -141,11 +141,11 @@ public abstract class XMLDAO <T extends Object> extends XMLDAOFactory implements
             List ls = elementRaiz.getChildren();
 
             for (int i = 0; i < ls.size(); i++) {
-                Element el = (Element) list.get(i);
-                Cliente cliente = leituraRegistro(el);
-                if (procura.getCodigo() == cliente.getCodigo()) {
-                    return true;
-                }
+                //Element el = (Element) list.get(i);
+                //Cliente cliente = leituraRegistro(el);
+//                if (procura.getCodigo() == cliente.getCodigo()) {
+//                    return true;
+//                }
             }
         } catch (JDOMException e) {
             e.printStackTrace();

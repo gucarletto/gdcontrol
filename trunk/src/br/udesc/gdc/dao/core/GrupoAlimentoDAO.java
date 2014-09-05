@@ -1,6 +1,6 @@
-package java.br.udesc.gdc.dao.core;
+package br.udesc.gdc.dao.core;
 
-import java.br.udesc.gdc.dao.DefaultDAO;
+import br.udesc.gdc.dao.DefaultDAO;
 
 /**
  *

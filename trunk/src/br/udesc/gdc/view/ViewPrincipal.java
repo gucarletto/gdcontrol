@@ -1,4 +1,4 @@
-package java.br.udesc.gdc.view;
+package br.udesc.gdc.view;
 
 /**
  *
