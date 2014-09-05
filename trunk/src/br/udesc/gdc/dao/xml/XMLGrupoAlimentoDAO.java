@@ -22,7 +22,7 @@ public class XMLGrupoAlimentoDAO extends XMLDAO<Object> implements GrupoAlimento
     @Override
     protected GrupoAlimento leituraRegistro(Element element) {
         GrupoAlimento grp = new GrupoAlimento();
-        grp.setId(Integer.parseInt(element.getChildText("codigo")));
+        grp.setId(Integer.parseInt(element.getChildText("id")));
         grp.setDescricao(element.getChildText("descricao"));
         return grp;
     }
@@ -33,9 +33,9 @@ public class XMLGrupoAlimentoDAO extends XMLDAO<Object> implements GrupoAlimento
         elementId.setText(grp.getId() + "");
         elementGrp.addContent(elementId);
 
-        Element elementDescricao = new Element("descricao");
-        elementDescricao.setText(grp.getDescricao());
-        elementGrp.addContent(elementDescricao);
+        Element elementNome = new Element("descricao");
+        elementNome.setText(grp.getDescricao());
+        elementGrp.addContent(elementNome);
         
         return elementGrp;
     }
@@ -44,8 +44,8 @@ public class XMLGrupoAlimentoDAO extends XMLDAO<Object> implements GrupoAlimento
 //        Element elementId = el.getChild("id");
 //        elementId.setText(grp.getId()+ "");
 //
-//        Element elementNome = el.getChild("descricao");
-//        elementNome.setText(grp.getDescricao());
+//        Element elementDescricao = el.getChild("descricao");
+//        elementDescricao.setText(grp.getDescricao());
 //
 //        File arquivo = new File(getNomeArquivo());
 //        FileWriter fw;
