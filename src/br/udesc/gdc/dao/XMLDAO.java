@@ -18,9 +18,7 @@ import org.jdom2.output.XMLOutputter;
 public abstract class XMLDAO <T extends Object> extends XMLDAOFactory implements DefaultDAO<T> {
     
     public abstract String getNomeArquivo();
-    
-    protected abstract T leituraRegistro(Element element);
-    
+    protected abstract T leituraRegistro(Element element);    
     protected abstract Element criaElement(T t);
     
     //protected abstract void alteraRegistro(Document doc, Element e, T t);
@@ -41,9 +39,9 @@ public abstract class XMLDAO <T extends Object> extends XMLDAOFactory implements
             boolean existeRegistro = existeRegistro(t);
 
             if (!existeRegistro) {
-                Element elementCliente = criaElement(t);
+                Element element = criaElement(t);
 
-                elementRaiz.addContent(elementCliente);
+                elementRaiz.addContent(element);
                 FileWriter fw = new FileWriter(arquivo);
                 xout.output(doc, fw);
 
