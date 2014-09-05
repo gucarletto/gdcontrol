@@ -1,8 +1,8 @@
-package java.br.udesc.gdc.dao.xml;
+package br.udesc.gdc.dao.xml;
 
-import java.br.udesc.gdc.dao.XMLDAO;
-import java.br.udesc.gdc.dao.core.GrupoAlimentoDAO;
-import java.br.udesc.gdc.model.GrupoAlimento;
+import br.udesc.gdc.dao.XMLDAO;
+import br.udesc.gdc.dao.core.GrupoAlimentoDAO;
+import br.udesc.gdc.model.GrupoAlimento;
 import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -12,7 +12,7 @@ import org.jdom2.Element;
  *
  * @author gustavo
  */
-public class XMLGrupoAlimentoDAO extends XMLDAO<Object> implements GrupoAlimentoDAO{
+public abstract class XMLGrupoAlimentoDAO extends XMLDAO<Object> implements GrupoAlimentoDAO{
 
     @Override
     public String getNomeArquivo() {

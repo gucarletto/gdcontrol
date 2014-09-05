@@ -1,4 +1,4 @@
-package java.br.udesc.gdc.dao;
+package br.udesc.gdc.dao;
 
 /**
  * 

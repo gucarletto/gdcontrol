@@ -1,4 +1,4 @@
-package java.br.udesc.gdc.model;
+package br.udesc.gdc.model;
 
 import java.util.ArrayList;
 import java.util.Date;
