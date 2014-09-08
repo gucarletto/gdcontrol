@@ -1,7 +1,5 @@
 package br.udesc.gdc.view;
 
-import javax.swing.JComponent;
-
 /**
  *
  * @author gustavo
@@ -14,8 +12,8 @@ public class ViewGrupoAlimento extends ViewPadrao {
     public ViewGrupoAlimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.add(edId);
-        this.add(edDescricao);
+        this.addComponenteTexto(edId);
+        this.addComponenteTexto(edDescricao);
     }
 
     /**
@@ -33,10 +31,14 @@ public class ViewGrupoAlimento extends ViewPadrao {
         edDescricao = new javax.swing.JTextField();
         btConfirmar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
-        btCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("dialogGrupoAlimento"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         labelId.setText("ID:");
 
@@ -58,8 +60,6 @@ public class ViewGrupoAlimento extends ViewPadrao {
             }
         });
 
-        btCancelar.setText("Cancelar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,9 +78,7 @@ public class ViewGrupoAlimento extends ViewPadrao {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btCancelar)))
+                        .addComponent(btLimpar)))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -97,8 +95,7 @@ public class ViewGrupoAlimento extends ViewPadrao {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
-                    .addComponent(btLimpar)
-                    .addComponent(btCancelar))
+                    .addComponent(btLimpar))
                 .addContainerGap())
         );
 
@@ -112,6 +109,10 @@ public class ViewGrupoAlimento extends ViewPadrao {
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         this.limpar();
     }//GEN-LAST:event_btLimparActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -156,7 +157,6 @@ public class ViewGrupoAlimento extends ViewPadrao {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCancelar;
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btLimpar;
     private javax.swing.JTextField edDescricao;
