@@ -2,5 +2,5 @@
 
 if exist bin (
 	echo *** Executando projeto ***
-	java -cp bin Principal
+	java -cp bin ViewPrincipal
 )
