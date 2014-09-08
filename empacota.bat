@@ -11,5 +11,5 @@ if not exist jar (
 
 echo *** Empacotando projeto ***
 cd bin
-jar cvfe ..\jar\projeto1.jar Principal *.class
+jar cvfe ..\jar\gdcontrol.jar ViewPrincipal *.class
 cd ..
