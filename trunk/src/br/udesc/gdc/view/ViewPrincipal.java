@@ -24,9 +24,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         menuPrincipal = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         itemGrupoAlimento = new javax.swing.JMenuItem();
         itemAlimento = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
+        menuSincronizacao = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GD-Control");
@@ -34,13 +36,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         menuCadastros.setText("Cadastros");
 
+        jMenu1.setText("Alimentação");
+
         itemGrupoAlimento.setText("Grupo Alimento");
         itemGrupoAlimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemGrupoAlimentoActionPerformed(evt);
             }
         });
-        menuCadastros.add(itemGrupoAlimento);
+        jMenu1.add(itemGrupoAlimento);
 
         itemAlimento.setText("Alimento");
         itemAlimento.addActionListener(new java.awt.event.ActionListener() {
@@ -48,12 +52,17 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 itemAlimentoActionPerformed(evt);
             }
         });
-        menuCadastros.add(itemAlimento);
+        jMenu1.add(itemAlimento);
+
+        menuCadastros.add(jMenu1);
 
         menuPrincipal.add(menuCadastros);
 
         menuRelatorios.setText("Relatórios");
         menuPrincipal.add(menuRelatorios);
+
+        menuSincronizacao.setText("Sincronização");
+        menuPrincipal.add(menuSincronizacao);
 
         setJMenuBar(menuPrincipal);
 
@@ -118,8 +127,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemAlimento;
     private javax.swing.JMenuItem itemGrupoAlimento;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JMenu menuRelatorios;
+    private javax.swing.JMenu menuSincronizacao;
     // End of variables declaration//GEN-END:variables
 }

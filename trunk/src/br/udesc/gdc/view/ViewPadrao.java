@@ -4,6 +4,7 @@ import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -11,27 +12,27 @@ import javax.swing.JDialog;
  */
 public abstract class ViewPadrao extends JDialog{
     
-    private ArrayList<JComponent> componentes;
+    private ArrayList<JTextComponent> componentesTexto = new ArrayList<JTextComponent>();
 
     public ViewPadrao(Frame owner, boolean modal) {
         super(owner, modal);
     }
 
-    public ArrayList<JComponent> getComponentes() {
-        return componentes;
+    public ArrayList<JTextComponent> getComponentesTexto() {
+        return componentesTexto;
     }
 
-    public void setComponentes(ArrayList<JComponent> componentes) {
-        this.componentes = componentes;
+    public void setComponentesTexto(ArrayList<JTextComponent> componentesTexto) {
+        this.componentesTexto = componentesTexto;
     }
     
-    public void addComponente(JComponent componente) {
-        this.componentes.add(componente);
+    public void addComponenteTexto(JTextComponent componenteTexto) {
+        this.componentesTexto.add(componenteTexto);
     }
     
     protected void limpar(){
-        for(JComponent componente : this.getComponentes()){
-            //switch(componente.clas)
+        for(JTextComponent componenteTexto : this.getComponentesTexto()){
+             componenteTexto.setText("");
         }
     }
 }
