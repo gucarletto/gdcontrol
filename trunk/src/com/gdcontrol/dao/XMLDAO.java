@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.jdom2.output.XMLOutputter;
-import org.omg.CORBA.Context;
 
 /**
  *
@@ -22,7 +21,7 @@ public abstract class XMLDAO <T extends Object> extends XMLDAOFactory implements
     protected abstract T leituraRegistro(Element element);    
     protected abstract Element criaElement(T t);
     
-    //protected abstract void alteraRegistro(Document doc, Element e, T t);
+    protected abstract void alteraRegistro(Document doc, Element e, T t);
 
     public boolean inserir(T t) {
         boolean inseriu = false;
@@ -51,40 +50,37 @@ public abstract class XMLDAO <T extends Object> extends XMLDAOFactory implements
             } else {
                 JOptionPane.showMessageDialog(null,"Este Registro ja existe");
             }
-        } catch (JDOMException e) {
-             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (JDOMException | IOException e) {
              e.printStackTrace();
         }
         return inseriu;
     }
 
-//    @Override
-//    public boolean alterar(T t) {
-//        boolean achou = false;
-//        File arquivo = new File(getNomeArquivo());
-//        SAXBuilder builder = new SAXBuilder(true);
-//        builder.setFeature("http://apache.org/xml/features/validation/schema", true);
-//
-//        try {
-//            Document doc = builder.build(arquivo);
-//            Element elementRaiz = doc.getRootElement();
-//            List list = elementRaiz.getChildren();
-//            int i = 0;
-//            while ((i < list.size()) && (achou == false)) {
-//
-//                Element element = (Element) list.get(i);
-//                T procura = leituraRegistro(element);
-//
-//                alteraRegistro(doc, element, procura);
-//                i = i + 1;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return achou;
-//    }
+    public boolean alterar(T t) {
+        boolean achou = false;
+        File arquivo = new File(getNomeArquivo());
+        SAXBuilder builder = new SAXBuilder(true);
+        builder.setFeature("http://apache.org/xml/features/validation/schema", true);
+
+        try {
+            Document doc = builder.build(arquivo);
+            Element elementRaiz = doc.getRootElement();
+            List list = elementRaiz.getChildren();
+            int i = 0;
+            while ((i < list.size()) && (achou == false)) {
+
+                Element element = (Element) list.get(i);
+                T procura = leituraRegistro(element);
+
+                alteraRegistro(doc, element, procura);
+                i = i + 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return achou;
+    }
 //
 //    @Override
 //    public boolean excluir(T procura) {

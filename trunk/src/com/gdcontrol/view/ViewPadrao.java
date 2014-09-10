@@ -1,8 +1,8 @@
 package br.udesc.gdc.view;
 
+import com.gdcontrol.controle.ControllerPadrao;
 import java.awt.Frame;
 import java.util.ArrayList;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.text.JTextComponent;
 
@@ -17,6 +17,8 @@ public abstract class ViewPadrao extends JDialog{
     public ViewPadrao(Frame owner, boolean modal) {
         super(owner, modal);
     }
+    
+    public abstract ControllerPadrao getController();
 
     public ArrayList<JTextComponent> getComponentesTexto() {
         return componentesTexto;
