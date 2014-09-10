@@ -1,7 +1,7 @@
-package br.udesc.gdc.view;
+package com.gdcontrol.desktop.visao;
 
-import com.gdcontrol.controle.ControllerGrupoAlimento;
-import com.gdcontrol.controle.ControllerPadrao;
+import com.gdcontrol.desktop.controle.ControllerGrupoAlimento;
+import com.gdcontrol.desktop.controle.ControllerPadrao;
 
 /**
  *

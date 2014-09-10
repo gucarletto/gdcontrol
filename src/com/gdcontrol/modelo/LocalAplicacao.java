@@ -1,14 +1,13 @@
-package br.udesc.gdc.model;
+package com.gdcontrol.modelo;
 
 /**
- * 
+ *
  * @author gustavo
  */
-public class GrupoAlimento {
-    
+public class LocalAplicacao {
     
     private int id;
-    private String descricao;
+    private int descricao;
 
     public int getId() {
         return id;
@@ -18,11 +17,11 @@ public class GrupoAlimento {
         this.id = id;
     }
 
-    public String getDescricao() {
+    public int getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(int descricao) {
         this.descricao = descricao;
     }
 }

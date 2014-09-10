@@ -1,7 +1,7 @@
-package br.udesc.gdc.dao.core;
+package com.gdcontrol.dao.core;
 
-import br.udesc.gdc.dao.DefaultDAO;
-import br.udesc.gdc.model.GrupoAlimento;
+import com.gdcontrol.dao.DefaultDAO;
+import com.gdcontrol.modelo.GrupoAlimento;
 
 /**
  *

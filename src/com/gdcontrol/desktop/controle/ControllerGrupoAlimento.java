@@ -1,7 +1,7 @@
-package com.gdcontrol.controle;
+package com.gdcontrol.desktop.controle;
 
-import br.udesc.gdc.dao.core.GrupoAlimentoDAO;
-import br.udesc.gdc.model.GrupoAlimento;
+import com.gdcontrol.dao.core.GrupoAlimentoDAO;
+import com.gdcontrol.modelo.GrupoAlimento;
 
 /**
  *
@@ -16,8 +16,9 @@ public class ControllerGrupoAlimento extends ControllerPadrao<GrupoAlimento>{
         if(t.getId() != 0){
             grupoAlimentoDao.inserir(t);
         }else{
-            grupoAlimentoDao.
+            grupoAlimentoDao.alterar(t);
         }
+        return true;
     }
 
     @Override

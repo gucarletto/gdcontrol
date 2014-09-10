@@ -1,4 +1,4 @@
-package br.udesc.gdc.dao;
+package com.gdcontrol.dao;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package br.udesc.gdc.view;
+package com.gdcontrol.desktop.visao;
 
 /**
  *
