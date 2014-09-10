@@ -1,10 +1,21 @@
 package br.udesc.gdc.view;
 
+import com.gdcontrol.controle.ControllerGrupoAlimento;
+import com.gdcontrol.controle.ControllerPadrao;
+
 /**
  *
  * @author gustavo
  */
 public class ViewGrupoAlimento extends ViewPadrao {
+    
+    private ControllerGrupoAlimento controller = new ControllerGrupoAlimento();
+
+    @Override
+    public ControllerPadrao getController() {
+        return this.controller;
+    }
+    
 
     /**
      * Creates new form ViewGrupoAlimento
@@ -52,6 +63,11 @@ public class ViewGrupoAlimento extends ViewPadrao {
         });
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         btLimpar.setText("Limpar");
         btLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +129,12 @@ public class ViewGrupoAlimento extends ViewPadrao {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         
     }//GEN-LAST:event_formWindowActivated
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        if(edId.getText().isEmpty()){
+            
+        }
+    }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
