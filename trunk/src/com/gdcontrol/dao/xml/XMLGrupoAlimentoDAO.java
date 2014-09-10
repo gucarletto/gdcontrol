@@ -1,8 +1,8 @@
-package br.udesc.gdc.dao.xml;
+package com.gdcontrol.dao.xml;
 
-import br.udesc.gdc.dao.XMLDAO;
-import br.udesc.gdc.dao.core.GrupoAlimentoDAO;
-import br.udesc.gdc.model.GrupoAlimento;
+import com.gdcontrol.dao.XMLDAO;
+import com.gdcontrol.dao.core.GrupoAlimentoDAO;
+import com.gdcontrol.modelo.GrupoAlimento;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

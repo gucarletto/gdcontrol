@@ -1,4 +1,4 @@
-package br.udesc.gdc.model;
+package com.gdcontrol.modelo;
 
 import java.util.Date;
 
@@ -12,6 +12,8 @@ public abstract class Pessoa {
     private String nome;
     private int sexo;
     private Date dataNascimento;
+    private double altura;
+    private double peso;
 
     public int getId() {
         return id;
@@ -43,5 +45,21 @@ public abstract class Pessoa {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
     }
 }

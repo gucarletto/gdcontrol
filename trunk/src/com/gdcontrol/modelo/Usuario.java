@@ -1,4 +1,4 @@
-package br.udesc.gdc.model;
+package com.gdcontrol.modelo;
 
 import java.util.Date;
 

@@ -1,6 +1,6 @@
-package br.udesc.gdc.view;
+package com.gdcontrol.desktop.visao;
 
-import com.gdcontrol.controle.ControllerPadrao;
+import com.gdcontrol.desktop.controle.ControllerPadrao;
 import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.JDialog;

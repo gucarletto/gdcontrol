@@ -1,6 +1,6 @@
-package com.gdcontrol.controle;
+package com.gdcontrol.desktop.controle;
 
-import br.udesc.gdc.dao.DAOFactory;
+import com.gdcontrol.dao.DAOFactory;
 
 /**
  *

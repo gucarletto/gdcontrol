@@ -1,13 +1,14 @@
-package br.udesc.gdc.model;
+package com.gdcontrol.modelo;
 
 /**
  *
  * @author gustavo
  */
-public class ItemRefeicao {
-
+public class Ingrediente {
+    
     private int id;
     private int quantidade;
+    
     private Alimento alimento;
 
     public int getId() {
@@ -17,7 +18,7 @@ public class ItemRefeicao {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public int getQuantidade() {
         return quantidade;
     }
@@ -32,5 +33,5 @@ public class ItemRefeicao {
 
     public void setAlimento(Alimento alimento) {
         this.alimento = alimento;
-    }
+    }    
 }
