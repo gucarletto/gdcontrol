@@ -1,6 +1,6 @@
 package com.gdcontrol.desktop.visao;
 
-import com.gdcontrol.desktop.controle.ControllerPadrao;
+import com.gdcontrol.desktop.controle.ControlePadrao;
 import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.JDialog;
@@ -10,15 +10,15 @@ import javax.swing.text.JTextComponent;
  *
  * @author gustavo
  */
-public abstract class ViewPadrao extends JDialog{
+public abstract class VisaoPadrao extends JDialog{
     
     private ArrayList<JTextComponent> componentesTexto = new ArrayList<JTextComponent>();
 
-    public ViewPadrao(Frame owner, boolean modal) {
+    public VisaoPadrao(Frame owner, boolean modal) {
         super(owner, modal);
     }
     
-    public abstract ControllerPadrao getController();
+    public abstract ControlePadrao getController();
 
     public ArrayList<JTextComponent> getComponentesTexto() {
         return componentesTexto;
