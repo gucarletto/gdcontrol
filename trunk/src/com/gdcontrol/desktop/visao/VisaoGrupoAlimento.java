@@ -1,26 +1,28 @@
 package com.gdcontrol.desktop.visao;
 
-import com.gdcontrol.desktop.controle.ControllerGrupoAlimento;
-import com.gdcontrol.desktop.controle.ControllerPadrao;
+import com.gdcontrol.desktop.controle.ControleGrupoAlimento;
+import com.gdcontrol.desktop.controle.ControlePadrao;
+import com.gdcontrol.entidade.GrupoAlimento;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author gustavo
  */
-public class ViewGrupoAlimento extends ViewPadrao {
+public class VisaoGrupoAlimento extends VisaoPadrao {
     
-    private ControllerGrupoAlimento controller = new ControllerGrupoAlimento();
+    private ControleGrupoAlimento controle = new ControleGrupoAlimento();
 
     @Override
-    public ControllerPadrao getController() {
-        return this.controller;
+    public ControlePadrao getController() {
+        return this.controle;
     }
     
 
     /**
      * Creates new form ViewGrupoAlimento
      */
-    public ViewGrupoAlimento(java.awt.Frame parent, boolean modal) {
+    public VisaoGrupoAlimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.addComponenteTexto(edId);
@@ -44,6 +46,7 @@ public class ViewGrupoAlimento extends ViewPadrao {
         btLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Grupo Alimento");
         setName("dialogGrupoAlimento"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -61,6 +64,8 @@ public class ViewGrupoAlimento extends ViewPadrao {
                 edIdActionPerformed(evt);
             }
         });
+
+        edDescricao.setEnabled(false);
 
         btConfirmar.setText("Confirmar");
         btConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,12 +95,12 @@ public class ViewGrupoAlimento extends ViewPadrao {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(edId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(edDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btLimpar)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +113,7 @@ public class ViewGrupoAlimento extends ViewPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(edDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
                     .addComponent(btLimpar))
@@ -131,9 +136,17 @@ public class ViewGrupoAlimento extends ViewPadrao {
     }//GEN-LAST:event_formWindowActivated
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        if(edId.getText().isEmpty()){
-            
+        GrupoAlimento grupo = new GrupoAlimento();
+        if(!edId.getText().isEmpty()){
+            grupo.setId(Integer.parseInt(edId.getText()));
         }
+        grupo.setDescricao(edDescricao.getText());
+        if(controle.salvar(grupo)){
+            JOptionPane.showMessageDialog(this, "Gravado com sucesso");
+        }else{
+            JOptionPane.showMessageDialog(this, "Erro na gravação");
+        }
+        dispose();
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
@@ -153,20 +166,20 @@ public class ViewGrupoAlimento extends ViewPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ViewGrupoAlimento dialog = new ViewGrupoAlimento(new javax.swing.JFrame(), true);
+                VisaoGrupoAlimento dialog = new VisaoGrupoAlimento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -7,7 +7,7 @@ import com.gdcontrol.dao.DAOFactory;
  * @author gustavo
  * @param <T>
  */
-public abstract class ControllerPadrao<T extends Object>{
+public abstract class ControlePadrao<T extends Object>{
     
     private final DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.XML);
     
