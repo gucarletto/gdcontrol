@@ -13,14 +13,14 @@ import com.gdcontrol.desktop.controle.ControleTipoTeste;
  *
  * @author gustavo
  */
-public class VisaoTipoTeste extends VisaoPadrao {
+public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
     
     private ControleTipoTeste controle = new ControleTipoTeste();
 
     /**
      * Creates new form VisaoTipoTeste
      */
-    public VisaoTipoTeste(java.awt.Frame parent, boolean modal) {
+    public VisaoManutencaoTipoTeste(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.addComponenteTexto(edId);
@@ -44,6 +44,7 @@ public class VisaoTipoTeste extends VisaoPadrao {
         btLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tipo Teste");
 
         jLabel1.setText("ID:");
 
@@ -96,7 +97,7 @@ public class VisaoTipoTeste extends VisaoPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
                     .addComponent(btLimpar))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,20 +124,20 @@ public class VisaoTipoTeste extends VisaoPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoTipoTeste dialog = new VisaoTipoTeste(new javax.swing.JFrame(), true);
+                VisaoManutencaoTipoTeste dialog = new VisaoManutencaoTipoTeste(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -158,7 +159,7 @@ public class VisaoTipoTeste extends VisaoPadrao {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public ControlePadrao getController() {
+    public ControlePadrao getControle() {
         return this.controle;
     }
 }

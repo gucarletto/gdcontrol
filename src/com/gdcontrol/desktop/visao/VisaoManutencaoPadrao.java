@@ -10,15 +10,15 @@ import javax.swing.text.JTextComponent;
  *
  * @author gustavo
  */
-public abstract class VisaoPadrao extends JDialog{
+public abstract class VisaoManutencaoPadrao extends JDialog{
     
     private ArrayList<JTextComponent> componentesTexto = new ArrayList<JTextComponent>();
+    
+    public abstract ControlePadrao getControle();
 
-    public VisaoPadrao(Frame owner, boolean modal) {
+    public VisaoManutencaoPadrao(Frame owner, boolean modal) {
         super(owner, modal);
     }
-    
-    public abstract ControlePadrao getController();
 
     public ArrayList<JTextComponent> getComponentesTexto() {
         return componentesTexto;

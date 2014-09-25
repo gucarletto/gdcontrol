@@ -1,6 +1,7 @@
 package com.gdcontrol.desktop.controle;
 
 import com.gdcontrol.entidade.TipoTeste;
+import java.util.List;
 
 /**
  *
@@ -9,22 +10,27 @@ import com.gdcontrol.entidade.TipoTeste;
 public class ControleTipoTeste extends ControlePadrao<TipoTeste>{
 
     @Override
-    public boolean salvar(TipoTeste t) {
+    public void salvar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean excluir(TipoTeste t) {
+    public void excluir(TipoTeste t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean persistir(TipoTeste t) {
+    public List<TipoTeste> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean listar(TipoTeste t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public TipoTeste getModelo() {
+        return this.modelo;
+    }
+
+    @Override
+    public void setModelo(TipoTeste modelo) {
+        this.modelo = modelo;
     }
 }
