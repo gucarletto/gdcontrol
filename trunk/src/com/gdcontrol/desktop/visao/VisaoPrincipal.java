@@ -1,8 +1,6 @@
 package com.gdcontrol.desktop.visao;
 
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 /**
@@ -29,10 +27,21 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
         btMedicamentos = new javax.swing.JButton();
         btGrupoAlimento = new javax.swing.JButton();
-        btPerfil = new javax.swing.JButton();
+        btUsuario = new javax.swing.JButton();
+        btAlimento = new javax.swing.JButton();
+        btRefeicao = new javax.swing.JButton();
+        btAplicacao = new javax.swing.JButton();
+        btLocalAplicacao = new javax.swing.JButton();
+        btMedico = new javax.swing.JButton();
+        btPosologia = new javax.swing.JButton();
+        btTipoTeste = new javax.swing.JButton();
+        btTeste = new javax.swing.JButton();
+        btSincronizacao = new javax.swing.JButton();
+        btRelatorios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GD-Control");
+        setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(getIconImage());
         setName("viewPrincipal"); // NOI18N
 
@@ -58,30 +67,92 @@ public class VisaoPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/icone_perfil.png"))); // NOI18N
+        btUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/icone_perfil.png"))); // NOI18N
+
+        btAlimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/alimento.png"))); // NOI18N
+
+        btRefeicao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/refeicao.png"))); // NOI18N
+
+        btAplicacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/aplicacao.png"))); // NOI18N
+
+        btLocalAplicacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/localAplicacao.png"))); // NOI18N
+        btLocalAplicacao.setBorder(new javax.swing.border.MatteBorder(null));
+        btLocalAplicacao.setPreferredSize(new java.awt.Dimension(68, 68));
+
+        btMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/medico.png"))); // NOI18N
+
+        btPosologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/posologia.png"))); // NOI18N
+
+        btTipoTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/tipo_teste.png"))); // NOI18N
+        btTipoTeste.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btTipoTesteMouseClicked(evt);
+            }
+        });
+
+        btTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/teste.png"))); // NOI18N
+
+        btSincronizacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/sincronizacao.png"))); // NOI18N
+
+        btRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/relatorios.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(btGrupoAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(btMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(566, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addComponent(btGrupoAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btTipoTeste, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btTeste, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPosologia, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btSincronizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btLocalAplicacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRelatorios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRefeicao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(btAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btRefeicao, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 72, Short.MAX_VALUE)
                     .addComponent(btGrupoAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btMedicamentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(394, Short.MAX_VALUE))
+                    .addComponent(btAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btLocalAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btPosologia, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btTipoTeste, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btTeste)
+                    .addComponent(btSincronizacao)
+                    .addComponent(btRelatorios))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -92,14 +163,19 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btMedicamentosActionPerformed
 
     private void btGrupoAlimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btGrupoAlimentoMouseClicked
-        VisaoGrupoAlimento viewGrupoAlimento = new VisaoGrupoAlimento(this, true);
-        viewGrupoAlimento.setVisible(true);
+        VisaoConsultaGrupoAlimento visaoGrupoAlimento = new VisaoConsultaGrupoAlimento(this, true);
+        visaoGrupoAlimento.setVisible(true);
     }//GEN-LAST:event_btGrupoAlimentoMouseClicked
 
     private void btMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btMedicamentosMouseClicked
-        VisaoTipoTeste tipoTes = new VisaoTipoTeste(this, true);
-        tipoTes.setVisible(true);
+        VisaoManutencaoMedicamento visaoMedicamento = new VisaoManutencaoMedicamento(this, true);
+        visaoMedicamento.setVisible(true);
     }//GEN-LAST:event_btMedicamentosMouseClicked
+
+    private void btTipoTesteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btTipoTesteMouseClicked
+        VisaoManutencaoTipoTeste visaoTipoTeste = new VisaoManutencaoTipoTeste(this, true);
+        visaoTipoTeste.setVisible(true);
+    }//GEN-LAST:event_btTipoTesteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -143,8 +219,18 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAlimento;
+    private javax.swing.JButton btAplicacao;
     private javax.swing.JButton btGrupoAlimento;
+    private javax.swing.JButton btLocalAplicacao;
     private javax.swing.JButton btMedicamentos;
-    private javax.swing.JButton btPerfil;
+    private javax.swing.JButton btMedico;
+    private javax.swing.JButton btPosologia;
+    private javax.swing.JButton btRefeicao;
+    private javax.swing.JButton btRelatorios;
+    private javax.swing.JButton btSincronizacao;
+    private javax.swing.JButton btTeste;
+    private javax.swing.JButton btTipoTeste;
+    private javax.swing.JButton btUsuario;
     // End of variables declaration//GEN-END:variables
 }

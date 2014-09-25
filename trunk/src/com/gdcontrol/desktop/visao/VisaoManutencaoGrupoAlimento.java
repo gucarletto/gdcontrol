@@ -4,30 +4,13 @@ import com.gdcontrol.desktop.controle.ControleGrupoAlimento;
 import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.entidade.GrupoAlimento;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
  * @author gustavo
  */
-public class VisaoGrupoAlimento extends VisaoPadrao {
-    
-    private ControleGrupoAlimento controle = new ControleGrupoAlimento();
-
-    @Override
-    public ControlePadrao getController() {
-        return this.controle;
-    }
-    
-
-    /**
-     * Creates new form ViewGrupoAlimento
-     */
-    public VisaoGrupoAlimento(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-        this.addComponenteTexto(edId);
-        this.addComponenteTexto(edDescricao);
-    }
+public class VisaoManutencaoGrupoAlimento extends VisaoManutencaoPadrao {
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,14 +41,12 @@ public class VisaoGrupoAlimento extends VisaoPadrao {
 
         jLabel1.setText("Descrição:");
 
-        edId.setEditable(false);
+        edId.setEnabled(false);
         edId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 edIdActionPerformed(evt);
             }
         });
-
-        edDescricao.setEnabled(false);
 
         btConfirmar.setText("Confirmar");
         btConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,16 +117,9 @@ public class VisaoGrupoAlimento extends VisaoPadrao {
     }//GEN-LAST:event_formWindowActivated
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        GrupoAlimento grupo = new GrupoAlimento();
-        if(!edId.getText().isEmpty()){
-            grupo.setId(Integer.parseInt(edId.getText()));
-        }
-        grupo.setDescricao(edDescricao.getText());
-        if(controle.salvar(grupo)){
-            JOptionPane.showMessageDialog(this, "Gravado com sucesso");
-        }else{
-            JOptionPane.showMessageDialog(this, "Erro na gravação");
-        }
+        this.controle = (ControleGrupoAlimento) getControle();
+        this.controle.setTela(this);
+        this.controle.salvar();
         dispose();
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -166,20 +140,20 @@ public class VisaoGrupoAlimento extends VisaoPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoGrupoAlimento dialog = new VisaoGrupoAlimento(new javax.swing.JFrame(), true);
+                VisaoManutencaoGrupoAlimento dialog = new VisaoManutencaoGrupoAlimento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -199,4 +173,39 @@ public class VisaoGrupoAlimento extends VisaoPadrao {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelId;
     // End of variables declaration//GEN-END:variables
+
+    private ControleGrupoAlimento controle = new ControleGrupoAlimento();
+
+    @Override
+    public ControlePadrao getControle() {
+        return this.controle;
+    }
+
+    /**
+     * Creates new form ViewGrupoAlimento
+     */
+    public VisaoManutencaoGrupoAlimento(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        this.addComponenteTexto(edId);
+        this.addComponenteTexto(edDescricao);
+    }
+
+    public JTextField getEdDescricao() {
+        return edDescricao;
+    }
+
+    public void setEdDescricao(JTextField edDescricao) {
+        this.edDescricao = edDescricao;
+    }
+
+    public JTextField getEdId() {
+        return edId;
+    }
+
+    public void setEdId(JTextField edId) {
+        this.edId = edId;
+    }
+    
+    
 }
