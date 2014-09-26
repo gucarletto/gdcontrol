@@ -5,6 +5,7 @@ import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.util.tablemodel.GrupoAlimentoTableModel;
 import com.gdcontrol.entidade.GrupoAlimento;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,6 +63,11 @@ public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
                 btAlterarMouseClicked(evt);
             }
         });
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,8 +107,11 @@ public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
     private void btExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExcluirMouseClicked
         int indice = tbGrupoAlimento.getSelectedRow();
         if (indice >= 0) {
-            getControle().excluir(tableModelGrupoAlimento.getGrupoAlimento(indice));
-            carregaGrupoAlimentos();
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Grupo de Alimento selecionado?");
+            if(opcao == JOptionPane.YES_OPTION){
+                getControle().excluir(tableModelGrupoAlimento.getGrupoAlimento(indice));
+                carregaGrupoAlimentos();
+            }
         }
     }//GEN-LAST:event_btExcluirMouseClicked
 
@@ -110,10 +119,18 @@ public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
         int indice = tbGrupoAlimento.getSelectedRow();
         if (indice >= 0) {
             VisaoManutencaoGrupoAlimento manutencao = new VisaoManutencaoGrupoAlimento(null, true);
-            manutencao.getControle().setModelo(tableModelGrupoAlimento.getGrupoAlimento(indice));
+            ControleGrupoAlimento controle = (ControleGrupoAlimento) manutencao.getControle();
+            controle.setModelo(tableModelGrupoAlimento.getGrupoAlimento(indice));
+            controle.setTela(manutencao);
+            controle.carregaTela();
+            manutencao.setVisible(true);
             carregaGrupoAlimentos();
         }
     }//GEN-LAST:event_btAlterarMouseClicked
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btAlterarActionPerformed
 
     /**
      * @param args the command line arguments
