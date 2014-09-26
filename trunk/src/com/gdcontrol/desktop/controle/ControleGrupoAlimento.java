@@ -21,7 +21,6 @@ public class ControleGrupoAlimento extends ControlePadrao<GrupoAlimento>{
         GrupoAlimento grupo = (GrupoAlimento) this.getModelo();
         grupo.setDescricao(this.tela.getEdDescricao().getText());
         if(!this.tela.getEdId().getText().isEmpty()){
-            grupo.setId(Integer.parseInt(this.tela.getEdId().getText()));
             salvou = grupoAlimentoDao.alterar(grupo);
         }else{
             salvou = grupoAlimentoDao.inserir(grupo);
@@ -66,5 +65,10 @@ public class ControleGrupoAlimento extends ControlePadrao<GrupoAlimento>{
 
     public void setTela(VisaoManutencaoGrupoAlimento tela) {
         this.tela = tela;
+    }
+    
+    public void carregaTela(){
+        this.tela.getEdId().setText(this.modelo.getId() + "");
+        this.tela.getEdDescricao().setText(this.modelo.getDescricao());
     }
 }
