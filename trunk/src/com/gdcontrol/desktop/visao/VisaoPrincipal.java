@@ -173,7 +173,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btMedicamentosMouseClicked
 
     private void btTipoTesteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btTipoTesteMouseClicked
-        VisaoManutencaoTipoTeste visaoTipoTeste = new VisaoManutencaoTipoTeste(this, true);
+        VisaoConsultaTipoTeste visaoTipoTeste = new VisaoConsultaTipoTeste(this, true);
         visaoTipoTeste.setVisible(true);
     }//GEN-LAST:event_btTipoTesteMouseClicked
 

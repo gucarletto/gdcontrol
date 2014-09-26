@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.gdcontrol.desktop.visao;
 
 import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.controle.ControleTipoTeste;
+import javax.swing.JTextField;
 
 /**
  *
@@ -53,6 +48,11 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
         jLabel2.setText("Descrição:");
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         btLimpar.setText("Limpar");
         btLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +106,13 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         this.limpar();
     }//GEN-LAST:event_btLimparActionPerformed
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        this.controle = (ControleTipoTeste) getControle();
+        this.controle.setTela(this);
+        this.controle.salvar();
+        dispose();
+    }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,5 +168,21 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
     @Override
     public ControlePadrao getControle() {
         return this.controle;
+    }
+
+    public JTextField getEdDescricao() {
+        return edDescricao;
+    }
+
+    public void setEdDescricao(JTextField edDescricao) {
+        this.edDescricao = edDescricao;
+    }
+
+    public JTextField getEdId() {
+        return edId;
+    }
+
+    public void setEdId(JTextField edId) {
+        this.edId = edId;
     }
 }

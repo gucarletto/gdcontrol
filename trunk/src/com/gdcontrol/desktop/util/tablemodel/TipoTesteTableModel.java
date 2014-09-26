@@ -1,6 +1,6 @@
 package com.gdcontrol.desktop.util.tablemodel;
 
-import com.gdcontrol.entidade.GrupoAlimento;
+import com.gdcontrol.entidade.TipoTeste;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -8,13 +8,13 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author gustavo
  */
-public class GrupoAlimentoTableModel extends AbstractTableModel{
+public class TipoTesteTableModel extends AbstractTableModel{
     
-    private ArrayList<GrupoAlimento> grupos = new ArrayList<>();
+    private ArrayList<TipoTeste> tipos = new ArrayList<>();
 
     @Override
     public int getRowCount() {
-        return grupos.size();
+        return tipos.size();
     }
 
     @Override
@@ -24,13 +24,13 @@ public class GrupoAlimentoTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        GrupoAlimento grp = grupos.get(rowIndex);
+        TipoTeste tip = tipos.get(rowIndex);
         switch(columnIndex){
             case 0:{
-                return grp.getId();
+                return tip.getId();
             }
             default:{
-                return grp.getDescricao();
+                return tip.getDescricao();
             }
         }
     }
@@ -47,16 +47,17 @@ public class GrupoAlimentoTableModel extends AbstractTableModel{
         }
     }
     
-    public void addGrupoAlimento(GrupoAlimento grupo){
-        grupos.add(grupo);
-        fireTableRowsInserted(grupos.size()-1, grupos.size()-1);
+    public void addTipoTeste(TipoTeste tipo){
+        tipos.add(tipo);
+        fireTableRowsInserted(tipos.size()-1, tipos.size()-1);
     }
     
-    public GrupoAlimento getGrupoAlimento(int indice){
-        return grupos.get(indice);
+    public TipoTeste getTipoTeste(int indice){
+        return tipos.get(indice);
     }
 
     public void limpar(){
-        grupos.clear();
+        tipos.clear();
     }
+    
 }
