@@ -168,7 +168,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btGrupoAlimentoMouseClicked
 
     private void btMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btMedicamentosMouseClicked
-        VisaoManutencaoMedicamento visaoMedicamento = new VisaoManutencaoMedicamento(this, true);
+        VisaoConsultaMedicacao visaoMedicamento = new VisaoConsultaMedicacao(this, true);
         visaoMedicamento.setVisible(true);
     }//GEN-LAST:event_btMedicamentosMouseClicked
 

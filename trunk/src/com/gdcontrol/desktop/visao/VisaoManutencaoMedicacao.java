@@ -1,22 +1,20 @@
 package com.gdcontrol.desktop.visao;
 
+import com.gdcontrol.desktop.controle.ControleMedicacao;
 import com.gdcontrol.desktop.controle.ControlePadrao;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
  * @author gustavo
  */
-public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
-
-    @Override
-    public ControlePadrao getControle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public class VisaoManutencaoMedicacao extends VisaoManutencaoPadrao {
 
     /**
      * Creates new form VisaoMedicamento
      */
-    public VisaoManutencaoMedicamento(java.awt.Frame parent, boolean modal) {
+    public VisaoManutencaoMedicacao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.addComponenteTexto(edId);
@@ -47,10 +45,13 @@ public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
         edNomeComercial = new javax.swing.JTextField();
         edNomeQuimico = new javax.swing.JTextField();
         edMarca = new javax.swing.JTextField();
-        edFormaUso = new javax.swing.JTextField();
-        edObservacao = new javax.swing.JTextField();
         btConfirmar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
+        edUnidade = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        edFormaUso = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        edObservacao = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,6 +77,11 @@ public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
         });
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         btLimpar.setText("Limpar");
         btLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,6 +94,14 @@ public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
                 btLimparActionPerformed(evt);
             }
         });
+
+        edFormaUso.setColumns(20);
+        edFormaUso.setRows(5);
+        jScrollPane1.setViewportView(edFormaUso);
+
+        edObservacao.setColumns(20);
+        edObservacao.setRows(5);
+        jScrollPane2.setViewportView(edObservacao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,8 +125,9 @@ public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
                             .addComponent(edNomeComercial, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(edNomeQuimico)
                             .addComponent(edMarca)
-                            .addComponent(edFormaUso)
-                            .addComponent(edObservacao)))
+                            .addComponent(edUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -139,16 +154,18 @@ public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
                     .addComponent(jLabel2)
                     .addComponent(edMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(edUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(edFormaUso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(edObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
                     .addComponent(btLimpar))
@@ -163,12 +180,19 @@ public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
     }//GEN-LAST:event_edIdActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLimparMouseClicked
         this.limpar();
     }//GEN-LAST:event_btLimparMouseClicked
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        this.controle = (ControleMedicacao) getControle();
+        this.controle.setTela(this);
+        this.controle.salvar();
+        dispose();
+    }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,20 +211,20 @@ public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoMedicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoMedicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoMedicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoMedicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoManutencaoMedicamento dialog = new VisaoManutencaoMedicamento(new javax.swing.JFrame(), true);
+                VisaoManutencaoMedicacao dialog = new VisaoManutencaoMedicacao(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -212,15 +236,72 @@ public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
         });
     }
 
+    public JTextArea getEdFormaUso() {
+        return edFormaUso;
+    }
+
+    public void setEdFormaUso(JTextArea edFormaUso) {
+        this.edFormaUso = edFormaUso;
+    }
+
+    public JTextField getEdId() {
+        return edId;
+    }
+
+    public void setEdId(JTextField edId) {
+        this.edId = edId;
+    }
+
+    public JTextField getEdMarca() {
+        return edMarca;
+    }
+
+    public void setEdMarca(JTextField edMarca) {
+        this.edMarca = edMarca;
+    }
+
+    public JTextField getEdNomeComercial() {
+        return edNomeComercial;
+    }
+
+    public void setEdNomeComercial(JTextField edNomeComercial) {
+        this.edNomeComercial = edNomeComercial;
+    }
+
+    public JTextField getEdNomeQuimico() {
+        return edNomeQuimico;
+    }
+
+    public void setEdNomeQuimico(JTextField edNomeQuimico) {
+        this.edNomeQuimico = edNomeQuimico;
+    }
+
+    public JTextArea getEdObservacao() {
+        return edObservacao;
+    }
+
+    public void setEdObservacao(JTextArea edObservacao) {
+        this.edObservacao = edObservacao;
+    }
+
+    public JTextField getEdUnidade() {
+        return edUnidade;
+    }
+
+    public void setEdUnidade(JTextField edUnidade) {
+        this.edUnidade = edUnidade;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btLimpar;
-    private javax.swing.JTextField edFormaUso;
+    private javax.swing.JTextArea edFormaUso;
     private javax.swing.JTextField edId;
     private javax.swing.JTextField edMarca;
     private javax.swing.JTextField edNomeComercial;
     private javax.swing.JTextField edNomeQuimico;
-    private javax.swing.JTextField edObservacao;
+    private javax.swing.JTextArea edObservacao;
+    private javax.swing.JTextField edUnidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -228,5 +309,15 @@ public class VisaoManutencaoMedicamento extends VisaoManutencaoPadrao {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+    private ControleMedicacao controle = new ControleMedicacao();
+
+    @Override
+    public ControlePadrao getControle() {
+        return this.controle;
+    }
+
 }

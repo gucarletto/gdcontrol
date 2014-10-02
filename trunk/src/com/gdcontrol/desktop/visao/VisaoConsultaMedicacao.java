@@ -1,9 +1,9 @@
 package com.gdcontrol.desktop.visao;
 
+import com.gdcontrol.desktop.controle.ControleMedicacao;
 import com.gdcontrol.desktop.controle.ControlePadrao;
-import com.gdcontrol.desktop.controle.ControleTipoTeste;
-import com.gdcontrol.desktop.util.tablemodel.TipoTesteTableModel;
-import com.gdcontrol.entidade.TipoTeste;
+import com.gdcontrol.desktop.util.tablemodel.MedicacaoTableModel;
+import com.gdcontrol.entidade.Medicacao;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -11,15 +11,15 @@ import javax.swing.JOptionPane;
  *
  * @author gustavo
  */
-public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
+public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
 
     /**
-     * Creates new form VisaoConsultaTipoTeste
+     * Creates new form VisaoConsultaMedicamento
      */
-    public VisaoConsultaTipoTeste(java.awt.Frame parent, boolean modal) {
+    public VisaoConsultaMedicacao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        carregaTiposTeste();
+        carregaGrupoAlimentos();
     }
 
     /**
@@ -31,16 +31,13 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbTipoTeste = new javax.swing.JTable();
         btNovo = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbMedicacao = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        tbTipoTeste.setModel(tableModelTipoTeste);
-        jScrollPane1.setViewportView(tbTipoTeste);
 
         btNovo.setText("Novo");
         btNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -63,11 +60,14 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
             }
         });
 
+        tbMedicacao.setModel(tableModelMedicacao);
+        tbMedicacao.setToolTipText("");
+        jScrollPane1.setViewportView(tbMedicacao);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btNovo)
@@ -76,12 +76,13 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btExcluir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btNovo)
                     .addComponent(btAlterar)
@@ -93,32 +94,32 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
-        VisaoManutencaoTipoTeste manutencaoTipoTeste = new VisaoManutencaoTipoTeste(null, true);
-        manutencaoTipoTeste.setVisible(true);
-        carregaTiposTeste();
+        VisaoManutencaoMedicacao manutencao = new VisaoManutencaoMedicacao(null, true);
+        manutencao.setVisible(true);
+        carregaGrupoAlimentos();
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        int indice = tbTipoTeste.getSelectedRow();
+        int indice = tbMedicacao.getSelectedRow();
         if (indice >= 0) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Tipo Teste selecionado?");
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão da Medicação selecionada?");
             if(opcao == JOptionPane.YES_OPTION){
-                getControle().excluir(tableModelTipoTeste.getTipoTeste(indice));
-                carregaTiposTeste();
+                getControle().excluir(tableModelMedicacao.getMedicacao(indice));
+                carregaGrupoAlimentos();
             }
         }
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        int indice = tbTipoTeste.getSelectedRow();
+        int indice = tbMedicacao.getSelectedRow();
         if (indice >= 0) {
-            VisaoManutencaoTipoTeste manutencao = new VisaoManutencaoTipoTeste(null, true);
-            ControleTipoTeste controle = (ControleTipoTeste) manutencao.getControle();
-            controle.setModelo(tableModelTipoTeste.getTipoTeste(indice));
+            VisaoManutencaoMedicacao manutencao = new VisaoManutencaoMedicacao(null, true);
+            ControleMedicacao controle = (ControleMedicacao) manutencao.getControle();
+            controle.setModelo(tableModelMedicacao.getMedicacao(indice));
             controle.setTela(manutencao);
             controle.carregaTela();
             manutencao.setVisible(true);
-            carregaTiposTeste();
+            carregaGrupoAlimentos();
         }
     }//GEN-LAST:event_btAlterarActionPerformed
 
@@ -139,20 +140,20 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaMedicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaMedicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaMedicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaMedicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoConsultaTipoTeste dialog = new VisaoConsultaTipoTeste(new javax.swing.JFrame(), true);
+                VisaoConsultaMedicacao dialog = new VisaoConsultaMedicacao(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -169,23 +170,23 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btNovo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbTipoTeste;
+    private javax.swing.JTable tbMedicacao;
     // End of variables declaration//GEN-END:variables
 
-    private TipoTesteTableModel tableModelTipoTeste = new TipoTesteTableModel();
-    private ControleTipoTeste controle = new ControleTipoTeste();
-    
-    private void carregaTiposTeste() {
-        tableModelTipoTeste.limpar();
-        for (TipoTeste tip : (List<TipoTeste>) getControle().listar()) {
-            tableModelTipoTeste.addTipoTeste(tip);
-        }
-        tableModelTipoTeste.fireTableDataChanged();
-    }
+    private MedicacaoTableModel tableModelMedicacao = new MedicacaoTableModel();
+    private ControleMedicacao controle = new ControleMedicacao();
 
     @Override
     public ControlePadrao getControle() {
         return this.controle;
+    }
+
+    private void carregaGrupoAlimentos() {
+        tableModelMedicacao.limpar();
+        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
+            tableModelMedicacao.addMedicacao(med);
+        }
+        tableModelMedicacao.fireTableDataChanged();
     }
 
     @Override

@@ -5,21 +5,31 @@ import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.util.tablemodel.GrupoAlimentoTableModel;
 import com.gdcontrol.entidade.GrupoAlimento;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author gustavo
  */
-public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
+public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
+    
+    private static final String OPCAO_ID = "ID";
+    private static final String OPCAO_DESCRICAO = "Descrição";
 
     /**
      * Creates new form VisaoConsultaGrupoAlimento
+     * @param parent
+     * @param modal
      */
     public VisaoConsultaGrupoAlimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         carregaGrupoAlimentos();
+        getOpcoesPesquisa();
     }
 
     /**
@@ -36,11 +46,21 @@ public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
         btNovo = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cbCampoPesquisa = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        edPesquisa = new javax.swing.JTextField();
+        btPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Grupo Alimento");
 
         tbGrupoAlimento.setModel(tableModelGrupoAlimento);
+        tbGrupoAlimento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbGrupoAlimentoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbGrupoAlimento);
 
         btNovo.setText("Novo");
@@ -69,30 +89,58 @@ public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
             }
         });
 
+        jLabel1.setText("Campo Pesquisa:");
+
+        jLabel2.setText("Pesquisa:");
+
+        btPesquisar.setText("Pesquisar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btNovo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btAlterar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btExcluir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btExcluir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btPesquisar)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btNovo)
-                    .addComponent(btExcluir)
-                    .addComponent(btAlterar))
-                .addContainerGap())
+                    .addComponent(btAlterar)
+                    .addComponent(btExcluir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,21 +164,27 @@ public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
     }//GEN-LAST:event_btExcluirMouseClicked
 
     private void btAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAlterarMouseClicked
-        int indice = tbGrupoAlimento.getSelectedRow();
-        if (indice >= 0) {
-            VisaoManutencaoGrupoAlimento manutencao = new VisaoManutencaoGrupoAlimento(null, true);
-            ControleGrupoAlimento controle = (ControleGrupoAlimento) manutencao.getControle();
-            controle.setModelo(tableModelGrupoAlimento.getGrupoAlimento(indice));
-            controle.setTela(manutencao);
-            controle.carregaTela();
-            manutencao.setVisible(true);
-            carregaGrupoAlimentos();
-        }
+        
     }//GEN-LAST:event_btAlterarMouseClicked
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        // TODO add your handling code here:
+        int indice = tbGrupoAlimento.getSelectedRow();
+        if (indice >= 0) {
+            VisaoManutencaoGrupoAlimento manutencao = new VisaoManutencaoGrupoAlimento(null, true);
+            ControleGrupoAlimento controleManutencao = (ControleGrupoAlimento) manutencao.getControle();
+            controleManutencao.setModelo(tableModelGrupoAlimento.getGrupoAlimento(indice));
+            controleManutencao.setTela(manutencao);
+            controleManutencao.carregaTela();
+            manutencao.setVisible(true);
+            carregaGrupoAlimentos();
+        }
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void tbGrupoAlimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGrupoAlimentoMouseClicked
+        if (evt.getClickCount() == 2) {
+            btAlterarActionPerformed(null);
+        }
+    }//GEN-LAST:event_tbGrupoAlimentoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -161,6 +215,7 @@ public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 VisaoConsultaGrupoAlimento dialog = new VisaoConsultaGrupoAlimento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -178,6 +233,11 @@ public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btNovo;
+    private javax.swing.JButton btPesquisar;
+    private javax.swing.JComboBox cbCampoPesquisa;
+    private javax.swing.JTextField edPesquisa;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbGrupoAlimento;
     // End of variables declaration//GEN-END:variables
@@ -196,5 +256,14 @@ public class VisaoConsultaGrupoAlimento extends VisaoManutencaoPadrao {
             tableModelGrupoAlimento.addGrupoAlimento(grp);
         }
         tableModelGrupoAlimento.fireTableDataChanged();
+    }
+
+    @Override
+    public void getOpcoesPesquisa() {
+        Vector comboBoxItems = new Vector();
+        comboBoxItems.add("ID");
+        comboBoxItems.add("Descrição");
+        final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
+        this.cbCampoPesquisa.setModel(model);
     }
 }
