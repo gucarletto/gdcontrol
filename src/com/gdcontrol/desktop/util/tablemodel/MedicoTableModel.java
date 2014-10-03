@@ -71,12 +71,12 @@ public class MedicoTableModel extends AbstractTableModel{
         }
     }
     
-    public void addMedicacao(Medico medico){
+    public void addMedico(Medico medico){
         medicos.add(medico);
         fireTableRowsInserted(medicos.size()-1, medicos.size()-1);
     }
     
-    public Medico getMedicacao(int indice){
+    public Medico getMedico(int indice){
         return medicos.get(indice);
     }
 

@@ -18,17 +18,17 @@ public class ControleMedicacao extends ControlePadrao<Medicacao>{
     @Override
     public void salvar() {
         boolean salvou;
-        Medicacao grupo = (Medicacao) this.getModelo();
-        grupo.setNomeComercial(this.tela.getEdNomeComercial().getText());
-        grupo.setNomeQuimico(this.tela.getEdNomeQuimico().getText());
-        grupo.setMarca(this.tela.getEdMarca().getText());
-        grupo.setUnidade(this.tela.getEdUnidade().getText());
-        grupo.setFormaUso(this.tela.getEdFormaUso().getText());
-        grupo.setObservacao(this.tela.getEdObservacao().getText());
+        Medicacao medicacao = (Medicacao) this.getModelo();
+        medicacao.setNomeComercial(this.tela.getEdNomeComercial().getText());
+        medicacao.setNomeQuimico(this.tela.getEdNomeQuimico().getText());
+        medicacao.setMarca(this.tela.getEdMarca().getText());
+        medicacao.setUnidade(this.tela.getEdUnidade().getText());
+        medicacao.setFormaUso(this.tela.getEdFormaUso().getText());
+        medicacao.setObservacao(this.tela.getEdObservacao().getText());
         if(!this.tela.getEdId().getText().isEmpty()){
-            salvou = medicacaoDao.alterar(grupo);
+            salvou = medicacaoDao.alterar(medicacao);
         }else{
-            salvou = medicacaoDao.inserir(grupo);
+            salvou = medicacaoDao.inserir(medicacao);
         }
         if(salvou){
             JOptionPane.showMessageDialog(this.tela, "Gravado com sucesso");

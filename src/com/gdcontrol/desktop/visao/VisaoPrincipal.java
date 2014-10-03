@@ -80,6 +80,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         btLocalAplicacao.setPreferredSize(new java.awt.Dimension(68, 68));
 
         btMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/medico.png"))); // NOI18N
+        btMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMedicoActionPerformed(evt);
+            }
+        });
 
         btPosologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/posologia.png"))); // NOI18N
 
@@ -176,6 +181,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         VisaoConsultaTipoTeste visaoTipoTeste = new VisaoConsultaTipoTeste(this, true);
         visaoTipoTeste.setVisible(true);
     }//GEN-LAST:event_btTipoTesteMouseClicked
+
+    private void btMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMedicoActionPerformed
+        VisaoConsultaMedico visaoMedico = new VisaoConsultaMedico(this, true);
+        visaoMedico.setVisible(true);
+    }//GEN-LAST:event_btMedicoActionPerformed
 
     /**
      * @param args the command line arguments
