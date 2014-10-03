@@ -1,9 +1,7 @@
 package com.gdcontrol.desktop.visao;
 
-import com.gdcontrol.desktop.controle.ControlePadrao;
 import java.awt.Frame;
 import java.util.ArrayList;
-import javax.swing.JDialog;
 import javax.swing.text.JTextComponent;
 
 /**

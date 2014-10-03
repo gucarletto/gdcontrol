@@ -4,11 +4,10 @@ import com.gdcontrol.desktop.controle.ControleGrupoAlimento;
 import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.util.tablemodel.GrupoAlimentoTableModel;
 import com.gdcontrol.entidade.GrupoAlimento;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -93,7 +92,18 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
 
         jLabel2.setText("Pesquisa:");
 
+        edPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                edPesquisaKeyPressed(evt);
+            }
+        });
+
         btPesquisar.setText("Pesquisar");
+        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,7 +150,7 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
                     .addComponent(btAlterar)
                     .addComponent(btExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -185,6 +195,32 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
             btAlterarActionPerformed(null);
         }
     }//GEN-LAST:event_tbGrupoAlimentoMouseClicked
+
+    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
+        if(!edPesquisa.getText().isEmpty()){
+            tableModelGrupoAlimento.limpar();
+            String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
+            switch(pesquisa){
+                case OPCAO_ID:
+                    try{
+                        filtraId(Integer.parseInt(edPesquisa.getText()));
+                    }catch(NumberFormatException e){}
+                    break;
+                case OPCAO_DESCRICAO:
+                    filtraDescricao(edPesquisa.getText());
+                    break;    
+            }
+            tableModelGrupoAlimento.fireTableDataChanged();
+        }else{
+            carregaGrupoAlimentos();
+        }
+    }//GEN-LAST:event_btPesquisarActionPerformed
+
+    private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btPesquisarActionPerformed(null);
+        }
+    }//GEN-LAST:event_edPesquisaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -257,12 +293,29 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
         }
         tableModelGrupoAlimento.fireTableDataChanged();
     }
+    
+    private void filtraId(int id){
+        for (GrupoAlimento grp : (List<GrupoAlimento>) getControle().listar()) {
+            if(grp.getId() == id){
+                tableModelGrupoAlimento.addGrupoAlimento(grp);
+                break;
+            }
+        }
+    }
+    
+    private void filtraDescricao(String descricao){
+        for (GrupoAlimento grp : (List<GrupoAlimento>) getControle().listar()) {
+            if(grp.getDescricao().toUpperCase().contains(descricao.toUpperCase())){
+                tableModelGrupoAlimento.addGrupoAlimento(grp);
+            }
+        }
+    }
 
     @Override
     public void getOpcoesPesquisa() {
         Vector comboBoxItems = new Vector();
-        comboBoxItems.add("ID");
-        comboBoxItems.add("Descrição");
+        comboBoxItems.add(OPCAO_ID);
+        comboBoxItems.add(OPCAO_DESCRICAO);
         final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
         this.cbCampoPesquisa.setModel(model);
     }
