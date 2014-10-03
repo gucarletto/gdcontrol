@@ -4,7 +4,10 @@ import com.gdcontrol.desktop.controle.ControleMedicacao;
 import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.util.tablemodel.MedicacaoTableModel;
 import com.gdcontrol.entidade.Medicacao;
+import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +15,12 @@ import javax.swing.JOptionPane;
  * @author gustavo
  */
 public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
+    
+    private static final String OPCAO_ID = "ID";
+    private static final String OPCAO_MARCA = "Marca";
+    private static final String OPCAO_NOME_COMERCIAL = "Nome Comercial";
+    private static final String OPCAO_NOME_QUIMICO = "Nome Químico";
+    private static final String OPCAO_UNIDADE = "Unidade";
 
     /**
      * Creates new form VisaoConsultaMedicamento
@@ -20,6 +29,7 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
         super(parent, modal);
         initComponents();
         carregaGrupoAlimentos();
+        getOpcoesPesquisa();
     }
 
     /**
@@ -36,6 +46,11 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
         btExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMedicacao = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cbCampoPesquisa = new javax.swing.JComboBox();
+        edPesquisa = new javax.swing.JTextField();
+        btPesquisa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,30 +79,74 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
         tbMedicacao.setToolTipText("");
         jScrollPane1.setViewportView(tbMedicacao);
 
+        jLabel1.setText("Campo Pesquisa:");
+
+        jLabel2.setText("Pesquisa:");
+
+        edPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                edPesquisaKeyPressed(evt);
+            }
+        });
+
+        btPesquisa.setText("Pesquisar");
+        btPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btNovo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btAlterar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btExcluir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btExcluir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btPesquisa)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btPesquisa))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btNovo)
                     .addComponent(btAlterar)
                     .addComponent(btExcluir))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -122,6 +181,41 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
             carregaGrupoAlimentos();
         }
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void btPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisaActionPerformed
+        if(!edPesquisa.getText().isEmpty()){
+            tableModelMedicacao.limpar();
+            String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
+            switch(pesquisa){
+                case OPCAO_ID:
+                    try{
+                        filtraId(Integer.parseInt(edPesquisa.getText()));
+                    }catch(NumberFormatException e){}
+                    break;
+                case OPCAO_MARCA:
+                    filtraMarca(edPesquisa.getText());
+                    break;
+                case OPCAO_NOME_COMERCIAL:
+                    filtraNomeComercial(edPesquisa.getText());
+                    break;
+                case OPCAO_NOME_QUIMICO:
+                    filtraNomeQuimico(edPesquisa.getText());
+                    break;
+                case OPCAO_UNIDADE:
+                    filtraUnidade(edPesquisa.getText());
+                    break;
+            }
+            tableModelMedicacao.fireTableDataChanged();
+        }else{
+            carregaGrupoAlimentos();
+        }
+    }//GEN-LAST:event_btPesquisaActionPerformed
+
+    private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btPesquisaActionPerformed(null);
+        }
+    }//GEN-LAST:event_edPesquisaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -169,6 +263,11 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btNovo;
+    private javax.swing.JButton btPesquisa;
+    private javax.swing.JComboBox cbCampoPesquisa;
+    private javax.swing.JTextField edPesquisa;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbMedicacao;
     // End of variables declaration//GEN-END:variables
@@ -188,9 +287,57 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
         }
         tableModelMedicacao.fireTableDataChanged();
     }
+    
+    private void filtraId(int id){
+        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
+            if(med.getId() == id){
+                tableModelMedicacao.addMedicacao(med);
+                break;
+            }
+        }
+    }
+    
+    private void filtraMarca(String marca){
+        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
+            if(med.getMarca().toUpperCase().contains(marca.toUpperCase())){
+                tableModelMedicacao.addMedicacao(med);
+            }
+        }
+    }
+    
+    private void filtraNomeComercial(String nome){
+        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
+            if(med.getNomeComercial().toUpperCase().contains(nome.toUpperCase())){
+                tableModelMedicacao.addMedicacao(med);
+            }
+        }
+    }
+    
+    private void filtraNomeQuimico(String nome){
+        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
+            if(med.getNomeQuimico().toUpperCase().contains(nome.toUpperCase())){
+                tableModelMedicacao.addMedicacao(med);
+            }
+        }
+    }
+    
+    private void filtraUnidade(String und){
+        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
+            if(med.getUnidade().toUpperCase().contains(und.toUpperCase())){
+                tableModelMedicacao.addMedicacao(med);
+            }
+        }
+    }
 
     @Override
     public void getOpcoesPesquisa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Vector comboBoxItems = new Vector();
+        comboBoxItems.add(OPCAO_ID);
+        comboBoxItems.add(OPCAO_MARCA);
+        comboBoxItems.add(OPCAO_NOME_COMERCIAL);
+        comboBoxItems.add(OPCAO_NOME_QUIMICO);
+        comboBoxItems.add(OPCAO_UNIDADE);
+        final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
+        this.cbCampoPesquisa.setModel(model);
     }
 }

@@ -4,7 +4,11 @@ import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.controle.ControleTipoTeste;
 import com.gdcontrol.desktop.util.tablemodel.TipoTesteTableModel;
 import com.gdcontrol.entidade.TipoTeste;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +17,9 @@ import javax.swing.JOptionPane;
  */
 public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
 
+    private static final String OPCAO_ID = "ID";
+    private static final String OPCAO_DESCRICAO = "Descrição";
+    
     /**
      * Creates new form VisaoConsultaTipoTeste
      */
@@ -20,6 +27,7 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
         super(parent, modal);
         initComponents();
         carregaTiposTeste();
+        getOpcoesPesquisa();
     }
 
     /**
@@ -36,6 +44,11 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
         btNovo = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cbCampoPesquisa = new javax.swing.JComboBox();
+        edPesquisa = new javax.swing.JTextField();
+        btPesquisa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,6 +76,23 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
             }
         });
 
+        jLabel1.setText("Campo Pesquisa:");
+
+        jLabel2.setText("Pesquisa:");
+
+        edPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                edPesquisaKeyPressed(evt);
+            }
+        });
+
+        btPesquisa.setText("Pesquisar");
+        btPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,22 +100,46 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btNovo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btAlterar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btExcluir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btExcluir)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btPesquisa)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPesquisa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btNovo)
                     .addComponent(btAlterar)
                     .addComponent(btExcluir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -121,6 +175,32 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
             carregaTiposTeste();
         }
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void btPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisaActionPerformed
+        if(!edPesquisa.getText().isEmpty()){
+            tableModelTipoTeste.limpar();
+            String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
+            switch(pesquisa){
+                case OPCAO_ID:
+                    try{
+                        filtraId(Integer.parseInt(edPesquisa.getText()));
+                    }catch(NumberFormatException e){}
+                    break;
+                case OPCAO_DESCRICAO:
+                    filtraDescricao(edPesquisa.getText());
+                    break;    
+            }
+            tableModelTipoTeste.fireTableDataChanged();
+        }else{
+            carregaTiposTeste();
+        }
+    }//GEN-LAST:event_btPesquisaActionPerformed
+
+    private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btPesquisaActionPerformed(null);
+        }
+    }//GEN-LAST:event_edPesquisaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -168,6 +248,11 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btNovo;
+    private javax.swing.JButton btPesquisa;
+    private javax.swing.JComboBox cbCampoPesquisa;
+    private javax.swing.JTextField edPesquisa;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbTipoTeste;
     // End of variables declaration//GEN-END:variables
@@ -187,9 +272,30 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     public ControlePadrao getControle() {
         return this.controle;
     }
+    
+    private void filtraId(int id){
+        for (TipoTeste tip : (List<TipoTeste>) getControle().listar()) {
+            if(tip.getId() == id){
+                tableModelTipoTeste.addTipoTeste(tip);
+                break;
+            }
+        }
+    }
+    
+    private void filtraDescricao(String descricao){
+        for (TipoTeste tip : (List<TipoTeste>) getControle().listar()) {
+            if(tip.getDescricao().toUpperCase().contains(descricao.toUpperCase())){
+                tableModelTipoTeste.addTipoTeste(tip);
+            }
+        }
+    }
 
     @Override
     public void getOpcoesPesquisa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Vector comboBoxItems = new Vector();
+        comboBoxItems.add(OPCAO_ID);
+        comboBoxItems.add(OPCAO_DESCRICAO);
+        final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
+        this.cbCampoPesquisa.setModel(model);
     }
 }
