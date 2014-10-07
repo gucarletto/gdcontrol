@@ -1,6 +1,6 @@
 package com.gdcontrol.desktop.visao;
 
-import com.gdcontrol.desktop.controle.ControleGrupoAlimento;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoGrupoAlimento;
 import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.entidade.GrupoAlimento;
 import javax.swing.JOptionPane;
@@ -117,7 +117,7 @@ public class VisaoManutencaoGrupoAlimento extends VisaoManutencaoPadrao {
     }//GEN-LAST:event_formWindowActivated
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        this.controle = (ControleGrupoAlimento) getControle();
+        this.controle = (ControleManutencaoGrupoAlimento) getControle();
         this.controle.setTela(this);
         this.controle.salvar();
         dispose();
@@ -174,7 +174,7 @@ public class VisaoManutencaoGrupoAlimento extends VisaoManutencaoPadrao {
     private javax.swing.JLabel labelId;
     // End of variables declaration//GEN-END:variables
 
-    private ControleGrupoAlimento controle = new ControleGrupoAlimento();
+    private ControleManutencaoGrupoAlimento controle = new ControleManutencaoGrupoAlimento();
 
     @Override
     public ControlePadrao getControle() {

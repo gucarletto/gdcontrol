@@ -35,68 +35,97 @@
               <EmptySpace pref="30" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="btMedicamentos" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace pref="68" max="32767" attributes="0"/>
+                      <Component id="btPosologia" min="-2" pref="72" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Component id="btUsuario" min="-2" pref="72" max="-2" attributes="0"/>
-                      <EmptySpace pref="68" max="32767" attributes="0"/>
-                      <Component id="btGrupoAlimento" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btMedico" min="-2" pref="72" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btMedico" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                           <Component id="btTipoTeste" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="btSincronizacao" min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="68" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btRelatorios" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                           <Component id="btTeste" pref="0" max="32767" attributes="0"/>
-                          <Component id="btMedicamentos" min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-              </Group>
-              <EmptySpace pref="68" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btAlimento" min="-2" pref="72" max="-2" attributes="0"/>
-                  <Component id="btPosologia" pref="0" max="32767" attributes="0"/>
-                  <Component id="btSincronizacao" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="68" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btLocalAplicacao" alignment="1" min="-2" pref="72" max="-2" attributes="0"/>
-                  <Component id="btRelatorios" alignment="1" min="-2" pref="72" max="-2" attributes="0"/>
-                  <Component id="btRefeicao" alignment="1" min="-2" pref="72" max="-2" attributes="0"/>
+                  <Component id="btTipoEvento" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                  <Component id="btGrupoAlimento" min="-2" pref="72" max="-2" attributes="0"/>
+                  <Component id="btLocalAplicacao" min="-2" pref="72" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="68" max="32767" attributes="0"/>
-              <Component id="btAplicacao" min="-2" pref="72" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="btAlimento" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace pref="68" max="32767" attributes="0"/>
+                      <Component id="btRefeicao" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btEvento" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="btAplicacao" min="-2" pref="72" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="14" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btRefeicao" pref="0" max="32767" attributes="0"/>
-                  <Component id="btUsuario" pref="72" max="32767" attributes="0"/>
-                  <Component id="btGrupoAlimento" pref="0" max="32767" attributes="0"/>
-                  <Component id="btAlimento" pref="0" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btRefeicao" pref="0" max="32767" attributes="0"/>
+                      <Component id="btUsuario" pref="72" max="32767" attributes="0"/>
+                      <Component id="btGrupoAlimento" pref="0" max="32767" attributes="0"/>
+                      <Component id="btAlimento" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="btMedico" min="-2" pref="72" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btLocalAplicacao" min="-2" pref="72" max="-2" attributes="0"/>
-                      <Component id="btAplicacao" min="-2" pref="72" max="-2" attributes="0"/>
-                      <Component id="btMedicamentos" alignment="1" min="-2" pref="72" max="-2" attributes="0"/>
-                      <Component id="btMedico" min="-2" pref="72" max="-2" attributes="0"/>
+                      <Component id="btLocalAplicacao" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                      <Component id="btAplicacao" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                   </Group>
                   <Component id="btPosologia" min="-2" pref="72" max="-2" attributes="0"/>
+                  <Component id="btMedicamentos" min="-2" pref="72" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btTipoTeste" min="-2" pref="72" max="-2" attributes="0"/>
-                  <Component id="btTeste" min="-2" max="-2" attributes="0"/>
-                  <Component id="btSincronizacao" min="-2" max="-2" attributes="0"/>
-                  <Component id="btRelatorios" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                              <Component id="btTipoTeste" min="-2" pref="72" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btTipoEvento" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="btTeste" alignment="1" min="-2" pref="72" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btRelatorios" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btSincronizacao" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="btEvento" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -218,6 +247,23 @@
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/com/gdcontrol/desktop/util/img/relatorios.png"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btTipoEvento">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/com/gdcontrol/desktop/util/img/icone_tipo_evento.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTipoEventoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btEvento">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/com/gdcontrol/desktop/util/img/evento.png"/>
         </Property>
       </Properties>
     </Component>

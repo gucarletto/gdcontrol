@@ -1,4 +1,4 @@
-package com.gdcontrol.desktop.controle;
+package com.gdcontrol.desktop.controle.manutencao;
 
 import com.gdcontrol.dao.medicacao.MedicacaoDAO;
 import com.gdcontrol.desktop.visao.VisaoManutencaoMedicacao;
@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author gustavo
  */
-public class ControleMedicacao extends ControlePadrao<Medicacao>{
+public class ControleManutencaoMedicacao extends ControleManutencaoPadrao<Medicacao>{
     
     private MedicacaoDAO medicacaoDao = getDAOFactory().getMedicacaoDAO();
     private VisaoManutencaoMedicacao tela;
@@ -35,20 +35,6 @@ public class ControleMedicacao extends ControlePadrao<Medicacao>{
         }else{
             JOptionPane.showMessageDialog(this.tela, "Erro na gravação");
         }
-    }
-
-    @Override
-    public void excluir(Medicacao t) {
-       if(medicacaoDao.excluir(t)){
-           JOptionPane.showMessageDialog(this.tela, "Excluído com sucesso");
-       }else{
-           JOptionPane.showMessageDialog(this.tela, "Erro na exclusão");
-       }
-    }
-
-    @Override
-    public List<Medicacao> listar() {
-        return medicacaoDao.listar();
     }
 
     @Override

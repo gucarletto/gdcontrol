@@ -1,7 +1,7 @@
 package com.gdcontrol.desktop.visao;
 
-import com.gdcontrol.desktop.controle.ControleMedicacao;
-import com.gdcontrol.desktop.controle.ControlePadrao;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaMedicacao;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoMedicacao;
 import com.gdcontrol.desktop.util.tablemodel.MedicacaoTableModel;
 import com.gdcontrol.entidade.Medicacao;
 import java.awt.event.KeyEvent;
@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author gustavo
  */
 public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
-    
+
     private static final String OPCAO_ID = "ID";
     private static final String OPCAO_MARCA = "Marca";
     private static final String OPCAO_NOME_COMERCIAL = "Nome Comercial";
@@ -162,7 +162,7 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
         int indice = tbMedicacao.getSelectedRow();
         if (indice >= 0) {
             int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão da Medicação selecionada?");
-            if(opcao == JOptionPane.YES_OPTION){
+            if (opcao == JOptionPane.YES_OPTION) {
                 getControle().excluir(tableModelMedicacao.getMedicacao(indice));
                 carregaGrupoAlimentos();
             }
@@ -173,7 +173,7 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
         int indice = tbMedicacao.getSelectedRow();
         if (indice >= 0) {
             VisaoManutencaoMedicacao manutencao = new VisaoManutencaoMedicacao(null, true);
-            ControleMedicacao controle = (ControleMedicacao) manutencao.getControle();
+            ControleManutencaoMedicacao controle = (ControleManutencaoMedicacao) manutencao.getControle();
             controle.setModelo(tableModelMedicacao.getMedicacao(indice));
             controle.setTela(manutencao);
             controle.carregaTela();
@@ -183,14 +183,15 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void btPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisaActionPerformed
-        if(!edPesquisa.getText().isEmpty()){
+        if (!edPesquisa.getText().isEmpty()) {
             tableModelMedicacao.limpar();
             String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
-            switch(pesquisa){
+            switch (pesquisa) {
                 case OPCAO_ID:
-                    try{
+                    try {
                         filtraId(Integer.parseInt(edPesquisa.getText()));
-                    }catch(NumberFormatException e){}
+                    } catch (NumberFormatException e) {
+                    }
                     break;
                 case OPCAO_MARCA:
                     filtraMarca(edPesquisa.getText());
@@ -206,13 +207,13 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
                     break;
             }
             tableModelMedicacao.fireTableDataChanged();
-        }else{
+        } else {
             carregaGrupoAlimentos();
         }
     }//GEN-LAST:event_btPesquisaActionPerformed
 
     private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btPesquisaActionPerformed(null);
         }
     }//GEN-LAST:event_edPesquisaKeyPressed
@@ -273,10 +274,10 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
     // End of variables declaration//GEN-END:variables
 
     private MedicacaoTableModel tableModelMedicacao = new MedicacaoTableModel();
-    private ControleMedicacao controle = new ControleMedicacao();
+    private ControleConsultaMedicacao controle = new ControleConsultaMedicacao();
 
     @Override
-    public ControlePadrao getControle() {
+    public ControleConsultaMedicacao getControle() {
         return this.controle;
     }
 
@@ -287,45 +288,33 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
         }
         tableModelMedicacao.fireTableDataChanged();
     }
-    
-    private void filtraId(int id){
-        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
-            if(med.getId() == id){
-                tableModelMedicacao.addMedicacao(med);
-                break;
-            }
+
+    private void filtraId(int id) {
+        Medicacao med = getControle().filtraId(id);
+        tableModelMedicacao.addMedicacao(med);
+    }
+
+    private void filtraMarca(String marca) {
+        for (Medicacao med : (List<Medicacao>) getControle().filtraMarca(marca)) {
+            tableModelMedicacao.addMedicacao(med);
         }
     }
-    
-    private void filtraMarca(String marca){
-        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
-            if(med.getMarca().toUpperCase().contains(marca.toUpperCase())){
-                tableModelMedicacao.addMedicacao(med);
-            }
+
+    private void filtraNomeComercial(String nome) {
+        for (Medicacao med : (List<Medicacao>) getControle().filtraNomeComercial(nome)) {
+            tableModelMedicacao.addMedicacao(med);
         }
     }
-    
-    private void filtraNomeComercial(String nome){
-        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
-            if(med.getNomeComercial().toUpperCase().contains(nome.toUpperCase())){
-                tableModelMedicacao.addMedicacao(med);
-            }
+
+    private void filtraNomeQuimico(String nome) {
+        for (Medicacao med : (List<Medicacao>) getControle().filtraNomeQuimico(nome)) {
+            tableModelMedicacao.addMedicacao(med);
         }
     }
-    
-    private void filtraNomeQuimico(String nome){
-        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
-            if(med.getNomeQuimico().toUpperCase().contains(nome.toUpperCase())){
-                tableModelMedicacao.addMedicacao(med);
-            }
-        }
-    }
-    
-    private void filtraUnidade(String und){
-        for (Medicacao med : (List<Medicacao>) getControle().listar()) {
-            if(med.getUnidade().toUpperCase().contains(und.toUpperCase())){
-                tableModelMedicacao.addMedicacao(med);
-            }
+
+    private void filtraUnidade(String und) {
+        for (Medicacao med : (List<Medicacao>) getControle().filtraUnidade(und)) {
+            tableModelMedicacao.addMedicacao(med);
         }
     }
 

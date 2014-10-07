@@ -1,6 +1,6 @@
 package com.gdcontrol.desktop.visao;
 
-import com.gdcontrol.desktop.controle.ControleMedico;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoMedico;
 import com.gdcontrol.desktop.controle.ControlePadrao;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
@@ -146,7 +146,7 @@ public class VisaoManutencaoMedico extends VisaoManutencaoPadrao{
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        this.controle = (ControleMedico) getControle();
+        this.controle = (ControleManutencaoMedico) getControle();
         this.controle.setTela(this);
         this.controle.salvar();
         dispose();
@@ -209,7 +209,7 @@ public class VisaoManutencaoMedico extends VisaoManutencaoPadrao{
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 
-    ControleMedico controle = new ControleMedico();
+    ControleManutencaoMedico controle = new ControleManutencaoMedico();
     
     @Override
     public ControlePadrao getControle() {
