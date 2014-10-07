@@ -1,6 +1,8 @@
 package com.gdcontrol.desktop.visao;
 
-import com.gdcontrol.desktop.controle.ControleGrupoAlimento;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaGrupoAlimento;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaPadrao;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoGrupoAlimento;
 import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.util.tablemodel.GrupoAlimentoTableModel;
 import com.gdcontrol.entidade.GrupoAlimento;
@@ -150,7 +152,7 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
                     .addComponent(btAlterar)
                     .addComponent(btExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
         );
 
         pack();
@@ -181,7 +183,7 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
         int indice = tbGrupoAlimento.getSelectedRow();
         if (indice >= 0) {
             VisaoManutencaoGrupoAlimento manutencao = new VisaoManutencaoGrupoAlimento(null, true);
-            ControleGrupoAlimento controleManutencao = (ControleGrupoAlimento) manutencao.getControle();
+            ControleManutencaoGrupoAlimento controleManutencao = (ControleManutencaoGrupoAlimento) manutencao.getControle();
             controleManutencao.setModelo(tableModelGrupoAlimento.getGrupoAlimento(indice));
             controleManutencao.setTela(manutencao);
             controleManutencao.carregaTela();
@@ -279,10 +281,10 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
     // End of variables declaration//GEN-END:variables
 
     private GrupoAlimentoTableModel tableModelGrupoAlimento = new GrupoAlimentoTableModel();
-    private ControleGrupoAlimento controle = new ControleGrupoAlimento();
+    private ControleConsultaGrupoAlimento controle = new ControleConsultaGrupoAlimento();
 
     @Override
-    public ControlePadrao getControle() {
+    public ControleConsultaGrupoAlimento getControle() {
         return this.controle;
     }
 
@@ -295,19 +297,15 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
     }
     
     private void filtraId(int id){
-        for (GrupoAlimento grp : (List<GrupoAlimento>) getControle().listar()) {
-            if(grp.getId() == id){
-                tableModelGrupoAlimento.addGrupoAlimento(grp);
-                break;
-            }
+        GrupoAlimento grp = getControle().filtraId(id);
+        if(grp != null){
+            tableModelGrupoAlimento.addGrupoAlimento(grp);
         }
     }
     
     private void filtraDescricao(String descricao){
-        for (GrupoAlimento grp : (List<GrupoAlimento>) getControle().listar()) {
-            if(grp.getDescricao().toUpperCase().contains(descricao.toUpperCase())){
-                tableModelGrupoAlimento.addGrupoAlimento(grp);
-            }
+        for (GrupoAlimento grp : (List<GrupoAlimento>) getControle().filtraDescricao(descricao)) {
+            tableModelGrupoAlimento.addGrupoAlimento(grp);
         }
     }
 

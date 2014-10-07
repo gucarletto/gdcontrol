@@ -1,25 +1,23 @@
 package com.gdcontrol.desktop.visao;
 
 import com.gdcontrol.desktop.controle.ControlePadrao;
-import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoTipoTeste;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoTipoEvento;
 import javax.swing.JTextField;
 
 /**
  *
  * @author gustavo
  */
-public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
-    
-    private ControleManutencaoTipoTeste controle = new ControleManutencaoTipoTeste();
+public class VisaoManutencaoTipoEvento extends VisaoManutencaoPadrao{
 
     /**
-     * Creates new form VisaoTipoTeste
+     * Creates new form VisaoManutencaoTipoEvento
      */
-    public VisaoManutencaoTipoTeste(java.awt.Frame parent, boolean modal) {
+    public VisaoManutencaoTipoEvento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.addComponenteTexto(edId);
-        this.addComponenteTexto(edDescricao);
+        this.addComponenteTexto(edNome);
     }
 
     /**
@@ -32,20 +30,17 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        edId = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        edDescricao = new javax.swing.JTextField();
         btConfirmar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
+        edId = new javax.swing.JTextField();
+        edNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Tipo Teste");
 
         jLabel1.setText("ID:");
 
-        edId.setEnabled(false);
-
-        jLabel2.setText("Descrição:");
+        jLabel2.setText("Nome:");
 
         btConfirmar.setText("Confirmar");
         btConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -61,6 +56,8 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
             }
         });
 
+        edId.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,12 +72,12 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(edId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(edNome, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btLimpar)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,12 +89,12 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(edDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(edNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
                     .addComponent(btLimpar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -108,7 +105,7 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        this.controle = (ControleManutencaoTipoTeste) getControle();
+        this.controle = (ControleManutencaoTipoEvento) getControle();
         this.controle.setTela(this);
         this.controle.salvar();
         dispose();
@@ -131,20 +128,20 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoManutencaoTipoTeste dialog = new VisaoManutencaoTipoTeste(new javax.swing.JFrame(), true);
+                VisaoManutencaoTipoEvento dialog = new VisaoManutencaoTipoEvento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -159,30 +156,24 @@ public class VisaoManutencaoTipoTeste extends VisaoManutencaoPadrao {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btLimpar;
-    private javax.swing.JTextField edDescricao;
     private javax.swing.JTextField edId;
+    private javax.swing.JTextField edNome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
+    ControleManutencaoTipoEvento controle = new ControleManutencaoTipoEvento();
+    
     @Override
     public ControlePadrao getControle() {
         return this.controle;
-    }
-
-    public JTextField getEdDescricao() {
-        return edDescricao;
-    }
-
-    public void setEdDescricao(JTextField edDescricao) {
-        this.edDescricao = edDescricao;
     }
 
     public JTextField getEdId() {
         return edId;
     }
 
-    public void setEdId(JTextField edId) {
-        this.edId = edId;
+    public JTextField getEdNome() {
+        return edNome;
     }
 }

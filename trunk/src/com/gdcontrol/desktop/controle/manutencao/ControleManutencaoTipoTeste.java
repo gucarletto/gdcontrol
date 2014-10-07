@@ -1,4 +1,4 @@
-package com.gdcontrol.desktop.controle;
+package com.gdcontrol.desktop.controle.manutencao;
 
 import com.gdcontrol.dao.tipoteste.TipoTesteDAO;
 import com.gdcontrol.desktop.visao.VisaoManutencaoTipoTeste;
@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author gustavo
  */
-public class ControleTipoTeste extends ControlePadrao<TipoTeste>{
+public class ControleManutencaoTipoTeste extends ControleManutencaoPadrao<TipoTeste>{
     
     private TipoTesteDAO tipoTesteDao = getDAOFactory().getTipoTesteDAO();
     private VisaoManutencaoTipoTeste tela;
@@ -30,20 +30,6 @@ public class ControleTipoTeste extends ControlePadrao<TipoTeste>{
         }else{
             JOptionPane.showMessageDialog(this.tela, "Erro na gravação");
         }
-    }
-
-    @Override
-    public void excluir(TipoTeste t) {
-        if(tipoTesteDao.excluir(t)){
-           JOptionPane.showMessageDialog(this.tela, "Excluído com sucesso");
-       }else{
-           JOptionPane.showMessageDialog(this.tela, "Erro na exclusão");
-       }
-    }
-
-    @Override
-    public List<TipoTeste> listar() {
-        return tipoTesteDao.listar();
     }
 
     @Override

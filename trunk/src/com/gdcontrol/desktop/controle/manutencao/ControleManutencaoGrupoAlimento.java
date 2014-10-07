@@ -1,8 +1,9 @@
-package com.gdcontrol.desktop.controle;
+package com.gdcontrol.desktop.controle.manutencao;
 
 import com.gdcontrol.dao.grupoalimento.GrupoAlimentoDAO;
 import com.gdcontrol.desktop.visao.VisaoManutencaoGrupoAlimento;
 import com.gdcontrol.entidade.GrupoAlimento;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -10,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author gustavo
  */
-public class ControleGrupoAlimento extends ControlePadrao<GrupoAlimento>{
+public class ControleManutencaoGrupoAlimento extends ControleManutencaoPadrao<GrupoAlimento>{
     
     private GrupoAlimentoDAO grupoAlimentoDao = getDAOFactory().getGrupoAlimentoDAO();
     private VisaoManutencaoGrupoAlimento tela;
@@ -30,20 +31,6 @@ public class ControleGrupoAlimento extends ControlePadrao<GrupoAlimento>{
         }else{
             JOptionPane.showMessageDialog(this.tela, "Erro na gravação");
         }
-    }
-
-    @Override
-    public void excluir(GrupoAlimento t) {
-       if(grupoAlimentoDao.excluir(t)){
-           JOptionPane.showMessageDialog(this.tela, "Excluído com sucesso");
-       }else{
-           JOptionPane.showMessageDialog(this.tela, "Erro na exclusão");
-       }
-    }
-
-    @Override
-    public List<GrupoAlimento> listar() {
-        return grupoAlimentoDao.listar();
     }
 
     @Override

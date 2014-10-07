@@ -1,11 +1,11 @@
 package com.gdcontrol.desktop.visao;
 
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaTipoTeste;
 import com.gdcontrol.desktop.controle.ControlePadrao;
-import com.gdcontrol.desktop.controle.ControleTipoTeste;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoTipoTeste;
 import com.gdcontrol.desktop.util.tablemodel.TipoTesteTableModel;
 import com.gdcontrol.entidade.TipoTeste;
 import java.awt.event.KeyEvent;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -19,7 +19,7 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
 
     private static final String OPCAO_ID = "ID";
     private static final String OPCAO_DESCRICAO = "Descrição";
-    
+
     /**
      * Creates new form VisaoConsultaTipoTeste
      */
@@ -156,7 +156,7 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
         int indice = tbTipoTeste.getSelectedRow();
         if (indice >= 0) {
             int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Tipo Teste selecionado?");
-            if(opcao == JOptionPane.YES_OPTION){
+            if (opcao == JOptionPane.YES_OPTION) {
                 getControle().excluir(tableModelTipoTeste.getTipoTeste(indice));
                 carregaTiposTeste();
             }
@@ -167,7 +167,7 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
         int indice = tbTipoTeste.getSelectedRow();
         if (indice >= 0) {
             VisaoManutencaoTipoTeste manutencao = new VisaoManutencaoTipoTeste(null, true);
-            ControleTipoTeste controle = (ControleTipoTeste) manutencao.getControle();
+            ControleManutencaoTipoTeste controle = (ControleManutencaoTipoTeste) manutencao.getControle();
             controle.setModelo(tableModelTipoTeste.getTipoTeste(indice));
             controle.setTela(manutencao);
             controle.carregaTela();
@@ -177,27 +177,28 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void btPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisaActionPerformed
-        if(!edPesquisa.getText().isEmpty()){
+        if (!edPesquisa.getText().isEmpty()) {
             tableModelTipoTeste.limpar();
             String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
-            switch(pesquisa){
+            switch (pesquisa) {
                 case OPCAO_ID:
-                    try{
+                    try {
                         filtraId(Integer.parseInt(edPesquisa.getText()));
-                    }catch(NumberFormatException e){}
+                    } catch (NumberFormatException e) {
+                    }
                     break;
                 case OPCAO_DESCRICAO:
                     filtraDescricao(edPesquisa.getText());
-                    break;    
+                    break;
             }
             tableModelTipoTeste.fireTableDataChanged();
-        }else{
+        } else {
             carregaTiposTeste();
         }
     }//GEN-LAST:event_btPesquisaActionPerformed
 
     private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btPesquisaActionPerformed(null);
         }
     }//GEN-LAST:event_edPesquisaKeyPressed
@@ -258,8 +259,8 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     // End of variables declaration//GEN-END:variables
 
     private TipoTesteTableModel tableModelTipoTeste = new TipoTesteTableModel();
-    private ControleTipoTeste controle = new ControleTipoTeste();
-    
+    private ControleConsultaTipoTeste controle = new ControleConsultaTipoTeste();
+
     private void carregaTiposTeste() {
         tableModelTipoTeste.limpar();
         for (TipoTeste tip : (List<TipoTeste>) getControle().listar()) {
@@ -269,24 +270,20 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     }
 
     @Override
-    public ControlePadrao getControle() {
+    public ControleConsultaTipoTeste getControle() {
         return this.controle;
     }
-    
-    private void filtraId(int id){
-        for (TipoTeste tip : (List<TipoTeste>) getControle().listar()) {
-            if(tip.getId() == id){
-                tableModelTipoTeste.addTipoTeste(tip);
-                break;
-            }
+
+    private void filtraId(int id) {
+        TipoTeste tip = getControle().filtraId(id);
+        if (tip != null) {
+            tableModelTipoTeste.addTipoTeste(tip);
         }
     }
-    
-    private void filtraDescricao(String descricao){
-        for (TipoTeste tip : (List<TipoTeste>) getControle().listar()) {
-            if(tip.getDescricao().toUpperCase().contains(descricao.toUpperCase())){
-                tableModelTipoTeste.addTipoTeste(tip);
-            }
+
+    private void filtraDescricao(String descricao) {
+        for (TipoTeste tip : (List<TipoTeste>) getControle().filtraDescricao(descricao)) {
+            tableModelTipoTeste.addTipoTeste(tip);
         }
     }
 
