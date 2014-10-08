@@ -1,0 +1,67 @@
+package com.gdcontrol.desktop.controle.manutencao;
+
+import com.gdcontrol.dao.alimento.AlimentoDAO;
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoAlimento;
+import com.gdcontrol.entidade.Alimento;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author gustavo
+ */
+public class ControleManutencaoAlimento extends ControleManutencaoPadrao<Alimento>{
+
+    private AlimentoDAO alimentoDao = getDAOFactory().getAlimentoDAO();
+    private VisaoManutencaoAlimento tela;
+
+    @Override
+    public void salvar() {
+        boolean salvou;
+        Alimento alimento = (Alimento) this.getModelo();
+        alimento.setNome(this.tela.getEdNome().getText());
+        alimento.setCarboidrato(Integer.parseInt(this.tela.getEdCarboidrato().getText()));
+        alimento.setCaloria(Integer.parseInt(this.tela.getEdCaloria().getText()));
+        alimento.setProteina(Integer.parseInt(this.tela.getEdProteina().getText()));
+        alimento.setGordura(Integer.parseInt(this.tela.getEdGordura().getText()));
+        alimento.setMedidaExata(this.tela.getEdMedidaExata().getText());
+        alimento.setMedidaUsual(this.tela.getEdMedidaUsual().getText());
+        alimento.setUnidadeMedida(this.tela.getEdUnidadeMedida().getText());
+        alimento.setGrupoAlimentoID(Integer.parseInt(this.tela.getEdIdGrupo().getText()));
+        if(!this.tela.getEdId().getText().isEmpty()){
+            salvou = alimentoDao.alterar(alimento);
+        }else{
+            salvou = alimentoDao.inserir(alimento);
+        }
+        if(salvou){
+            JOptionPane.showMessageDialog(this.tela, "Gravado com sucesso");
+        }else{
+            JOptionPane.showMessageDialog(this.tela, "Erro na gravação");
+        }
+    }
+
+    @Override
+    public Alimento getModelo() {
+        if(this.modelo == null){
+            return new Alimento();
+        }
+        return this.modelo;
+    }
+
+    @Override
+    public void setModelo(Alimento modelo) {
+        this.modelo = modelo;
+    }
+
+    public VisaoManutencaoAlimento getTela() {
+        return tela;
+    }
+
+    public void setTela(VisaoManutencaoAlimento tela) {
+        this.tela = tela;
+    }
+    
+    public void carregaTela(){
+        this.tela.getEdId().setText(this.modelo.getId() + "");
+        this.tela.getEdNome().setText(this.modelo.getNome());
+    }
+}
