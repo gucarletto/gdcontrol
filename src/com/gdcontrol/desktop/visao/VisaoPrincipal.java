@@ -1,5 +1,6 @@
 package com.gdcontrol.desktop.visao;
 
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaAlimento;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaGrupoAlimento;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaLocalAplicacao;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedico;
@@ -84,6 +85,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         });
 
         btAlimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/alimento.png"))); // NOI18N
+        btAlimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlimentoActionPerformed(evt);
+            }
+        });
 
         btRefeicao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/refeicao.png"))); // NOI18N
 
@@ -248,6 +254,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         VisaoConsultaLocalAplicacao visaoLocalAplicacao = new VisaoConsultaLocalAplicacao(this, true);
         visaoLocalAplicacao.setVisible(true);
     }//GEN-LAST:event_btLocalAplicacaoActionPerformed
+
+    private void btAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlimentoActionPerformed
+        VisaoConsultaAlimento visaoAlimento = new VisaoConsultaAlimento(this, true);
+        visaoAlimento.setVisible(true);
+    }//GEN-LAST:event_btAlimentoActionPerformed
 
     /**
      * @param args the command line arguments
