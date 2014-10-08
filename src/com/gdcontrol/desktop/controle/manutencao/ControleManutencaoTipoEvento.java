@@ -1,7 +1,7 @@
 package com.gdcontrol.desktop.controle.manutencao;
 
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoTipoEvento;
 import com.gdcontrol.dao.tipoevento.TipoEventoDAO;
-import com.gdcontrol.desktop.visao.VisaoManutencaoTipoEvento;
 import com.gdcontrol.entidade.TipoEvento;
 import javax.swing.JOptionPane;
 

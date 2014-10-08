@@ -1,10 +1,13 @@
-package com.gdcontrol.desktop.visao;
+package com.gdcontrol.desktop.visao.consulta;
 
-import com.gdcontrol.desktop.controle.consulta.ControleConsultaTipoTeste;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaGrupoAlimento;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaPadrao;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoGrupoAlimento;
 import com.gdcontrol.desktop.controle.ControlePadrao;
-import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoTipoTeste;
-import com.gdcontrol.desktop.util.tablemodel.TipoTesteTableModel;
-import com.gdcontrol.entidade.TipoTeste;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaGrupoAlimento;
+import com.gdcontrol.desktop.util.tablemodel.GrupoAlimentoTableModel;
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoGrupoAlimento;
+import com.gdcontrol.entidade.GrupoAlimento;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Vector;
@@ -15,18 +18,20 @@ import javax.swing.JOptionPane;
  *
  * @author gustavo
  */
-public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
-
+public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
+    
     private static final String OPCAO_ID = "ID";
     private static final String OPCAO_DESCRICAO = "Descrição";
 
     /**
-     * Creates new form VisaoConsultaTipoTeste
+     * Creates new form VisaoConsultaGrupoAlimento
+     * @param parent
+     * @param modal
      */
-    public VisaoConsultaTipoTeste(java.awt.Frame parent, boolean modal) {
+    public VisaoConsultaGrupoAlimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        carregaTiposTeste();
+        carregaGrupoAlimentos();
         getOpcoesPesquisa();
     }
 
@@ -40,39 +45,50 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbTipoTeste = new javax.swing.JTable();
+        tbGrupoAlimento = new javax.swing.JTable();
         btNovo = new javax.swing.JButton();
-        btAlterar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
+        btAlterar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         cbCampoPesquisa = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
         edPesquisa = new javax.swing.JTextField();
-        btPesquisa = new javax.swing.JButton();
+        btPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta Grupo Alimento");
 
-        tbTipoTeste.setModel(tableModelTipoTeste);
-        jScrollPane1.setViewportView(tbTipoTeste);
-
-        btNovo.setText("Novo");
-        btNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btNovoActionPerformed(evt);
+        tbGrupoAlimento.setModel(tableModelGrupoAlimento);
+        tbGrupoAlimento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbGrupoAlimentoMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(tbGrupoAlimento);
 
-        btAlterar.setText("Alterar");
-        btAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAlterarActionPerformed(evt);
+        btNovo.setText("Novo");
+        btNovo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btNovoMouseClicked(evt);
             }
         });
 
         btExcluir.setText("Excluir");
-        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+        btExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btExcluirMouseClicked(evt);
+            }
+        });
+
+        btAlterar.setText("Alterar");
+        btAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btAlterarMouseClicked(evt);
+            }
+        });
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btExcluirActionPerformed(evt);
+                btAlterarActionPerformed(evt);
             }
         });
 
@@ -86,10 +102,10 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
             }
         });
 
-        btPesquisa.setText("Pesquisar");
-        btPesquisa.addActionListener(new java.awt.event.ActionListener() {
+        btPesquisar.setText("Pesquisar");
+        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPesquisaActionPerformed(evt);
+                btPesquisarActionPerformed(evt);
             }
         });
 
@@ -106,8 +122,7 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAlterar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btExcluir)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btExcluir))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -118,8 +133,8 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btPesquisa)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(btPesquisar)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,74 +147,82 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPesquisa))
+                    .addComponent(btPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btNovo)
                     .addComponent(btAlterar)
                     .addComponent(btExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
-        VisaoManutencaoTipoTeste manutencaoTipoTeste = new VisaoManutencaoTipoTeste(null, true);
-        manutencaoTipoTeste.setVisible(true);
-        carregaTiposTeste();
-    }//GEN-LAST:event_btNovoActionPerformed
+    private void btNovoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btNovoMouseClicked
+        VisaoManutencaoGrupoAlimento visaoManutencao = new VisaoManutencaoGrupoAlimento(null, true);
+        visaoManutencao.setVisible(true);
+        carregaGrupoAlimentos();
+    }//GEN-LAST:event_btNovoMouseClicked
 
-    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        int indice = tbTipoTeste.getSelectedRow();
+    private void btExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExcluirMouseClicked
+        int indice = tbGrupoAlimento.getSelectedRow();
         if (indice >= 0) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Tipo Teste selecionado?");
-            if (opcao == JOptionPane.YES_OPTION) {
-                getControle().excluir(tableModelTipoTeste.getTipoTeste(indice));
-                carregaTiposTeste();
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Grupo de Alimento selecionado?");
+            if(opcao == JOptionPane.YES_OPTION){
+                getControle().excluir(tableModelGrupoAlimento.getGrupoAlimento(indice));
+                carregaGrupoAlimentos();
             }
         }
-    }//GEN-LAST:event_btExcluirActionPerformed
+    }//GEN-LAST:event_btExcluirMouseClicked
+
+    private void btAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAlterarMouseClicked
+        
+    }//GEN-LAST:event_btAlterarMouseClicked
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        int indice = tbTipoTeste.getSelectedRow();
+        int indice = tbGrupoAlimento.getSelectedRow();
         if (indice >= 0) {
-            VisaoManutencaoTipoTeste manutencao = new VisaoManutencaoTipoTeste(null, true);
-            ControleManutencaoTipoTeste controle = (ControleManutencaoTipoTeste) manutencao.getControle();
-            controle.setModelo(tableModelTipoTeste.getTipoTeste(indice));
-            controle.setTela(manutencao);
-            controle.carregaTela();
+            VisaoManutencaoGrupoAlimento manutencao = new VisaoManutencaoGrupoAlimento(null, true);
+            ControleManutencaoGrupoAlimento controleManutencao = (ControleManutencaoGrupoAlimento) manutencao.getControle();
+            controleManutencao.setModelo(tableModelGrupoAlimento.getGrupoAlimento(indice));
+            controleManutencao.setTela(manutencao);
+            controleManutencao.carregaTela();
             manutencao.setVisible(true);
-            carregaTiposTeste();
+            carregaGrupoAlimentos();
         }
     }//GEN-LAST:event_btAlterarActionPerformed
 
-    private void btPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisaActionPerformed
-        if (!edPesquisa.getText().isEmpty()) {
-            tableModelTipoTeste.limpar();
+    private void tbGrupoAlimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGrupoAlimentoMouseClicked
+        if (evt.getClickCount() == 2) {
+            btAlterarActionPerformed(null);
+        }
+    }//GEN-LAST:event_tbGrupoAlimentoMouseClicked
+
+    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
+        if(!edPesquisa.getText().isEmpty()){
+            tableModelGrupoAlimento.limpar();
             String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
-            switch (pesquisa) {
+            switch(pesquisa){
                 case OPCAO_ID:
-                    try {
+                    try{
                         filtraId(Integer.parseInt(edPesquisa.getText()));
-                    } catch (NumberFormatException e) {
-                    }
+                    }catch(NumberFormatException e){}
                     break;
                 case OPCAO_DESCRICAO:
                     filtraDescricao(edPesquisa.getText());
-                    break;
+                    break;    
             }
-            tableModelTipoTeste.fireTableDataChanged();
-        } else {
-            carregaTiposTeste();
+            tableModelGrupoAlimento.fireTableDataChanged();
+        }else{
+            carregaGrupoAlimentos();
         }
-    }//GEN-LAST:event_btPesquisaActionPerformed
+    }//GEN-LAST:event_btPesquisarActionPerformed
 
     private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btPesquisaActionPerformed(null);
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btPesquisarActionPerformed(null);
         }
     }//GEN-LAST:event_edPesquisaKeyPressed
 
@@ -220,20 +243,21 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaGrupoAlimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                VisaoConsultaTipoTeste dialog = new VisaoConsultaTipoTeste(new javax.swing.JFrame(), true);
+                VisaoConsultaGrupoAlimento dialog = new VisaoConsultaGrupoAlimento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -249,41 +273,41 @@ public class VisaoConsultaTipoTeste extends VisaoConsultaPadrao {
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btNovo;
-    private javax.swing.JButton btPesquisa;
+    private javax.swing.JButton btPesquisar;
     private javax.swing.JComboBox cbCampoPesquisa;
     private javax.swing.JTextField edPesquisa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbTipoTeste;
+    private javax.swing.JTable tbGrupoAlimento;
     // End of variables declaration//GEN-END:variables
 
-    private TipoTesteTableModel tableModelTipoTeste = new TipoTesteTableModel();
-    private ControleConsultaTipoTeste controle = new ControleConsultaTipoTeste();
-
-    private void carregaTiposTeste() {
-        tableModelTipoTeste.limpar();
-        for (TipoTeste tip : (List<TipoTeste>) getControle().listar()) {
-            tableModelTipoTeste.addTipoTeste(tip);
-        }
-        tableModelTipoTeste.fireTableDataChanged();
-    }
+    private GrupoAlimentoTableModel tableModelGrupoAlimento = new GrupoAlimentoTableModel();
+    private ControleConsultaGrupoAlimento controle = new ControleConsultaGrupoAlimento();
 
     @Override
-    public ControleConsultaTipoTeste getControle() {
+    public ControleConsultaGrupoAlimento getControle() {
         return this.controle;
     }
 
-    private void filtraId(int id) {
-        TipoTeste tip = getControle().filtraId(id);
-        if (tip != null) {
-            tableModelTipoTeste.addTipoTeste(tip);
+    private void carregaGrupoAlimentos() {
+        tableModelGrupoAlimento.limpar();
+        for (GrupoAlimento grp : (List<GrupoAlimento>) getControle().listar()) {
+            tableModelGrupoAlimento.addGrupoAlimento(grp);
+        }
+        tableModelGrupoAlimento.fireTableDataChanged();
+    }
+    
+    private void filtraId(int id){
+        GrupoAlimento grp = getControle().filtraId(id);
+        if(grp != null){
+            tableModelGrupoAlimento.addGrupoAlimento(grp);
         }
     }
-
-    private void filtraDescricao(String descricao) {
-        for (TipoTeste tip : (List<TipoTeste>) getControle().filtraDescricao(descricao)) {
-            tableModelTipoTeste.addTipoTeste(tip);
+    
+    private void filtraDescricao(String descricao){
+        for (GrupoAlimento grp : (List<GrupoAlimento>) getControle().filtraDescricao(descricao)) {
+            tableModelGrupoAlimento.addGrupoAlimento(grp);
         }
     }
 

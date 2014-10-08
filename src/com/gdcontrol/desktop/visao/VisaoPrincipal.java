@@ -1,5 +1,12 @@
 package com.gdcontrol.desktop.visao;
 
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaGrupoAlimento;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaLocalAplicacao;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedico;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaTipoEvento;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaTipoTeste;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedicacao;
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoUsuario;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -70,6 +77,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         });
 
         btUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/icone_perfil.png"))); // NOI18N
+        btUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUsuarioActionPerformed(evt);
+            }
+        });
 
         btAlimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/alimento.png"))); // NOI18N
 
@@ -80,6 +92,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         btLocalAplicacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/localAplicacao.png"))); // NOI18N
         btLocalAplicacao.setBorder(new javax.swing.border.MatteBorder(null));
         btLocalAplicacao.setPreferredSize(new java.awt.Dimension(68, 68));
+        btLocalAplicacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLocalAplicacaoActionPerformed(evt);
+            }
+        });
 
         btMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/medico.png"))); // NOI18N
         btMedico.addActionListener(new java.awt.event.ActionListener() {
@@ -166,9 +183,8 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                     .addComponent(btMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btLocalAplicacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btAplicacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btLocalAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btPosologia, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
@@ -221,6 +237,17 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         VisaoConsultaTipoEvento visaoTipoEvento = new VisaoConsultaTipoEvento(this, true);
         visaoTipoEvento.setVisible(true);
     }//GEN-LAST:event_btTipoEventoActionPerformed
+
+    private void btUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUsuarioActionPerformed
+        VisaoManutencaoUsuario visaoUsuario = new VisaoManutencaoUsuario(this, true);
+        visaoUsuario.verificaUsuarioExistente();
+        visaoUsuario.setVisible(true); 
+    }//GEN-LAST:event_btUsuarioActionPerformed
+
+    private void btLocalAplicacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLocalAplicacaoActionPerformed
+        VisaoConsultaLocalAplicacao visaoLocalAplicacao = new VisaoConsultaLocalAplicacao(this, true);
+        visaoLocalAplicacao.setVisible(true);
+    }//GEN-LAST:event_btLocalAplicacaoActionPerformed
 
     /**
      * @param args the command line arguments

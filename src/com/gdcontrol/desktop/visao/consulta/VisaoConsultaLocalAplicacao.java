@@ -1,10 +1,10 @@
-package com.gdcontrol.desktop.visao;
+package com.gdcontrol.desktop.visao.consulta;
 
-import com.gdcontrol.desktop.controle.consulta.ControleConsultaMedico;
-import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoMedico;
-import com.gdcontrol.desktop.controle.ControlePadrao;
-import com.gdcontrol.desktop.util.tablemodel.MedicoTableModel;
-import com.gdcontrol.entidade.Medico;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaLocalAplicacao;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoLocalAplicacao;
+import com.gdcontrol.desktop.util.tablemodel.LocalAplicacaoTableModel;
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoLocalAplicacao;
+import com.gdcontrol.entidade.LocalAplicacao;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Vector;
@@ -15,21 +15,18 @@ import javax.swing.JOptionPane;
  *
  * @author gustavo
  */
-public class VisaoConsultaMedico extends VisaoConsultaPadrao {
-    
-    public final static String OPCAO_ID = "ID";
-    public final static String OPCAO_NOME = "Nome";
-    public final static String OPCAO_TELEFONE = "Telefone";
-    public final static String OPCAO_CRM = "CRM";
-    public final static String OPCAO_ESPECIALIZACAO = "Especialização";
+public class VisaoConsultaLocalAplicacao extends VisaoConsultaPadrao {
 
+    public static final String OPCAO_ID = "ID";
+    public static final String OPCAO_DESCRICAO = "Descrição";
+    
     /**
-     * Creates new form VisaoConsultaMedico
+     * Creates new form VisaoConsultaLocalAplicacao
      */
-    public VisaoConsultaMedico(java.awt.Frame parent, boolean modal) {
+    public VisaoConsultaLocalAplicacao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        carregaMedicos();
+        carregaLocaisAplicacao();
         getOpcoesPesquisa();
     }
 
@@ -45,30 +42,31 @@ public class VisaoConsultaMedico extends VisaoConsultaPadrao {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbCampoPesquisa = new javax.swing.JComboBox();
-        edPesquisa = new javax.swing.JTextField();
-        btPesquisa = new javax.swing.JButton();
+        edPesquisar = new javax.swing.JTextField();
+        btPesquisar = new javax.swing.JButton();
         btNovo = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbMedicos = new javax.swing.JTable();
+        tbLocalAplicacao = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta Locais Aplicação");
 
         jLabel1.setText("Campo Pesquisa:");
 
         jLabel2.setText("Pesquisa:");
 
-        edPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+        edPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                edPesquisaKeyPressed(evt);
+                edPesquisarKeyPressed(evt);
             }
         });
 
-        btPesquisa.setText("Pesquisar");
-        btPesquisa.addActionListener(new java.awt.event.ActionListener() {
+        btPesquisar.setText("Pesquisar");
+        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPesquisaActionPerformed(evt);
+                btPesquisarActionPerformed(evt);
             }
         });
 
@@ -93,13 +91,13 @@ public class VisaoConsultaMedico extends VisaoConsultaPadrao {
             }
         });
 
-        tbMedicos.setModel(tableModelMedico);
-        tbMedicos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbLocalAplicacao.setModel(tableModelLocalAplicacao);
+        tbLocalAplicacao.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbMedicosMouseClicked(evt);
+                tbLocalAplicacaoMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbMedicos);
+        jScrollPane1.setViewportView(tbLocalAplicacao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,9 +114,9 @@ public class VisaoConsultaMedico extends VisaoConsultaPadrao {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(edPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btPesquisa))))
+                                .addComponent(btPesquisar))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btNovo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -138,90 +136,82 @@ public class VisaoConsultaMedico extends VisaoConsultaPadrao {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPesquisa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(edPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPesquisar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btNovo)
                     .addComponent(btAlterar)
                     .addComponent(btExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
+        if (!edPesquisar.getText().isEmpty()) {
+            tableModelLocalAplicacao.limpar();
+            String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
+            switch (pesquisa) {
+                case OPCAO_ID:
+                    try {
+                        filtraId(Integer.parseInt(edPesquisar.getText()));
+                    } catch (NumberFormatException e) {
+                    }
+                    break;
+                case OPCAO_DESCRICAO:
+                    filtraDescricao(edPesquisar.getText());
+                    break;
+            }
+            tableModelLocalAplicacao.fireTableDataChanged();
+        } else {
+            carregaLocaisAplicacao();
+        }
+    }//GEN-LAST:event_btPesquisarActionPerformed
+
+    private void edPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btPesquisarActionPerformed(null);
+        }
+    }//GEN-LAST:event_edPesquisarKeyPressed
+
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
-        VisaoManutencaoMedico manutencaoMedico = new VisaoManutencaoMedico(null, true);
-        manutencaoMedico.setVisible(true);
-        carregaMedicos();
+        VisaoManutencaoLocalAplicacao manutencao = new VisaoManutencaoLocalAplicacao(null, true);
+        manutencao.setVisible(true);
+        carregaLocaisAplicacao();
     }//GEN-LAST:event_btNovoActionPerformed
 
-    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        int indice = tbMedicos.getSelectedRow();
-        if (indice >= 0) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Médico selecionado?");
-            if(opcao == JOptionPane.YES_OPTION){
-                getControle().excluir(tableModelMedico.getMedico(indice));
-                carregaMedicos();
-            }
-        }
-    }//GEN-LAST:event_btExcluirActionPerformed
-
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        int indice = tbMedicos.getSelectedRow();
+        int indice = tbLocalAplicacao.getSelectedRow();
         if (indice >= 0) {
-            VisaoManutencaoMedico manutencao = new VisaoManutencaoMedico(null, true);
-            ControleManutencaoMedico controleManutencao = (ControleManutencaoMedico) manutencao.getControle();
-            controleManutencao.setModelo(tableModelMedico.getMedico(indice));
+            VisaoManutencaoLocalAplicacao manutencao = new VisaoManutencaoLocalAplicacao(null, true);
+            ControleManutencaoLocalAplicacao controleManutencao = (ControleManutencaoLocalAplicacao) manutencao.getControle();
+            controleManutencao.setModelo(tableModelLocalAplicacao.getLocalAplicacao(indice));
             controleManutencao.setTela(manutencao);
             controleManutencao.carregaTela();
             manutencao.setVisible(true);
-            carregaMedicos();
+            carregaLocaisAplicacao();
         }
     }//GEN-LAST:event_btAlterarActionPerformed
 
-    private void tbMedicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMedicosMouseClicked
+    private void tbLocalAplicacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLocalAplicacaoMouseClicked
         if (evt.getClickCount() == 2) {
             btAlterarActionPerformed(null);
         }
-    }//GEN-LAST:event_tbMedicosMouseClicked
+    }//GEN-LAST:event_tbLocalAplicacaoMouseClicked
 
-    private void btPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisaActionPerformed
-        if(!edPesquisa.getText().isEmpty()){
-            tableModelMedico.limpar();
-            String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
-            switch(pesquisa){
-                case OPCAO_ID:
-                    try{
-                        filtraId(Integer.parseInt(edPesquisa.getText()));
-                    }catch(NumberFormatException e){}
-                    break;
-                case OPCAO_NOME:
-                    filtraNome(edPesquisa.getText());
-                    break;
-                case OPCAO_TELEFONE:
-                    filtraTelefone(edPesquisa.getText());
-                    break;
-                case OPCAO_CRM:
-                    filtraCrm(edPesquisa.getText());
-                    break;
-                case OPCAO_ESPECIALIZACAO:
-                    filtraEspecializacao(edPesquisa.getText());
-                    break;
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        int indice = tbLocalAplicacao.getSelectedRow();
+        if (indice >= 0) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Grupo de Alimento selecionado?");
+            if(opcao == JOptionPane.YES_OPTION){
+                getControle().excluir(tableModelLocalAplicacao.getLocalAplicacao(indice));
+                carregaLocaisAplicacao();
             }
-            tableModelMedico.fireTableDataChanged();
-        }else{
-            carregaMedicos();
         }
-    }//GEN-LAST:event_btPesquisaActionPerformed
-
-    private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            btPesquisaActionPerformed(null);
-        }
-    }//GEN-LAST:event_edPesquisaKeyPressed
+    }//GEN-LAST:event_btExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,20 +230,20 @@ public class VisaoConsultaMedico extends VisaoConsultaPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaLocalAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaLocalAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaLocalAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaLocalAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoConsultaMedico dialog = new VisaoConsultaMedico(new javax.swing.JFrame(), true);
+                VisaoConsultaLocalAplicacao dialog = new VisaoConsultaLocalAplicacao(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -269,69 +259,50 @@ public class VisaoConsultaMedico extends VisaoConsultaPadrao {
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btNovo;
-    private javax.swing.JButton btPesquisa;
+    private javax.swing.JButton btPesquisar;
     private javax.swing.JComboBox cbCampoPesquisa;
-    private javax.swing.JTextField edPesquisa;
+    private javax.swing.JTextField edPesquisar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbMedicos;
+    private javax.swing.JTable tbLocalAplicacao;
     // End of variables declaration//GEN-END:variables
 
-    ControleConsultaMedico controle = new ControleConsultaMedico();
-    MedicoTableModel tableModelMedico = new MedicoTableModel();
+    ControleConsultaLocalAplicacao controle = new ControleConsultaLocalAplicacao();
+    LocalAplicacaoTableModel tableModelLocalAplicacao = new LocalAplicacaoTableModel();
     
-    private void carregaMedicos() {
-        tableModelMedico.limpar();
-        for (Medico grp : (List<Medico>) getControle().listar()) {
-            tableModelMedico.addMedico(grp);
+    @Override
+    public ControleConsultaLocalAplicacao getControle() {
+        return this.controle;
+    }
+    
+    private void carregaLocaisAplicacao() {
+        tableModelLocalAplicacao.limpar();
+        for (LocalAplicacao local : (List<LocalAplicacao>) getControle().listar()) {
+            tableModelLocalAplicacao.addLocalAplicacao(local);
         }
-        tableModelMedico.fireTableDataChanged();
+        tableModelLocalAplicacao.fireTableDataChanged();
     }
     
-    private void filtraId(int id){
-        Medico med = getControle().filtraId(id);
-        tableModelMedico.addMedico(med);
-    }
-    
-    private void filtraNome(String nome){
-        for (Medico med : (List<Medico>) getControle().filtraNome(nome)) {
-            tableModelMedico.addMedico(med);
-        }
-    }
-    
-    private void filtraTelefone(String telefone){
-        for (Medico med : (List<Medico>) getControle().filtraTelefone(telefone)) {
-            tableModelMedico.addMedico(med);
+    private void filtraId(int id) {
+        LocalAplicacao local = getControle().filtraId(id);
+        if (local != null) {
+            tableModelLocalAplicacao.addLocalAplicacao(local);
         }
     }
-    
-    private void filtraCrm(String crm){
-        for (Medico med : (List<Medico>) getControle().filtraCrm(crm)) {
-            tableModelMedico.addMedico(med);
+
+    private void filtraDescricao(String descricao) {
+        for (LocalAplicacao local : (List<LocalAplicacao>) getControle().filtraDescricao(descricao)) {
+            tableModelLocalAplicacao.addLocalAplicacao(local);
         }
     }
-    
-    private void filtraEspecializacao(String espec){
-        for (Medico med : (List<Medico>) getControle().filtraEspecializacao(espec)) {
-            tableModelMedico.addMedico(med);
-        }
-    }
-    
+
     @Override
     public void getOpcoesPesquisa() {
         Vector comboBoxItems = new Vector();
         comboBoxItems.add(OPCAO_ID);
-        comboBoxItems.add(OPCAO_NOME);
-        comboBoxItems.add(OPCAO_TELEFONE);
-        comboBoxItems.add(OPCAO_CRM);
-        comboBoxItems.add(OPCAO_ESPECIALIZACAO);
+        comboBoxItems.add(OPCAO_DESCRICAO);
         final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
         this.cbCampoPesquisa.setModel(model);
-    }
-
-    @Override
-    public ControleConsultaMedico getControle() {
-        return this.controle;
-    }
+    }    
 }

@@ -1,7 +1,7 @@
 package com.gdcontrol.desktop.controle.manutencao;
 
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoTipoTeste;
 import com.gdcontrol.dao.tipoteste.TipoTesteDAO;
-import com.gdcontrol.desktop.visao.VisaoManutencaoTipoTeste;
 import com.gdcontrol.entidade.TipoTeste;
 import java.util.List;
 import javax.swing.JOptionPane;

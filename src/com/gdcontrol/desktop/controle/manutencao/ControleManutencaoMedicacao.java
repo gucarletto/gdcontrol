@@ -1,7 +1,7 @@
 package com.gdcontrol.desktop.controle.manutencao;
 
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoMedicacao;
 import com.gdcontrol.dao.medicacao.MedicacaoDAO;
-import com.gdcontrol.desktop.visao.VisaoManutencaoMedicacao;
 import com.gdcontrol.entidade.Medicacao;
 import java.util.List;
 import javax.swing.JOptionPane;

@@ -1,7 +1,8 @@
-package com.gdcontrol.desktop.visao;
+package com.gdcontrol.desktop.visao.manutencao;
 
 import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoMedico;
 import com.gdcontrol.desktop.controle.ControlePadrao;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoMedico;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
@@ -47,6 +48,7 @@ public class VisaoManutencaoMedico extends VisaoManutencaoPadrao{
         edEspecializacao = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Médico");
 
         jLabel1.setText("ID:");
 
@@ -79,6 +81,11 @@ public class VisaoManutencaoMedico extends VisaoManutencaoPadrao{
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        edTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edTelefoneActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,6 +158,10 @@ public class VisaoManutencaoMedico extends VisaoManutencaoPadrao{
         this.controle.salvar();
         dispose();
     }//GEN-LAST:event_btConfirmarActionPerformed
+
+    private void edTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edTelefoneActionPerformed
 
     /**
      * @param args the command line arguments
