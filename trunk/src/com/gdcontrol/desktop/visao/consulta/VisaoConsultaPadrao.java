@@ -1,5 +1,6 @@
-package com.gdcontrol.desktop.visao;
+package com.gdcontrol.desktop.visao.consulta;
 
+import com.gdcontrol.desktop.visao.VisaoPadrao;
 import java.awt.Frame;
 
 /**

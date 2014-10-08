@@ -1,8 +1,10 @@
-package com.gdcontrol.desktop.visao;
+package com.gdcontrol.desktop.visao.consulta;
 
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaTipoEvento;
 import com.gdcontrol.desktop.controle.consulta.ControleConsultaTipoEvento;
 import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoTipoEvento;
 import com.gdcontrol.desktop.util.tablemodel.TipoEventoTableModel;
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoTipoEvento;
 import com.gdcontrol.entidade.TipoEvento;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -50,7 +52,7 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
         tbTipoEvento = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 430));
+        setTitle("Consulta Tipo Evento");
 
         jLabel1.setText("Campo Pesquisa:");
 

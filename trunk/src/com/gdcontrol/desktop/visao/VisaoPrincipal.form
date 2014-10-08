@@ -96,10 +96,8 @@
               </Group>
               <EmptySpace pref="31" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btLocalAplicacao" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
-                      <Component id="btAplicacao" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btLocalAplicacao" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                  <Component id="btAplicacao" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                   <Component id="btPosologia" min="-2" pref="72" max="-2" attributes="0"/>
                   <Component id="btMedicamentos" min="-2" pref="72" max="-2" attributes="0"/>
               </Group>
@@ -165,6 +163,9 @@
           <Image iconType="3" name="/com/gdcontrol/desktop/util/img/icone_perfil.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btUsuarioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btAlimento">
       <Properties>
@@ -201,6 +202,9 @@
           <Dimension value="[68, 68]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLocalAplicacaoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btMedico">
       <Properties>

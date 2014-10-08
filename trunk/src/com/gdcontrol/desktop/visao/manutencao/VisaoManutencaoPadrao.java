@@ -1,5 +1,6 @@
-package com.gdcontrol.desktop.visao;
+package com.gdcontrol.desktop.visao.manutencao;
 
+import com.gdcontrol.desktop.visao.VisaoPadrao;
 import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.text.JTextComponent;

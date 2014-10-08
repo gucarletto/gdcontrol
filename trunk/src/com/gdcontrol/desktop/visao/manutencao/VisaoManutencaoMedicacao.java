@@ -1,7 +1,8 @@
-package com.gdcontrol.desktop.visao;
+package com.gdcontrol.desktop.visao.manutencao;
 
 import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoMedicacao;
 import com.gdcontrol.desktop.controle.ControlePadrao;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoMedicacao;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -54,6 +55,7 @@ public class VisaoManutencaoMedicacao extends VisaoManutencaoPadrao {
         edObservacao = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Medicação");
 
         jLabel1.setText("ID:");
 

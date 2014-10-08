@@ -1,23 +1,23 @@
-package com.gdcontrol.desktop.visao;
+package com.gdcontrol.desktop.visao.manutencao;
 
 import com.gdcontrol.desktop.controle.ControlePadrao;
-import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoTipoEvento;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoLocalAplicacao;
 import javax.swing.JTextField;
 
 /**
  *
  * @author gustavo
  */
-public class VisaoManutencaoTipoEvento extends VisaoManutencaoPadrao{
+public class VisaoManutencaoLocalAplicacao extends VisaoManutencaoPadrao {
 
     /**
-     * Creates new form VisaoManutencaoTipoEvento
+     * Creates new form VisaoManutencaoLocalAplicacao
      */
-    public VisaoManutencaoTipoEvento(java.awt.Frame parent, boolean modal) {
+    public VisaoManutencaoLocalAplicacao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.addComponenteTexto(edId);
-        this.addComponenteTexto(edNome);
+        this.addComponenteTexto(edDescricao);
     }
 
     /**
@@ -31,16 +31,19 @@ public class VisaoManutencaoTipoEvento extends VisaoManutencaoPadrao{
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        edId = new javax.swing.JTextField();
+        edDescricao = new javax.swing.JTextField();
         btConfirmar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
-        edId = new javax.swing.JTextField();
-        edNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Local Aplicação");
 
         jLabel1.setText("ID:");
 
-        jLabel2.setText("Nome:");
+        jLabel2.setText("Descrição:");
+
+        edId.setEnabled(false);
 
         btConfirmar.setText("Confirmar");
         btConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -56,28 +59,28 @@ public class VisaoManutencaoTipoEvento extends VisaoManutencaoPadrao{
             }
         });
 
-        edId.setEnabled(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edNome, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(edId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(btConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btLimpar)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,11 +89,11 @@ public class VisaoManutencaoTipoEvento extends VisaoManutencaoPadrao{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(edId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(edNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                    .addComponent(edDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
                     .addComponent(btLimpar))
@@ -100,16 +103,15 @@ public class VisaoManutencaoTipoEvento extends VisaoManutencaoPadrao{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
-        this.limpar();
-    }//GEN-LAST:event_btLimparActionPerformed
-
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        this.controle = (ControleManutencaoTipoEvento) getControle();
         this.controle.setTela(this);
         this.controle.salvar();
         dispose();
     }//GEN-LAST:event_btConfirmarActionPerformed
+
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
+        this.limpar();
+    }//GEN-LAST:event_btLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,20 +130,20 @@ public class VisaoManutencaoTipoEvento extends VisaoManutencaoPadrao{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoLocalAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoLocalAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoLocalAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoManutencaoTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoManutencaoLocalAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoManutencaoTipoEvento dialog = new VisaoManutencaoTipoEvento(new javax.swing.JFrame(), true);
+                VisaoManutencaoLocalAplicacao dialog = new VisaoManutencaoLocalAplicacao(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -156,24 +158,24 @@ public class VisaoManutencaoTipoEvento extends VisaoManutencaoPadrao{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btLimpar;
+    private javax.swing.JTextField edDescricao;
     private javax.swing.JTextField edId;
-    private javax.swing.JTextField edNome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
-    ControleManutencaoTipoEvento controle = new ControleManutencaoTipoEvento();
+    ControleManutencaoLocalAplicacao controle = new ControleManutencaoLocalAplicacao();
     
     @Override
     public ControlePadrao getControle() {
         return this.controle;
     }
 
-    public JTextField getEdId() {
-        return edId;
+    public JTextField getEdDescricao() {
+        return edDescricao;
     }
 
-    public JTextField getEdNome() {
-        return edNome;
+    public JTextField getEdId() {
+        return edId;
     }
 }

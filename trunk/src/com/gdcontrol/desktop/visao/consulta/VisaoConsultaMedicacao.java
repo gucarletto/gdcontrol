@@ -1,8 +1,10 @@
-package com.gdcontrol.desktop.visao;
+package com.gdcontrol.desktop.visao.consulta;
 
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaMedicacao;
 import com.gdcontrol.desktop.controle.consulta.ControleConsultaMedicacao;
 import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoMedicacao;
 import com.gdcontrol.desktop.util.tablemodel.MedicacaoTableModel;
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoMedicacao;
 import com.gdcontrol.entidade.Medicacao;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -53,6 +55,7 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
         btPesquisa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta Medicação");
 
         btNovo.setText("Novo");
         btNovo.addActionListener(new java.awt.event.ActionListener() {

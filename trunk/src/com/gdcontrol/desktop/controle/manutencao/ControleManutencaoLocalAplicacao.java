@@ -1,30 +1,28 @@
 package com.gdcontrol.desktop.controle.manutencao;
 
-import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoGrupoAlimento;
-import com.gdcontrol.dao.grupoalimento.GrupoAlimentoDAO;
-import com.gdcontrol.entidade.GrupoAlimento;
-import java.util.ArrayList;
-import java.util.List;
+import com.gdcontrol.dao.localaplicacao.LocalAplicacaoDAO;
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoLocalAplicacao;
+import com.gdcontrol.entidade.LocalAplicacao;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author gustavo
  */
-public class ControleManutencaoGrupoAlimento extends ControleManutencaoPadrao<GrupoAlimento>{
+public class ControleManutencaoLocalAplicacao extends ControleManutencaoPadrao<LocalAplicacao>{
     
-    private GrupoAlimentoDAO grupoAlimentoDao = getDAOFactory().getGrupoAlimentoDAO();
-    private VisaoManutencaoGrupoAlimento tela;
+    private LocalAplicacaoDAO localAplicacaoDao = getDAOFactory().getLocalAplicacaoDAO();
+    private VisaoManutencaoLocalAplicacao tela;
 
     @Override
     public void salvar() {
         boolean salvou;
-        GrupoAlimento grupo = (GrupoAlimento) this.getModelo();
+        LocalAplicacao grupo = (LocalAplicacao) this.getModelo();
         grupo.setDescricao(this.tela.getEdDescricao().getText());
         if(!this.tela.getEdId().getText().isEmpty()){
-            salvou = grupoAlimentoDao.alterar(grupo);
+            salvou = localAplicacaoDao.alterar(grupo);
         }else{
-            salvou = grupoAlimentoDao.inserir(grupo);
+            salvou = localAplicacaoDao.inserir(grupo);
         }
         if(salvou){
             JOptionPane.showMessageDialog(this.tela, "Gravado com sucesso");
@@ -34,23 +32,23 @@ public class ControleManutencaoGrupoAlimento extends ControleManutencaoPadrao<Gr
     }
 
     @Override
-    public GrupoAlimento getModelo() {
+    public LocalAplicacao getModelo() {
         if(this.modelo == null){
-            return new GrupoAlimento();
+            return new LocalAplicacao();
         }
         return this.modelo;
     }
 
     @Override
-    public void setModelo(GrupoAlimento modelo) {
+    public void setModelo(LocalAplicacao modelo) {
         this.modelo = modelo;
     }
 
-    public VisaoManutencaoGrupoAlimento getTela() {
+    public VisaoManutencaoLocalAplicacao getTela() {
         return tela;
     }
 
-    public void setTela(VisaoManutencaoGrupoAlimento tela) {
+    public void setTela(VisaoManutencaoLocalAplicacao tela) {
         this.tela = tela;
     }
     
@@ -58,4 +56,5 @@ public class ControleManutencaoGrupoAlimento extends ControleManutencaoPadrao<Gr
         this.tela.getEdId().setText(this.modelo.getId() + "");
         this.tela.getEdDescricao().setText(this.modelo.getDescricao());
     }
+    
 }
