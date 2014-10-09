@@ -32,7 +32,7 @@ public class AlimentoTableModel extends AbstractTableModel{
         GrupoAlimento grupo = grupoAlimentoDao.filtraId(ali.getGrupoAlimentoID());
         switch(columnIndex){
             case 0:{
-                return ali.getId();
+                return ali.getAlimentoId();
             }
             case 1:{
                 return ali.getNome();
@@ -50,7 +50,7 @@ public class AlimentoTableModel extends AbstractTableModel{
                 return ali.getProteina();
             }
             case 6:{
-                return grupo.getId();
+                return grupo.getGrupoAlimentoId();
             }
             case 7:{
                 return grupo.getDescricao();

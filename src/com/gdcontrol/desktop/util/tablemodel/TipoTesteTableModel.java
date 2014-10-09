@@ -27,7 +27,7 @@ public class TipoTesteTableModel extends AbstractTableModel{
         TipoTeste tip = tipos.get(rowIndex);
         switch(columnIndex){
             case 0:{
-                return tip.getId();
+                return tip.getTipoTesteId();
             }
             default:{
                 return tip.getDescricao();

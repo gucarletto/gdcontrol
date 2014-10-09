@@ -57,7 +57,7 @@ public class ControleManutencaoMedico extends ControleManutencaoPadrao<Medico>{
     }
     
     public void carregaTela(){
-        this.tela.getEdId().setText(this.modelo.getId() + "");
+        this.tela.getEdId().setText(this.modelo.getPessoaId() + "");
         this.tela.getEdNome().setText(this.modelo.getNome());
         this.tela.getEdTelefone().setText(this.modelo.getTelefone());
         this.tela.getEdCrm().setText(this.modelo.getCrm());

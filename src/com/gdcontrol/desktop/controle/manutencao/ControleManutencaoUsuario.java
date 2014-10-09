@@ -81,7 +81,7 @@ public class ControleManutencaoUsuario extends ControleManutencaoPadrao<Usuario>
     }
     
     public void carregaTela(){
-        this.tela.getEdId().setText(this.modelo.getId() + "");
+        this.tela.getEdId().setText(this.modelo.getPessoaId() + "");
         this.tela.getEdNome().setText(this.modelo.getNome());
         this.tela.getEdAltura().setText(this.modelo.getAltura() + "");
         this.tela.getEdPeso().setText(this.modelo.getPeso()+ "");

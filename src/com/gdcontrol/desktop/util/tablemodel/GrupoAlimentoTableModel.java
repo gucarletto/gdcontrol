@@ -27,7 +27,7 @@ public class GrupoAlimentoTableModel extends AbstractTableModel{
         GrupoAlimento grp = grupos.get(rowIndex);
         switch(columnIndex){
             case 0:{
-                return grp.getId();
+                return grp.getGrupoAlimentoId();
             }
             default:{
                 return grp.getDescricao();

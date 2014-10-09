@@ -27,7 +27,7 @@ public class LocalAplicacaoTableModel extends AbstractTableModel{
         LocalAplicacao local = locais.get(rowIndex);
         switch(columnIndex){
             case 0:{
-                return local.getId();
+                return local.getLocalAplicacaoId();
             }
             default:{
                 return local.getDescricao();

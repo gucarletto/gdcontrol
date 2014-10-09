@@ -27,7 +27,7 @@ public class MedicoTableModel extends AbstractTableModel{
         Medico med = medicos.get(rowIndex);
         switch(columnIndex){
             case 0:{
-                return med.getId();
+                return med.getPessoaId();
             }
             case 1:{
                 return med.getNome();
