@@ -53,7 +53,7 @@ public class ControleManutencaoTipoEvento extends ControleManutencaoPadrao<TipoE
     }
     
     public void carregaTela(){
-        this.tela.getEdId().setText(this.modelo.getId() + "");
+        this.tela.getEdId().setText(this.modelo.getTipoEventoId() + "");
         this.tela.getEdNome().setText(this.modelo.getNome());
     }
 }

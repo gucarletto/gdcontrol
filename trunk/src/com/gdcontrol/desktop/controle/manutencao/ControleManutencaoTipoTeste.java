@@ -54,7 +54,7 @@ public class ControleManutencaoTipoTeste extends ControleManutencaoPadrao<TipoTe
     }
     
     public void carregaTela(){
-        this.tela.getEdId().setText(this.modelo.getId() + "");
+        this.tela.getEdId().setText(this.modelo.getTipoTesteId() + "");
         this.tela.getEdDescricao().setText(this.modelo.getDescricao());
     }
 }

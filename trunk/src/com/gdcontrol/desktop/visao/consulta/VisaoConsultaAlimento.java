@@ -53,6 +53,7 @@ public class VisaoConsultaAlimento extends VisaoConsultaPadrao {
         tbAlimento = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta de Alimentos");
 
         jLabel1.setText("Campo Pesquisa:");
 

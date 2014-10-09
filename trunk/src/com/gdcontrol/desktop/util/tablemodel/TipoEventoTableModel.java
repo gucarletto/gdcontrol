@@ -27,7 +27,7 @@ public class TipoEventoTableModel extends AbstractTableModel{
         TipoEvento tip = tipos.get(rowIndex);
         switch(columnIndex){
             case 0:{
-                return tip.getId();
+                return tip.getTipoEventoId();
             }
             default:{
                 return tip.getNome();

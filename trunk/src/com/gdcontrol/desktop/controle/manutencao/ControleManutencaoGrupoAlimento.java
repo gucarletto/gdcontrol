@@ -55,7 +55,7 @@ public class ControleManutencaoGrupoAlimento extends ControleManutencaoPadrao<Gr
     }
     
     public void carregaTela(){
-        this.tela.getEdId().setText(this.modelo.getId() + "");
+        this.tela.getEdId().setText(this.modelo.getGrupoAlimentoId() + "");
         this.tela.getEdDescricao().setText(this.modelo.getDescricao());
     }
 }

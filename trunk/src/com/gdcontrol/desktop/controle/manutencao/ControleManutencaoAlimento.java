@@ -1,8 +1,10 @@
 package com.gdcontrol.desktop.controle.manutencao;
 
 import com.gdcontrol.dao.alimento.AlimentoDAO;
+import com.gdcontrol.dao.grupoalimento.GrupoAlimentoDAO;
 import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoAlimento;
 import com.gdcontrol.entidade.Alimento;
+import com.gdcontrol.entidade.GrupoAlimento;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +14,7 @@ import javax.swing.JOptionPane;
 public class ControleManutencaoAlimento extends ControleManutencaoPadrao<Alimento>{
 
     private AlimentoDAO alimentoDao = getDAOFactory().getAlimentoDAO();
+    private GrupoAlimentoDAO grupoAlimentoDao = getDAOFactory().getGrupoAlimentoDAO();
     private VisaoManutencaoAlimento tela;
 
     @Override
@@ -61,7 +64,11 @@ public class ControleManutencaoAlimento extends ControleManutencaoPadrao<Aliment
     }
     
     public void carregaTela(){
-        this.tela.getEdId().setText(this.modelo.getId() + "");
+        this.tela.getEdId().setText(this.modelo.getAlimentoId() + "");
         this.tela.getEdNome().setText(this.modelo.getNome());
+    }
+    
+    public GrupoAlimento buscaGrupo(int id){
+        return grupoAlimentoDao.filtraId(id);
     }
 }

@@ -53,7 +53,7 @@ public class ControleManutencaoLocalAplicacao extends ControleManutencaoPadrao<L
     }
     
     public void carregaTela(){
-        this.tela.getEdId().setText(this.modelo.getId() + "");
+        this.tela.getEdId().setText(this.modelo.getLocalAplicacaoId() + "");
         this.tela.getEdDescricao().setText(this.modelo.getDescricao());
     }
     
