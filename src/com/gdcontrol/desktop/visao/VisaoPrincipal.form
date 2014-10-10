@@ -250,6 +250,9 @@
           <Image iconType="3" name="/com/gdcontrol/desktop/util/img/refeicao.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRefeicaoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btAplicacao">
       <Properties>
@@ -309,6 +312,9 @@
           <Image iconType="3" name="/com/gdcontrol/desktop/util/img/teste.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTesteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btSincronizacao">
       <Properties>

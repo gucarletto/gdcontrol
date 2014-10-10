@@ -1,9 +1,8 @@
 package com.gdcontrol.desktop.visao.consulta;
 
-import com.gdcontrol.desktop.controle.ControlePadrao;
-import com.gdcontrol.desktop.controle.consulta.ControleConsultaEvento;
-import com.gdcontrol.desktop.util.tablemodel.EventoTableModel;
-import com.gdcontrol.entidade.Evento;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaTeste;
+import com.gdcontrol.desktop.util.tablemodel.TesteTableModel;
+import com.gdcontrol.entidade.Teste;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Vector;
@@ -13,22 +12,21 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author gustavo
  */
-public class VisaoConsultaEvento extends VisaoConsultaPadrao {
+public class VisaoConsultaTeste extends VisaoConsultaPadrao {
 
     private static final String OPCAO_ID = "ID";
-    private static final String OPCAO_DATA_INICIO = "Data Início";
-    private static final String OPCAO_DATA_FIM = "Data Fim";
+    private static final String OPCAO_DATA = "Data";
     private static final String OPCAO_HORA = "Hora";
     private static final String OPCAO_VALOR = "Valor";
-    private static final String OPCAO_TIPO = "Tipo Evento";
+    private static final String OPCAO_TIPO = "Tipo Teste";
     
     /**
-     * Creates new form VisaoConsultaEvento
+     * Creates new form VisaoConsultaTeste
      */
-    public VisaoConsultaEvento(java.awt.Frame parent, boolean modal) {
+    public VisaoConsultaTeste(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        carregaEventos();
+        carregaTestes();
         getOpcoesPesquisa();
     }
 
@@ -43,27 +41,29 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        edPesquisa = new javax.swing.JTextField();
         cbCampoPesquisa = new javax.swing.JComboBox();
-        tbEvento = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        edPesquisa = new javax.swing.JTextField();
         btPesquisar = new javax.swing.JButton();
+        tbTeste = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Consulta Eventos");
+        setTitle("Consulta Testes");
 
         jLabel1.setText("Campo Pesquisa:");
 
         jLabel2.setText("Pesquisa:");
 
+        edPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edPesquisaActionPerformed(evt);
+            }
+        });
         edPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 edPesquisaKeyPressed(evt);
             }
         });
-
-        jTable1.setModel(tableModelEvento);
-        tbEvento.setViewportView(jTable1);
 
         btPesquisar.setText("Pesquisar");
         btPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +71,9 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
                 btPesquisarActionPerformed(evt);
             }
         });
+
+        jTable1.setModel(tableModelTeste);
+        tbTeste.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,13 +86,13 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
                     .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btPesquisar))
-                    .addComponent(jLabel2))
+                        .addComponent(btPesquisar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(tbEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(tbTeste, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,11 +103,11 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tbEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
+                .addComponent(tbTeste, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,7 +115,7 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
 
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
         if(!edPesquisa.getText().isEmpty()){
-            tableModelEvento.limpar();
+            tableModelTeste.limpar();
             String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
             switch(pesquisa){
                 case OPCAO_ID:
@@ -120,28 +123,29 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
                         filtraId(Integer.parseInt(edPesquisa.getText()));
                     }catch(NumberFormatException e){}
                     break;
-                case OPCAO_DATA_INICIO:
-                    filtraDataInicio(edPesquisa.getText());
-                    break;  
-                case OPCAO_DATA_FIM:
-                    filtraDataFim(edPesquisa.getText());
+                case OPCAO_DATA:
+                    filtraData(edPesquisa.getText());
                     break;  
                 case OPCAO_HORA:
                     filtraHora(edPesquisa.getText());
                     break;  
                 case OPCAO_TIPO:
-                    filtraNomeTipo(edPesquisa.getText());
+                    filtraDescricaoTipo(edPesquisa.getText());
                     break;  
                 case OPCAO_VALOR:
                     try{
                         filtraValor(Integer.parseInt(edPesquisa.getText()));
                     }catch(NumberFormatException e){}
             }
-            tableModelEvento.fireTableDataChanged();
+            tableModelTeste.fireTableDataChanged();
         }else{
-            carregaEventos();
+            carregaTestes();
         }
     }//GEN-LAST:event_btPesquisarActionPerformed
+
+    private void edPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edPesquisaActionPerformed
 
     private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
@@ -166,20 +170,20 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoConsultaEvento dialog = new VisaoConsultaEvento(new javax.swing.JFrame(), true);
+                VisaoConsultaTeste dialog = new VisaoConsultaTeste(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -198,53 +202,47 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JScrollPane tbEvento;
+    private javax.swing.JScrollPane tbTeste;
     // End of variables declaration//GEN-END:variables
 
-    ControleConsultaEvento controle = new ControleConsultaEvento();
-    EventoTableModel tableModelEvento = new EventoTableModel();
+    ControleConsultaTeste controle = new ControleConsultaTeste();
+    TesteTableModel tableModelTeste = new TesteTableModel();
     
-    private void carregaEventos() {
-        tableModelEvento.limpar();
-        for (Evento evento : (List<Evento>) getControle().listar()) {
-            tableModelEvento.addEvento(evento);
+    private void carregaTestes() {
+        tableModelTeste.limpar();
+        for (Teste teste : (List<Teste>) getControle().listar()) {
+            tableModelTeste.addTeste(teste);
         }
-        tableModelEvento.fireTableDataChanged();
+        tableModelTeste.fireTableDataChanged();
     }
     
     private void filtraId(int id){
-        Evento evento = getControle().filtraId(id);
-        if(evento != null){
-            tableModelEvento.addEvento(evento);
+        Teste teste = getControle().filtraId(id);
+        if(teste != null){
+            tableModelTeste.addTeste(teste);
         }
     }
     
-    private void filtraDataInicio(String data){
-        for (Evento evento : (List<Evento>) getControle().filtraDataInicio(data)) {
-            tableModelEvento.addEvento(evento);
-        }
-    }
-    
-    private void filtraDataFim(String data){
-        for (Evento evento : (List<Evento>) getControle().filtraDataFim(data)) {
-            tableModelEvento.addEvento(evento);
+    private void filtraData(String data){
+        for (Teste teste : (List<Teste>) getControle().filtraData(data)) {
+            tableModelTeste.addTeste(teste);
         }
     }
     
     private void filtraHora(String hora){
-        for (Evento evento : (List<Evento>) getControle().filtraHora(hora)) {
-            tableModelEvento.addEvento(evento);
+        for (Teste teste : (List<Teste>) getControle().filtraHora(hora)) {
+            tableModelTeste.addTeste(teste);
         }
     }
     private void filtraValor(int valor){
-        for (Evento evento : (List<Evento>) getControle().filtraValor(valor)) {
-            tableModelEvento.addEvento(evento);
+        for (Teste teste : (List<Teste>) getControle().filtraValor(valor)) {
+            tableModelTeste.addTeste(teste);
         }
     }
     
-    private void filtraNomeTipo(String nome){
-        for (Evento evento : (List<Evento>) getControle().filtraNomeTipo(nome)) {
-            tableModelEvento.addEvento(evento);
+    private void filtraDescricaoTipo(String descricao){
+        for (Teste teste : (List<Teste>) getControle().filtraDescricaoTipo(descricao)) {
+            tableModelTeste.addTeste(teste);
         }
     }
     
@@ -252,8 +250,7 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
     public void getOpcoesPesquisa() {
         Vector comboBoxItems = new Vector();
         comboBoxItems.add(OPCAO_ID);
-        comboBoxItems.add(OPCAO_DATA_INICIO);
-        comboBoxItems.add(OPCAO_DATA_FIM);
+        comboBoxItems.add(OPCAO_DATA);
         comboBoxItems.add(OPCAO_HORA);
         comboBoxItems.add(OPCAO_VALOR);
         comboBoxItems.add(OPCAO_TIPO);
@@ -262,7 +259,9 @@ public class VisaoConsultaEvento extends VisaoConsultaPadrao {
     }
 
     @Override
-    public ControleConsultaEvento getControle() {
+    public ControleConsultaTeste getControle() {
         return this.controle;
     }
+
+    
 }
