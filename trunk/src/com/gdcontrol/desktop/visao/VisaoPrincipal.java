@@ -8,6 +8,8 @@ import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedico;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaTipoEvento;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaTipoTeste;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedicacao;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaRefeicao;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaTeste;
 import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoUsuario;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -113,6 +115,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         });
 
         btRefeicao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/refeicao.png"))); // NOI18N
+        btRefeicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRefeicaoActionPerformed(evt);
+            }
+        });
 
         btAplicacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/aplicacao.png"))); // NOI18N
 
@@ -142,6 +149,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         });
 
         btTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/teste.png"))); // NOI18N
+        btTeste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTesteActionPerformed(evt);
+            }
+        });
 
         btSincronizacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/sincronizacao.png"))); // NOI18N
 
@@ -419,6 +431,16 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         VisaoConsultaEvento visaoEvento = new VisaoConsultaEvento(this, true);
         visaoEvento.setVisible(true);
     }//GEN-LAST:event_btEventoActionPerformed
+
+    private void btTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTesteActionPerformed
+        VisaoConsultaTeste visaoTeste = new VisaoConsultaTeste(this, true);
+        visaoTeste.setVisible(true);
+    }//GEN-LAST:event_btTesteActionPerformed
+
+    private void btRefeicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRefeicaoActionPerformed
+        VisaoConsultaRefeicao visaoRefeicao = new VisaoConsultaRefeicao(this, true);
+        visaoRefeicao.setVisible(true);
+    }//GEN-LAST:event_btRefeicaoActionPerformed
 
     /**
      * @param args the command line arguments

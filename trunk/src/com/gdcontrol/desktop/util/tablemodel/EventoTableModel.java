@@ -94,5 +94,4 @@ public class EventoTableModel extends AbstractTableModel{
     public void limpar(){
         eventos.clear();
     }
-    
 }
