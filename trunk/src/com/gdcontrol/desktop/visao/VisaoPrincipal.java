@@ -1,6 +1,7 @@
 package com.gdcontrol.desktop.visao;
 
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaAlimento;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaEvento;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaGrupoAlimento;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaLocalAplicacao;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedico;
@@ -131,7 +132,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btPosologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/posologia.png"))); // NOI18N
+        btPosologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/prescricao.png"))); // NOI18N
 
         btTipoTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/tipo_teste.png"))); // NOI18N
         btTipoTeste.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,6 +155,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         });
 
         btEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/evento.png"))); // NOI18N
+        btEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEventoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -277,7 +283,6 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -409,6 +414,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         VisaoConsultaGrupoAlimento visaoGrupoAlimento = new VisaoConsultaGrupoAlimento(this, true);
         visaoGrupoAlimento.setVisible(true);
     }//GEN-LAST:event_btGrupoAlimentoActionPerformed
+
+    private void btEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEventoActionPerformed
+        VisaoConsultaEvento visaoEvento = new VisaoConsultaEvento(this, true);
+        visaoEvento.setVisible(true);
+    }//GEN-LAST:event_btEventoActionPerformed
 
     /**
      * @param args the command line arguments
