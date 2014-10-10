@@ -1,9 +1,6 @@
 package com.gdcontrol.desktop.visao.consulta;
 
-import com.gdcontrol.desktop.controle.consulta.ControleConsultaGrupoAlimento;
-import com.gdcontrol.desktop.controle.consulta.ControleConsultaPadrao;
 import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoGrupoAlimento;
-import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.controle.consulta.ControleConsultaGrupoAlimento;
 import com.gdcontrol.desktop.util.tablemodel.GrupoAlimentoTableModel;
 import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoGrupoAlimento;
@@ -160,40 +157,6 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btNovoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btNovoMouseClicked
-        VisaoManutencaoGrupoAlimento visaoManutencao = new VisaoManutencaoGrupoAlimento(null, true);
-        visaoManutencao.setVisible(true);
-        carregaGrupoAlimentos();
-    }//GEN-LAST:event_btNovoMouseClicked
-
-    private void btExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExcluirMouseClicked
-        int indice = tbGrupoAlimento.getSelectedRow();
-        if (indice >= 0) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Grupo de Alimento selecionado?");
-            if(opcao == JOptionPane.YES_OPTION){
-                getControle().excluir(tableModelGrupoAlimento.getGrupoAlimento(indice));
-                carregaGrupoAlimentos();
-            }
-        }
-    }//GEN-LAST:event_btExcluirMouseClicked
-
-    private void btAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAlterarMouseClicked
-        
-    }//GEN-LAST:event_btAlterarMouseClicked
-
-    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        int indice = tbGrupoAlimento.getSelectedRow();
-        if (indice >= 0) {
-            VisaoManutencaoGrupoAlimento manutencao = new VisaoManutencaoGrupoAlimento(null, true);
-            ControleManutencaoGrupoAlimento controleManutencao = (ControleManutencaoGrupoAlimento) manutencao.getControle();
-            controleManutencao.setModelo(tableModelGrupoAlimento.getGrupoAlimento(indice));
-            controleManutencao.setTela(manutencao);
-            controleManutencao.carregaTela();
-            manutencao.setVisible(true);
-            carregaGrupoAlimentos();
-        }
-    }//GEN-LAST:event_btAlterarActionPerformed
-
     private void tbGrupoAlimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGrupoAlimentoMouseClicked
         if (evt.getClickCount() == 2) {
             btAlterarActionPerformed(null);
@@ -225,6 +188,40 @@ public class VisaoConsultaGrupoAlimento extends VisaoConsultaPadrao {
             btPesquisarActionPerformed(null);
         }
     }//GEN-LAST:event_edPesquisaKeyPressed
+
+    private void btNovoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btNovoMouseClicked
+        VisaoManutencaoGrupoAlimento visaoManutencao = new VisaoManutencaoGrupoAlimento(null, true);
+        visaoManutencao.setVisible(true);
+        carregaGrupoAlimentos();
+    }//GEN-LAST:event_btNovoMouseClicked
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        int indice = tbGrupoAlimento.getSelectedRow();
+        if (indice >= 0) {
+            VisaoManutencaoGrupoAlimento manutencao = new VisaoManutencaoGrupoAlimento(null, true);
+            ControleManutencaoGrupoAlimento controleManutencao = (ControleManutencaoGrupoAlimento) manutencao.getControle();
+            controleManutencao.setModelo(tableModelGrupoAlimento.getGrupoAlimento(indice));
+            controleManutencao.setTela(manutencao);
+            controleManutencao.carregaTela();
+            manutencao.setVisible(true);
+            carregaGrupoAlimentos();
+        }
+    }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void btAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAlterarMouseClicked
+
+    }//GEN-LAST:event_btAlterarMouseClicked
+
+    private void btExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExcluirMouseClicked
+        int indice = tbGrupoAlimento.getSelectedRow();
+        if (indice >= 0) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Grupo de Alimento selecionado?");
+            if(opcao == JOptionPane.YES_OPTION){
+                getControle().excluir(tableModelGrupoAlimento.getGrupoAlimento(indice));
+                carregaGrupoAlimentos();
+            }
+        }
+    }//GEN-LAST:event_btExcluirMouseClicked
 
     /**
      * @param args the command line arguments

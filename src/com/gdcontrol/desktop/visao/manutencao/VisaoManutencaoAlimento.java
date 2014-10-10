@@ -2,6 +2,7 @@ package com.gdcontrol.desktop.visao.manutencao;
 
 import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoAlimento;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaGrupoAlimento;
 import com.gdcontrol.entidade.GrupoAlimento;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -52,6 +53,7 @@ public class VisaoManutencaoAlimento extends VisaoManutencaoPadrao {
         btConfirmar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
         edDescricaoGrupo = new javax.swing.JTextField();
+        btAdicionarGrupo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alimento");
@@ -90,8 +92,20 @@ public class VisaoManutencaoAlimento extends VisaoManutencaoPadrao {
         });
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         btLimpar.setText("Limpar");
+
+        btAdicionarGrupo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/novo.png"))); // NOI18N
+        btAdicionarGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAdicionarGrupoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,27 +127,29 @@ public class VisaoManutencaoAlimento extends VisaoManutencaoPadrao {
                             .addComponent(jLabel4)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(edId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edNome, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(edCarboidrato)
-                            .addComponent(edMedidaExata)
-                            .addComponent(edMedidaUsual)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(edGordura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                                .addComponent(edProteina, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(edCaloria, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(edId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(edNome, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                .addComponent(edMedidaExata)
+                                .addComponent(edMedidaUsual)
+                                .addComponent(edCarboidrato, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                .addComponent(edGordura)
+                                .addComponent(edProteina)
+                                .addComponent(edCaloria))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(edIdGrupo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                                     .addComponent(edUnidadeMedida, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(18, 18, 18)
-                                .addComponent(edDescricaoGrupo))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(edDescricaoGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btAdicionarGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btLimpar)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGap(25, 32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,11 +191,13 @@ public class VisaoManutencaoAlimento extends VisaoManutencaoPadrao {
                     .addComponent(jLabel9)
                     .addComponent(edUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(edIdGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edDescricaoGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(edIdGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edDescricaoGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btAdicionarGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
                     .addComponent(btLimpar))
@@ -205,6 +223,17 @@ public class VisaoManutencaoAlimento extends VisaoManutencaoPadrao {
             }
         }
     }//GEN-LAST:event_edIdGrupoFocusLost
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        this.controle.setTela(this);
+        this.controle.salvar();
+        dispose();
+    }//GEN-LAST:event_btConfirmarActionPerformed
+
+    private void btAdicionarGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarGrupoActionPerformed
+        VisaoConsultaGrupoAlimento visaoGrupoAlimento = new VisaoConsultaGrupoAlimento(null, true);
+        visaoGrupoAlimento.setVisible(true);
+    }//GEN-LAST:event_btAdicionarGrupoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +278,7 @@ public class VisaoManutencaoAlimento extends VisaoManutencaoPadrao {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAdicionarGrupo;
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btLimpar;
     private javax.swing.JTextField edCaloria;

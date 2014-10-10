@@ -66,6 +66,19 @@ public class ControleManutencaoAlimento extends ControleManutencaoPadrao<Aliment
     public void carregaTela(){
         this.tela.getEdId().setText(this.modelo.getAlimentoId() + "");
         this.tela.getEdNome().setText(this.modelo.getNome());
+        this.tela.getEdCarboidrato().setText(this.modelo.getCarboidrato()+"");
+        this.tela.getEdCaloria().setText(this.modelo.getCaloria()+"");
+        this.tela.getEdProteina().setText(this.modelo.getProteina()+"");
+        this.tela.getEdGordura().setText(this.modelo.getGordura()+"");
+        this.tela.getEdMedidaExata().setText(this.modelo.getMedidaExata());
+        this.tela.getEdMedidaUsual().setText(this.modelo.getMedidaUsual());
+        this.tela.getEdUnidadeMedida().setText(this.modelo.getUnidadeMedida());
+        
+        GrupoAlimento grupo = this.buscaGrupo(this.modelo.getGrupoAlimentoID());
+        if(grupo != null){
+            this.tela.getEdIdGrupo().setText(grupo.getGrupoAlimentoId()+"");
+            this.tela.getEdDescricaoGrupo().setText(grupo.getDescricao());
+        }
     }
     
     public GrupoAlimento buscaGrupo(int id){
