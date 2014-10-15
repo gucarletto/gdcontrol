@@ -8,6 +8,7 @@ import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedico;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaTipoEvento;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaTipoTeste;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedicacao;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaPrescricao;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaRefeicao;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaTeste;
 import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoUsuario;
@@ -140,6 +141,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         });
 
         btPosologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/prescricao.png"))); // NOI18N
+        btPosologia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPosologiaActionPerformed(evt);
+            }
+        });
 
         btTipoTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/tipo_teste.png"))); // NOI18N
         btTipoTeste.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -441,6 +447,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         VisaoConsultaRefeicao visaoRefeicao = new VisaoConsultaRefeicao(this, true);
         visaoRefeicao.setVisible(true);
     }//GEN-LAST:event_btRefeicaoActionPerformed
+
+    private void btPosologiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPosologiaActionPerformed
+        VisaoConsultaPrescricao visaoPrescricao = new VisaoConsultaPrescricao(this, true);
+        visaoPrescricao.setVisible(true);
+    }//GEN-LAST:event_btPosologiaActionPerformed
 
     /**
      * @param args the command line arguments

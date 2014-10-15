@@ -295,6 +295,9 @@
           <Image iconType="3" name="/com/gdcontrol/desktop/util/img/prescricao.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPosologiaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btTipoTeste">
       <Properties>
