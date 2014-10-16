@@ -53,6 +53,7 @@ public class VisaoConsultaPrescricao extends VisaoConsultaPadrao {
         tbPrescricao = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta Prescrição");
 
         jLabel1.setText("Campo Pesquisa:");
 
@@ -187,6 +188,7 @@ public class VisaoConsultaPrescricao extends VisaoConsultaPadrao {
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
         VisaoManutencaoPrescricao manutencao = new VisaoManutencaoPrescricao(null, true);
         manutencao.setVisible(true);
+        carregaPrescricoes();
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed

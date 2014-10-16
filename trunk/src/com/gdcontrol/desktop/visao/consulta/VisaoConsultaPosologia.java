@@ -1,10 +1,10 @@
 package com.gdcontrol.desktop.visao.consulta;
 
-import com.gdcontrol.desktop.controle.consulta.ControleConsultaTipoEvento;
-import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoTipoEvento;
-import com.gdcontrol.desktop.util.tablemodel.TipoEventoTableModel;
-import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoTipoEvento;
-import com.gdcontrol.entidade.TipoEvento;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaPosologia;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoPosologia;
+import com.gdcontrol.desktop.util.tablemodel.PosologiaTableModel;
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoPosologia;
+import com.gdcontrol.entidade.Posologia;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Vector;
@@ -15,18 +15,21 @@ import javax.swing.JOptionPane;
  *
  * @author gustavo
  */
-public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
+public class VisaoConsultaPosologia extends VisaoConsultaPadrao {
 
     public static final String OPCAO_ID = "ID";
-    public static final String OPCAO_NOME = "Nome";
-
+    public static final String OPCAO_DOSAGEM = "Dosagem";
+    public static final String OPCAO_HORA = "Hora";
+    public static final String OPCAO_INICIO_PRESCRICAO = "Início Prescrição";
+    public static final String OPCAO_FINAL_PRESCRICAO = "Final Prescrição";
+    
     /**
-     * Creates new form VisaoConsultaTipoEvento
+     * Creates new form VisaoConsultaPosologia
      */
-    public VisaoConsultaTipoEvento(java.awt.Frame parent, boolean modal) {
+    public VisaoConsultaPosologia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        carregaTipoEventos();
+        carregaPosologias();
         getOpcoesPesquisa();
     }
 
@@ -48,10 +51,10 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
         btAlterar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbTipoEvento = new javax.swing.JTable();
+        tbPosologia = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Consulta Tipo Evento");
+        setTitle("Consulta Posologia");
 
         jLabel1.setText("Campo Pesquisa:");
 
@@ -85,20 +88,24 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
         });
 
         btExcluir.setText("Excluir");
-        btExcluir.setToolTipText("");
         btExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btExcluirActionPerformed(evt);
             }
         });
 
-        tbTipoEvento.setModel(tableModelTipoEvento);
-        tbTipoEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbPosologia.setModel(tableModelPosologia);
+        tbPosologia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbTipoEventoMouseClicked(evt);
+                tbPosologiaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbTipoEvento);
+        tbPosologia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tbPosologiaKeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbPosologia);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,12 +118,12 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btPesquisar))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btNovo)
@@ -130,7 +137,7 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -144,52 +151,16 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
                     .addComponent(btNovo)
                     .addComponent(btAlterar)
                     .addComponent(btExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
-        VisaoManutencaoTipoEvento manutencao = new VisaoManutencaoTipoEvento(null, true);
-        manutencao.setVisible(true);
-        carregaTipoEventos();
-    }//GEN-LAST:event_btNovoActionPerformed
-
-    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        int indice = tbTipoEvento.getSelectedRow();
-        if (indice >= 0) {
-            VisaoManutencaoTipoEvento manutencao = new VisaoManutencaoTipoEvento(null, true);
-            ControleManutencaoTipoEvento controleManutencao = (ControleManutencaoTipoEvento) manutencao.getControle();
-            controleManutencao.setModelo(tableModelTipoEvento.getTipoEvento(indice));
-            controleManutencao.setTela(manutencao);
-            controleManutencao.carregaTela();
-            manutencao.setVisible(true);
-            carregaTipoEventos();
-        }
-    }//GEN-LAST:event_btAlterarActionPerformed
-
-    private void tbTipoEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTipoEventoMouseClicked
-        if (evt.getClickCount() == 2) {
-            btAlterarActionPerformed(null);
-        }
-    }//GEN-LAST:event_tbTipoEventoMouseClicked
-
-    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        int indice = tbTipoEvento.getSelectedRow();
-        if (indice >= 0) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão do Tipo de Evento selecionado?");
-            if (opcao == JOptionPane.YES_OPTION) {
-                getControle().excluir(tableModelTipoEvento.getTipoEvento(indice));
-                carregaTipoEventos();
-            }
-        }
-    }//GEN-LAST:event_btExcluirActionPerformed
-
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
         if (!edPesquisa.getText().isEmpty()) {
-            tableModelTipoEvento.limpar();
+            tableModelPosologia.limpar();
             String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
             switch (pesquisa) {
                 case OPCAO_ID:
@@ -198,13 +169,22 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
                     } catch (NumberFormatException e) {
                     }
                     break;
-                case OPCAO_NOME:
-                    filtraNome(edPesquisa.getText());
+                case OPCAO_DOSAGEM:
+                    filtraDosagem(edPesquisa.getText());
+                    break;
+                case OPCAO_HORA:
+                    filtraHora(edPesquisa.getText());
+                    break;
+                case OPCAO_INICIO_PRESCRICAO:
+                    filtraInicioPrescricao(edPesquisa.getText());
+                    break;
+                case OPCAO_FINAL_PRESCRICAO:
+                    filtraFinalPrescricao(edPesquisa.getText());
                     break;
             }
-            tableModelTipoEvento.fireTableDataChanged();
+            tableModelPosologia.fireTableDataChanged();
         } else {
-            carregaTipoEventos();
+            carregaPosologias();
         }
     }//GEN-LAST:event_btPesquisarActionPerformed
 
@@ -213,6 +193,46 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
             btPesquisarActionPerformed(null);
         }
     }//GEN-LAST:event_edPesquisaKeyPressed
+
+    private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
+        VisaoManutencaoPosologia manutencao = new VisaoManutencaoPosologia(null, true);
+        manutencao.setVisible(true);
+        carregaPosologias();
+    }//GEN-LAST:event_btNovoActionPerformed
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        int indice = tbPosologia.getSelectedRow();
+        if (indice >= 0) {
+            VisaoManutencaoPosologia manutencao = new VisaoManutencaoPosologia(null, true);
+            ControleManutencaoPosologia controleManutencao = (ControleManutencaoPosologia) manutencao.getControle();
+            controleManutencao.setModelo(tableModelPosologia.getPosologia(indice));
+            controleManutencao.setTela(manutencao);
+            controleManutencao.carregaTela();
+            manutencao.setVisible(true);
+            carregaPosologias();
+        }
+    }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void tbPosologiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPosologiaKeyPressed
+        
+    }//GEN-LAST:event_tbPosologiaKeyPressed
+
+    private void tbPosologiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPosologiaMouseClicked
+        if (evt.getClickCount() == 2) {
+            btAlterarActionPerformed(null);
+        }
+    }//GEN-LAST:event_tbPosologiaMouseClicked
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        int indice = tbPosologia.getSelectedRow();
+        if (indice >= 0) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão da Posologia selecionada?");
+            if(opcao == JOptionPane.YES_OPTION){
+                getControle().excluir(tableModelPosologia.getPosologia(indice));
+                carregaPosologias();
+            }
+        }
+    }//GEN-LAST:event_btExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,20 +251,20 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaPosologia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaPosologia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaPosologia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaTipoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaPosologia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoConsultaTipoEvento dialog = new VisaoConsultaTipoEvento(new javax.swing.JFrame(), true);
+                VisaoConsultaPosologia dialog = new VisaoConsultaPosologia(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -266,44 +286,65 @@ public class VisaoConsultaTipoEvento extends VisaoConsultaPadrao {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbTipoEvento;
+    private javax.swing.JTable tbPosologia;
     // End of variables declaration//GEN-END:variables
 
-    ControleConsultaTipoEvento controle = new ControleConsultaTipoEvento();
-    TipoEventoTableModel tableModelTipoEvento = new TipoEventoTableModel();
-
+    ControleConsultaPosologia controle = new ControleConsultaPosologia();
+    PosologiaTableModel tableModelPosologia = new PosologiaTableModel();
+    
     @Override
     public void getOpcoesPesquisa() {
         Vector comboBoxItems = new Vector();
         comboBoxItems.add(OPCAO_ID);
-        comboBoxItems.add(OPCAO_NOME);
+        comboBoxItems.add(OPCAO_DOSAGEM);
+        comboBoxItems.add(OPCAO_HORA);
+        comboBoxItems.add(OPCAO_INICIO_PRESCRICAO);
+        comboBoxItems.add(OPCAO_FINAL_PRESCRICAO);
         final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
         this.cbCampoPesquisa.setModel(model);
     }
+    
+    private void carregaPosologias(){
+        tableModelPosologia.limpar();
+        for (Posologia pos : (List<Posologia>) getControle().listar()) {
+            tableModelPosologia.addPosologia(pos);
+        }
+        tableModelPosologia.fireTableDataChanged();
+    }
+    
+    private void filtraId(int id) {
+        Posologia pos = getControle().filtraId(id);
+        if(pos != null){
+            tableModelPosologia.addPosologia(pos);
+        }
+    }
+
+    private void filtraDosagem(String dosagem) {
+        for (Posologia pos : (List<Posologia>) getControle().filtraDosagem(dosagem)) {
+            tableModelPosologia.addPosologia(pos);
+        }
+    }
+    
+    private void filtraHora(String hora) {
+        for (Posologia pos : (List<Posologia>) getControle().filtraHora(hora)) {
+            tableModelPosologia.addPosologia(pos);
+        }
+    }
+    
+    private void filtraInicioPrescricao(String data) {
+        for (Posologia pos : (List<Posologia>) getControle().filtraInicioPrescricao(data)) {
+            tableModelPosologia.addPosologia(pos);
+        }
+    }
+    
+    private void filtraFinalPrescricao(String data) {
+        for (Posologia pos : (List<Posologia>) getControle().filtraFinalPrescricao(data)) {
+            tableModelPosologia.addPosologia(pos);
+        }
+    }
 
     @Override
-    public ControleConsultaTipoEvento getControle() {
+    public ControleConsultaPosologia getControle() {
         return this.controle;
-    }
-
-    private void carregaTipoEventos() {
-        tableModelTipoEvento.limpar();
-        for (TipoEvento tip : (List<TipoEvento>) getControle().listar()) {
-            tableModelTipoEvento.addTipoEvento(tip);
-        }
-        tableModelTipoEvento.fireTableDataChanged();
-    }
-
-    private void filtraId(int id) {
-        TipoEvento tip = getControle().filtraId(id);
-        if(tip != null){
-            tableModelTipoEvento.addTipoEvento(tip);
-        }
-    }
-
-    private void filtraNome(String nome) {
-        for (TipoEvento tip : (List<TipoEvento>) getControle().filtraNome(nome)) {
-            tableModelTipoEvento.addTipoEvento(tip);
-        }
     }
 }
