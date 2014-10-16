@@ -39,12 +39,12 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
         edDataInicio = new javax.swing.JFormattedTextField();
         edDataFim = new javax.swing.JFormattedTextField();
         edFatorCarboidrato = new javax.swing.JTextField();
-        edFatorReducao = new javax.swing.JTextField();
+        edFatorCorrecao = new javax.swing.JTextField();
         edFatorSensibilidade = new javax.swing.JTextField();
         edIdMedico = new javax.swing.JTextField();
-        edDescricaoMedico = new javax.swing.JTextField();
+        edNomeMedico = new javax.swing.JTextField();
         edIdMedicacao = new javax.swing.JTextField();
-        edDEscricaoMedicacao = new javax.swing.JTextField();
+        edNomeMedicacao = new javax.swing.JTextField();
         btConfirmar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
 
@@ -58,7 +58,7 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
 
         jLabel4.setText("Fator Carboidrato:");
 
-        jLabel5.setText("Fator Redução:");
+        jLabel5.setText("Fator Correção:");
 
         jLabel6.setText("Fator Sensibilidade:");
 
@@ -104,12 +104,12 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
                                     .addComponent(edIdMedicacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                                     .addComponent(edIdMedico, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(edFatorSensibilidade, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(edFatorReducao, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(edFatorCorrecao, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(edFatorCarboidrato, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(edDescricaoMedico, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                    .addComponent(edDEscricaoMedicacao)))))
+                                    .addComponent(edNomeMedico, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(edNomeMedicacao)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -138,7 +138,7 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(edFatorReducao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edFatorCorrecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -147,12 +147,12 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(edIdMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edDescricaoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(edIdMedicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edDEscricaoMedicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edNomeMedicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
@@ -208,16 +208,16 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btLimpar;
-    private javax.swing.JTextField edDEscricaoMedicacao;
     private javax.swing.JFormattedTextField edDataFim;
     private javax.swing.JFormattedTextField edDataInicio;
-    private javax.swing.JTextField edDescricaoMedico;
     private javax.swing.JTextField edFatorCarboidrato;
-    private javax.swing.JTextField edFatorReducao;
+    private javax.swing.JTextField edFatorCorrecao;
     private javax.swing.JTextField edFatorSensibilidade;
     private javax.swing.JTextField edId;
     private javax.swing.JTextField edIdMedicacao;
     private javax.swing.JTextField edIdMedico;
+    private javax.swing.JTextField edNomeMedicacao;
+    private javax.swing.JTextField edNomeMedico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -233,8 +233,8 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public JTextField getEdDEscricaoMedicacao() {
-        return edDEscricaoMedicacao;
+    public JTextField getEdNomeMedicacao() {
+        return edNomeMedicacao;
     }
 
     public JFormattedTextField getEdDataFim() {
@@ -245,16 +245,16 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
         return edDataInicio;
     }
 
-    public JTextField getEdDescricaoMedico() {
-        return edDescricaoMedico;
+    public JTextField getEdNomeMedico() {
+        return edNomeMedico;
     }
 
     public JTextField getEdFatorCarboidrato() {
         return edFatorCarboidrato;
     }
 
-    public JTextField getEdFatorReducao() {
-        return edFatorReducao;
+    public JTextField getEdFatorCorrecao() {
+        return edFatorCorrecao;
     }
 
     public JTextField getEdFatorSensibilidade() {
