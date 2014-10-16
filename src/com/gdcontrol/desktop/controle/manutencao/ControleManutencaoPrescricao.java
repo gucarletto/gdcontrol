@@ -2,6 +2,8 @@ package com.gdcontrol.desktop.controle.manutencao;
 
 import com.gdcontrol.dao.prescricao.PrescricaoDAO;
 import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoPrescricao;
+import com.gdcontrol.entidade.Medicacao;
+import com.gdcontrol.entidade.Medico;
 import com.gdcontrol.entidade.Prescricao;
 import com.gdcontrol.util.DateUtil;
 import javax.swing.JOptionPane;
@@ -19,6 +21,7 @@ public class ControleManutencaoPrescricao extends ControleManutencaoPadrao<Presc
     public void salvar() {
         DateUtil format = new DateUtil();
         boolean salvou;
+        
         Prescricao prescricao = (Prescricao) this.getModelo();
         prescricao.setFatorCarboidrato(Double.parseDouble(this.tela.getEdFatorCarboidrato().getText()));
         prescricao.setFatorCorrecao(Double.parseDouble(this.tela.getEdFatorCorrecao().getText()));
@@ -72,5 +75,13 @@ public class ControleManutencaoPrescricao extends ControleManutencaoPadrao<Presc
         this.tela.getEdNomeMedico().setText(this.modelo.getMedico().getNome());
         this.tela.getEdIdMedicacao().setText(this.modelo.getMedicacaoId() + "");
         this.tela.getEdNomeMedicacao().setText(this.modelo.getMedicacao().getNomeComercial());
+    }
+    
+    public Medico buscaMedico(int id){
+        return getDAOFactory().getMedicoDAO().filtraId(id);
+    }
+    
+    public Medicacao buscaMedicacao(int id){
+        return getDAOFactory().getMedicacaoDAO().filtraId(id);
     }
 }

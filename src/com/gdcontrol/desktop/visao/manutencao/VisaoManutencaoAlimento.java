@@ -100,7 +100,7 @@ public class VisaoManutencaoAlimento extends VisaoManutencaoPadrao {
 
         btLimpar.setText("Limpar");
 
-        btAdicionarGrupo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/novo.png"))); // NOI18N
+        btAdicionarGrupo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/pesquisar.png"))); // NOI18N
         btAdicionarGrupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAdicionarGrupoActionPerformed(evt);

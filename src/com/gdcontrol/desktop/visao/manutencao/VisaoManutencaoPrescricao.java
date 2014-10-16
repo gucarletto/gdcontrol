@@ -1,7 +1,12 @@
 package com.gdcontrol.desktop.visao.manutencao;
 
-import com.gdcontrol.desktop.controle.ControlePadrao;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoPrescricao;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedicacao;
+import com.gdcontrol.desktop.visao.consulta.VisaoConsultaMedico;
+import com.gdcontrol.entidade.Medicacao;
+import com.gdcontrol.entidade.Medico;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -16,6 +21,16 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
     public VisaoManutencaoPrescricao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.addComponenteTexto(edId);
+        this.addComponenteTexto(edDataFim);
+        this.addComponenteTexto(edDataInicio);
+        this.addComponenteTexto(edFatorCarboidrato);
+        this.addComponenteTexto(edFatorCorrecao);
+        this.addComponenteTexto(edFatorSensibilidade);
+        this.addComponenteTexto(edIdMedicacao);
+        this.addComponenteTexto(edNomeMedicacao);
+        this.addComponenteTexto(edIdMedico);
+        this.addComponenteTexto(edNomeMedico);
     }
 
     /**
@@ -47,8 +62,11 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
         edNomeMedicacao = new javax.swing.JTextField();
         btConfirmar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
+        btPesquisarMedico = new javax.swing.JButton();
+        btPesquisarMedicacao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Prescrição");
 
         jLabel1.setText("ID:");
 
@@ -72,9 +90,45 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
 
         edDataFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
+        edIdMedico.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                edIdMedicoFocusLost(evt);
+            }
+        });
+
+        edIdMedicacao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                edIdMedicacaoFocusLost(evt);
+            }
+        });
+
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         btLimpar.setText("Limpar");
+        btLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimparActionPerformed(evt);
+            }
+        });
+
+        btPesquisarMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/pesquisar.png"))); // NOI18N
+        btPesquisarMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisarMedicoActionPerformed(evt);
+            }
+        });
+
+        btPesquisarMedicacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/pesquisar.png"))); // NOI18N
+        btPesquisarMedicacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisarMedicacaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,12 +163,16 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(edNomeMedico, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                    .addComponent(edNomeMedicacao)))))
+                                    .addComponent(edNomeMedicacao))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btPesquisarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btPesquisarMedicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btLimpar)))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,13 +205,15 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(edIdMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPesquisarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(edIdMedicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edNomeMedicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
+                    .addComponent(edNomeMedicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btPesquisarMedicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
                     .addComponent(btLimpar))
@@ -162,6 +222,52 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
+        this.limpar();
+    }//GEN-LAST:event_btLimparActionPerformed
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        this.controle.setTela(this);
+        this.controle.salvar();
+        dispose();
+    }//GEN-LAST:event_btConfirmarActionPerformed
+
+    private void edIdMedicoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edIdMedicoFocusLost
+        if(!this.getEdIdMedico().getText().isEmpty()){
+            Medico med = getControle().buscaMedico(Integer.parseInt(this.getEdIdMedico().getText()));
+            if(med != null){
+                this.getEdNomeMedico().setText(med.getNome());
+            }else{
+                this.getEdIdMedico().setText(null);
+                this.getEdNomeMedico().setText(null);
+                JOptionPane.showMessageDialog(rootPane, "Não foi encontrado Médico com o ID solicitado!");
+            }
+        }
+    }//GEN-LAST:event_edIdMedicoFocusLost
+
+    private void edIdMedicacaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edIdMedicacaoFocusLost
+        if(!this.getEdIdMedicacao().getText().isEmpty()){
+            Medicacao med = getControle().buscaMedicacao(Integer.parseInt(this.getEdIdMedicacao().getText()));
+            if(med != null){
+                this.getEdNomeMedicacao().setText(med.getNomeComercial());
+            }else{
+                this.getEdIdMedicacao().setText(null);
+                this.getEdNomeMedicacao().setText(null);
+                JOptionPane.showMessageDialog(rootPane, "Não foi encontrada Medicação com o ID solicitado!");
+            }
+        }
+    }//GEN-LAST:event_edIdMedicacaoFocusLost
+
+    private void btPesquisarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarMedicoActionPerformed
+        VisaoConsultaMedico consultaMedico = new VisaoConsultaMedico(null, true);
+        consultaMedico.setVisible(true);
+    }//GEN-LAST:event_btPesquisarMedicoActionPerformed
+
+    private void btPesquisarMedicacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarMedicacaoActionPerformed
+        VisaoConsultaMedicacao consultaMedicacao = new VisaoConsultaMedicacao(null, true);
+        consultaMedicacao.setVisible(true);
+    }//GEN-LAST:event_btPesquisarMedicacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,6 +314,8 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btLimpar;
+    private javax.swing.JButton btPesquisarMedicacao;
+    private javax.swing.JButton btPesquisarMedico;
     private javax.swing.JFormattedTextField edDataFim;
     private javax.swing.JFormattedTextField edDataInicio;
     private javax.swing.JTextField edFatorCarboidrato;
@@ -228,9 +336,11 @@ public class VisaoManutencaoPrescricao extends VisaoManutencaoPadrao {
     private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 
+    ControleManutencaoPrescricao controle = new ControleManutencaoPrescricao();
+    
     @Override
-    public ControlePadrao getControle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ControleManutencaoPrescricao getControle() {
+        return this.controle;
     }
 
     public JTextField getEdNomeMedicacao() {
