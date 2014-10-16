@@ -63,7 +63,7 @@ public class PrescricaoTableModel extends AbstractTableModel{
                 return "Fator Carboidrato";
             }
             case 2:{
-                return "Fator Redução";
+                return "Fator Correção";
             }
             case 3:{
                 return "Data Início";

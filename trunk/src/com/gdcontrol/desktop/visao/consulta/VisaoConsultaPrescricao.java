@@ -1,11 +1,14 @@
 package com.gdcontrol.desktop.visao.consulta;
 
 import com.gdcontrol.desktop.controle.consulta.ControleConsultaPrescricao;
+import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoPrescricao;
 import com.gdcontrol.desktop.util.tablemodel.PrescricaoTableModel;
+import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoPrescricao;
 import com.gdcontrol.entidade.Prescricao;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -69,12 +72,32 @@ public class VisaoConsultaPrescricao extends VisaoConsultaPadrao {
         });
 
         btNovo.setText("Novo");
+        btNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNovoActionPerformed(evt);
+            }
+        });
 
         btAlterar.setText("Alterar");
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
+            }
+        });
 
         edExcluir.setText("Excluir");
+        edExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edExcluirActionPerformed(evt);
+            }
+        });
 
         tbPrescricao.setModel(tableModelPrescricao);
+        tbPrescricao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPrescricaoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbPrescricao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,6 +183,41 @@ public class VisaoConsultaPrescricao extends VisaoConsultaPadrao {
     private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
         btPesquisarActionPerformed(null);
     }//GEN-LAST:event_edPesquisaKeyPressed
+
+    private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
+        VisaoManutencaoPrescricao manutencao = new VisaoManutencaoPrescricao(null, true);
+        manutencao.setVisible(true);
+    }//GEN-LAST:event_btNovoActionPerformed
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        int indice = tbPrescricao.getSelectedRow();
+        if (indice >= 0) {
+            VisaoManutencaoPrescricao manutencao = new VisaoManutencaoPrescricao(null, true);
+            ControleManutencaoPrescricao controleManutencao = (ControleManutencaoPrescricao) manutencao.getControle();
+            controleManutencao.setModelo(tableModelPrescricao.getPrescricao(indice));
+            controleManutencao.setTela(manutencao);
+            controleManutencao.carregaTela();
+            manutencao.setVisible(true);
+            carregaPrescricoes();
+        }
+    }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void tbPrescricaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPrescricaoMouseClicked
+        if (evt.getClickCount() == 2) {
+            btAlterarActionPerformed(null);
+        }
+    }//GEN-LAST:event_tbPrescricaoMouseClicked
+
+    private void edExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edExcluirActionPerformed
+        int indice = tbPrescricao.getSelectedRow();
+        if (indice >= 0) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão da Prescrição selecionada?");
+            if(opcao == JOptionPane.YES_OPTION){
+                getControle().excluir(tableModelPrescricao.getPrescricao(indice));
+                carregaPrescricoes();
+            }
+        }
+    }//GEN-LAST:event_edExcluirActionPerformed
 
     /**
      * @param args the command line arguments

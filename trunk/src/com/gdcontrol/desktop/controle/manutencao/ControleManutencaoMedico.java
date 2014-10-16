@@ -3,7 +3,6 @@ package com.gdcontrol.desktop.controle.manutencao;
 import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoMedico;
 import com.gdcontrol.dao.medico.MedicoDAO;
 import com.gdcontrol.entidade.Medico;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**

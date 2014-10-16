@@ -49,13 +49,13 @@
                                   <Component id="edIdMedicacao" alignment="0" pref="50" max="32767" attributes="0"/>
                                   <Component id="edIdMedico" alignment="0" max="32767" attributes="0"/>
                                   <Component id="edFatorSensibilidade" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="edFatorReducao" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="edFatorCorrecao" alignment="0" max="32767" attributes="0"/>
                                   <Component id="edFatorCarboidrato" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="edDescricaoMedico" pref="250" max="32767" attributes="0"/>
-                                  <Component id="edDEscricaoMedicacao" max="32767" attributes="0"/>
+                                  <Component id="edNomeMedico" pref="250" max="32767" attributes="0"/>
+                                  <Component id="edNomeMedicacao" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -96,7 +96,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="edFatorReducao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="edFatorCorrecao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -107,13 +107,13 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="edIdMedico" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="edDescricaoMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="edNomeMedico" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="edIdMedicacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="edDEscricaoMedicacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="edNomeMedicacao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="207" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -148,7 +148,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fator Redu&#xe7;&#xe3;o:"/>
+        <Property name="text" type="java.lang.String" value="Fator Corre&#xe7;&#xe3;o:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -187,17 +187,17 @@
     </Component>
     <Component class="javax.swing.JTextField" name="edFatorCarboidrato">
     </Component>
-    <Component class="javax.swing.JTextField" name="edFatorReducao">
+    <Component class="javax.swing.JTextField" name="edFatorCorrecao">
     </Component>
     <Component class="javax.swing.JTextField" name="edFatorSensibilidade">
     </Component>
     <Component class="javax.swing.JTextField" name="edIdMedico">
     </Component>
-    <Component class="javax.swing.JTextField" name="edDescricaoMedico">
+    <Component class="javax.swing.JTextField" name="edNomeMedico">
     </Component>
     <Component class="javax.swing.JTextField" name="edIdMedicacao">
     </Component>
-    <Component class="javax.swing.JTextField" name="edDEscricaoMedicacao">
+    <Component class="javax.swing.JTextField" name="edNomeMedicacao">
     </Component>
     <Component class="javax.swing.JButton" name="btConfirmar">
       <Properties>
