@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1972e5ac-9f04-425b-bed9-fedf95b76b76">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dataInicio" class="java.util.Date"/>
+	<parameter name="dataFinal" class="java.util.Date"/>
+	<parameter name="minimoHiper" class="java.lang.Double"/>
+	<parameter name="maximoHipo" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="valor" class="java.lang.Double">
+		<fieldDescription><![CDATA[valor]]></fieldDescription>
+	</field>
+	<field name="dataHora" class="java.util.Date">
+		<fieldDescription><![CDATA[dataHora]]></fieldDescription>
+	</field>
+	<field name="testeId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[testeId]]></fieldDescription>
+	</field>
+	<filterExpression><![CDATA[$F{dataHora}.after( $P{dataInicio} ) && $F{dataHora}.before( $P{dataFinal} )]]></filterExpression>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement uuid="8af22868-3c7e-469b-815e-e00636e54a47" x="0" y="0" width="555" height="40"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Quantidade de Hipo e Hiper Mensal entre " + $P{dataInicio}.parse("dd/mm/YYYY") + " e " + $P{dataFinal}.parse("dd/mm/YYYY")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement uuid="1699bc08-cfe9-48dd-9bd8-acb17c9d8923" x="0" y="0" width="555" height="125"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Hipo"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{dataHora}.getMonth()]]></categoryExpression>
+						<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+				</barPlot>
+			</barChart>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement uuid="bc007ba4-ae47-4f71-b97c-b424671bd57b" x="455" y="34" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

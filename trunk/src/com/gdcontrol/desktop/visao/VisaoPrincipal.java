@@ -12,6 +12,8 @@ import com.gdcontrol.desktop.visao.consulta.VisaoConsultaPosologia;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaPrescricao;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaRefeicao;
 import com.gdcontrol.desktop.visao.consulta.VisaoConsultaTeste;
+import com.gdcontrol.desktop.visao.relatorio.VisaoRelatorioEscolha;
+import com.gdcontrol.desktop.visao.manutencao.VisaoSincronizacao;
 import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoUsuario;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -165,8 +167,18 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         });
 
         btSincronizacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/sincronizacao.png"))); // NOI18N
+        btSincronizacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSincronizacaoActionPerformed(evt);
+            }
+        });
 
         btRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/relatorios.png"))); // NOI18N
+        btRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelatoriosActionPerformed(evt);
+            }
+        });
 
         btTipoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gdcontrol/desktop/util/img/icone_tipo_evento.png"))); // NOI18N
         btTipoEvento.addActionListener(new java.awt.event.ActionListener() {
@@ -489,6 +501,16 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         VisaoConsultaPosologia visaoPosologia = new VisaoConsultaPosologia(this, true);
         visaoPosologia.setVisible(true);
     }//GEN-LAST:event_btPosologia
+
+    private void btSincronizacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSincronizacaoActionPerformed
+        VisaoSincronizacao sincronizacao = new VisaoSincronizacao(this, true);
+        sincronizacao.setVisible(true);
+    }//GEN-LAST:event_btSincronizacaoActionPerformed
+
+    private void btRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelatoriosActionPerformed
+        VisaoRelatorioEscolha relatorios = new VisaoRelatorioEscolha(this, true);
+        relatorios.setVisible(true);
+    }//GEN-LAST:event_btRelatoriosActionPerformed
 
     /**
      * @param args the command line arguments

@@ -350,6 +350,9 @@
           <Image iconType="3" name="/com/gdcontrol/desktop/util/img/sincronizacao.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSincronizacaoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btRelatorios">
       <Properties>
@@ -357,6 +360,9 @@
           <Image iconType="3" name="/com/gdcontrol/desktop/util/img/relatorios.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRelatoriosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btTipoEvento">
       <Properties>
