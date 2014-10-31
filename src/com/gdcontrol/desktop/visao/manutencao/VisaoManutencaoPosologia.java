@@ -51,6 +51,7 @@ public class VisaoManutencaoPosologia extends VisaoManutencaoPadrao {
         btPesquisarPrescricao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Posologia");
 
         jLabel1.setText("ID:");
 
