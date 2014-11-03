@@ -52,6 +52,11 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
         edDataFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,6 +111,14 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        this.controle.setValorHipo(Double.parseDouble(edMaxHipo.getText()));
+        this.controle.setValorHiper(Double.parseDouble(edMinHiper.getText()));
+        this.controle.setDataInicio(edDataInicio.getText());
+        this.controle.setDataFim(edDataFim.getText());
+        this.controle.chamaRelatorio();
+    }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,7 +177,7 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
     ControleRelatorioHipoHiper controle = new ControleRelatorioHipoHiper();
     
     @Override
-    public ControlePadrao getControle() {
+    public ControleRelatorioHipoHiper getControle() {
         return this.controle;
     }
 }

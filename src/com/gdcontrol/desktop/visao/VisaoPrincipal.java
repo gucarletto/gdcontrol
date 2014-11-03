@@ -508,7 +508,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btSincronizacaoActionPerformed
 
     private void btRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelatoriosActionPerformed
-        VisaoRelatorioEscolha relatorios = new VisaoRelatorioEscolha(this, true);
+        VisaoRelatorioEscolha relatorios = new VisaoRelatorioEscolha(this, false);
         relatorios.setVisible(true);
     }//GEN-LAST:event_btRelatoriosActionPerformed
 
