@@ -40,6 +40,11 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
         jLabel1.setText("Escolha um relatório:");
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,6 +74,15 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        switch((String) cbOpcoesImpressao.getSelectedItem()){
+            case RELATORIO_HIPO_HIPER:{
+                VisaoRelatorioHipoHiper hipoHiper = new VisaoRelatorioHipoHiper(null, false);
+                hipoHiper.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
