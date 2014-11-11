@@ -1,6 +1,5 @@
 package com.gdcontrol.desktop.controle.relatorio;
 
-import com.gdcontrol.entidade.Prescricao;
 import com.gdcontrol.entidade.Teste;
 import com.gdcontrol.util.DateUtil;
 import java.io.File;
@@ -8,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import net.sf.jasperreports.engine.JRException;
@@ -23,16 +21,14 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author gustavo
  */
-public class ControleRelatorioHipoHiper extends ControleRelatorioPadrao{
+public class ControleRelatorioMensal extends ControleRelatorioPadrao{
     
-    private double valorHipo;
-    private double valorHiper;
-    private String dataInicio;
-    private String dataFim;
+    private int mes;
+    private int ano;
 
     @Override
     public String getNomeArquivoRelatorio() {
-        return "RelatorioHipoHiper";
+        return "RelatorioMensal";
     }
 
     @Override
@@ -59,49 +55,27 @@ public class ControleRelatorioHipoHiper extends ControleRelatorioPadrao{
         List<Teste> testes = getDAOFactory().getTesteDAO().listar();
         List<Teste> filtrados = new ArrayList<>();
         DateUtil format = new DateUtil();
-                
-        int qtdeHipo = 0;
-        int qtdeHiper = 0;
         for(Teste t : testes){
-            Prescricao presc = getDAOFactory().getPrescricaoDAO().filtraData(format.formataData(t.getDataHora()));
-            if(validaPeriodoTeste(t)){
-                if(t.getValor() < presc.getMinimoGlicemia()){
-                    t.setHipoHiper("Hipo");
-                    filtrados.add(t);
-                    t.setQtde(++qtdeHipo);
-                }else if(t.getValor() > presc.getMaximoGlicemia()){
-                    t.setHipoHiper("Hiper");
-                    filtrados.add(t);
-                    t.setQtde(++qtdeHiper);
-                }
+            if(format.getAno(t.getDataHora()) == getAno() && format.getMes(t.getDataHora()) == getMes()){
+                filtrados.add(t);
             }
         }
         return filtrados;
     }
-    
-    private boolean validaPeriodoTeste(Teste t){
-        DateUtil format = new DateUtil();
-        if(!getDataInicio().isEmpty() && !getDataFim().isEmpty()){
-            Date dataInicio = format.validaData(getDataInicio());
-            Date dataFim = format.validaData(getDataFim());
-            return (t.getDataHora().after(dataInicio) && t.getDataHora().before(dataFim));
-        }
-        return true;
+
+    public int getMes() {
+        return mes;
     }
 
-    public String getDataInicio() {
-        return dataInicio;
+    public void setMes(int mes) {
+        this.mes = mes;
     }
 
-    public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
+    public int getAno() {
+        return ano;
     }
 
-    public String getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(String dataFim) {
-        this.dataFim = dataFim;
+    public void setAno(int ano) {
+        this.ano = ano;
     }
 }

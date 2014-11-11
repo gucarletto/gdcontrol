@@ -5,6 +5,7 @@ import com.gdcontrol.desktop.controle.manutencao.ControleManutencaoPrescricao;
 import com.gdcontrol.desktop.util.tablemodel.PrescricaoTableModel;
 import com.gdcontrol.desktop.visao.manutencao.VisaoManutencaoPrescricao;
 import com.gdcontrol.entidade.Prescricao;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -166,13 +167,13 @@ public class VisaoConsultaPrescricao extends VisaoConsultaPadrao {
                     filtraDataInicio(edPesquisa.getText());
                     break;
                 case OPCAO_DATA_FIM:
-                    filtraDataInicio(edPesquisa.getText());
+                    filtraDataFim(edPesquisa.getText());
                     break;
                 case OPCAO_NOME_MEDICO:
-                    filtraDataInicio(edPesquisa.getText());
+                    filtraNomeMedico(edPesquisa.getText());
                     break;
                 case OPCAO_NOME_MEDICACAO:
-                    filtraDataInicio(edPesquisa.getText());
+                    filtraNomeComercialMedicacao(edPesquisa.getText());
                     break;
             }
             tableModelPrescricao.fireTableDataChanged();
@@ -182,7 +183,9 @@ public class VisaoConsultaPrescricao extends VisaoConsultaPadrao {
     }//GEN-LAST:event_btPesquisarActionPerformed
 
     private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
-        btPesquisarActionPerformed(null);
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btPesquisarActionPerformed(null);
+        }
     }//GEN-LAST:event_edPesquisaKeyPressed
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
@@ -289,7 +292,9 @@ public class VisaoConsultaPrescricao extends VisaoConsultaPadrao {
     
     private void filtraId(int id){
         Prescricao prescricao = getControle().filtraId(id);
-        tableModelPrescricao.addPrescricao(prescricao);
+        if(prescricao != null){
+            tableModelPrescricao.addPrescricao(prescricao);
+        }
     }
     
     private void filtraDataInicio(String dataInicio){

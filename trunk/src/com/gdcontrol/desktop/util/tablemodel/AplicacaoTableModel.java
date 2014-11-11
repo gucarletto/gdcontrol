@@ -20,7 +20,7 @@ public class AplicacaoTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -33,6 +33,21 @@ public class AplicacaoTableModel extends AbstractTableModel{
             case 0:{
                 return aplicacao.getAplicacaoId();
             }
+            case 1:{
+                return format.formataData(aplicacao.getDataHora());
+            }
+            case 2:{
+                return format.formataHora(aplicacao.getDataHora());
+            }
+            case 3:{
+                return aplicacao.getDosagemAplicada();
+            }
+            case 4:{
+                return aplicacao.getLocalAplicacao().getDescricao();
+            }
+            case 5:{
+                return aplicacao.getMedicacao().getNomeComercial();
+            }
         }
         return null;
     }
@@ -41,7 +56,22 @@ public class AplicacaoTableModel extends AbstractTableModel{
     public String getColumnName(int column) {
         switch(column){
             case 0:{
-                return "ID";
+                return "Aplicação ID";
+            }
+            case 1:{
+                return "Data";
+            }
+            case 2:{
+                return "Hora";
+            }
+            case 3:{
+                return "Dosagem Aplicada";
+            }
+            case 4:{
+                return "Local Aplicação";
+            }
+            case 5:{
+                return "Medicação";
             }
         }
         return null;

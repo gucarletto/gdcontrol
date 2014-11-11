@@ -26,6 +26,8 @@ public class ControleManutencaoPrescricao extends ControleManutencaoPadrao<Presc
         prescricao.setFatorCarboidrato(Double.parseDouble(this.tela.getEdFatorCarboidrato().getText()));
         prescricao.setFatorCorrecao(Double.parseDouble(this.tela.getEdFatorCorrecao().getText()));
         prescricao.setFatorSensibilidade(Double.parseDouble(this.tela.getEdFatorSensibilidade().getText()));
+        prescricao.setMinimoGlicemia(Double.parseDouble(this.tela.getEdMinimoGlicemia().getText()));
+        prescricao.setMaximoGlicemia(Double.parseDouble(this.tela.getEdMaximoGlicemia().getText()));
         prescricao.setDataInicio(format.validaData(this.tela.getEdDataInicio().getText()));
         prescricao.setDataFim(format.validaData(this.tela.getEdDataFim().getText()));
         prescricao.setMedicacaoId(Integer.parseInt(this.tela.getEdIdMedicacao().getText()));
@@ -69,6 +71,8 @@ public class ControleManutencaoPrescricao extends ControleManutencaoPadrao<Presc
         this.tela.getEdFatorCarboidrato().setText(this.modelo.getFatorCarboidrato()+ "");
         this.tela.getEdFatorCorrecao().setText(this.modelo.getFatorCorrecao()+ "");
         this.tela.getEdFatorSensibilidade().setText(this.modelo.getFatorSensibilidade()+ "");
+        this.tela.getEdMinimoGlicemia().setText(this.modelo.getMinimoGlicemia()+ "");
+        this.tela.getEdMaximoGlicemia().setText(this.modelo.getMaximoGlicemia()+ "");
         this.tela.getEdDataInicio().setText(format.formataData(this.modelo.getDataInicio()));
         this.tela.getEdDataFim().setText(format.formataData(this.modelo.getDataFim()));
         this.tela.getEdIdMedico().setText(this.modelo.getMedicoId() + "");

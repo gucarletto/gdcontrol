@@ -1,25 +1,23 @@
-package com.gdcontrol.desktop.visao.relatorio;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-import com.gdcontrol.desktop.controle.ControlePadrao;
-import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
+package com.gdcontrol.desktop.visao.relatorio;
 
 /**
  *
  * @author gustavo
  */
-public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
+public class VisaoRelatorioMensal extends javax.swing.JDialog {
 
-    private static final String RELATORIO_HIPO_HIPER = "Hipo/Hiper Mensal";
-    private static final String RELATORIO_MENSAL = "Dados Mensais";
-    
     /**
-     * Creates new form ViewManutencaoRelatorios
+     * Creates new form VisaoRelatorioMensal
      */
-    public VisaoRelatorioEscolha(java.awt.Frame parent, boolean modal) {
+    public VisaoRelatorioMensal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        carregaOpcoesRelatorio();
     }
 
     /**
@@ -32,20 +30,19 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        cbOpcoesImpressao = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        edMes = new javax.swing.JTextField();
+        edAno = new javax.swing.JTextField();
         btConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Relatórios");
+        setTitle("Impressão");
 
-        jLabel1.setText("Escolha um relatório:");
+        jLabel1.setText("Mês:");
+
+        jLabel2.setText("Ano:");
 
         btConfirmar.setText("Confirmar");
-        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btConfirmarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,11 +52,15 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbOpcoesImpressao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(edMes, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(edAno)))
                     .addComponent(btConfirmar))
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -67,27 +68,18 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cbOpcoesImpressao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(edMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(edAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(btConfirmar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        switch((String) cbOpcoesImpressao.getSelectedItem()){
-            case RELATORIO_HIPO_HIPER:{
-                VisaoRelatorioHipoHiper hipoHiper = new VisaoRelatorioHipoHiper(null, false);
-                hipoHiper.setVisible(true);
-            }
-            case RELATORIO_MENSAL:{
-                VisaoRelatorioMensal mensal = new VisaoRelatorioMensal(null, false);
-                mensal.setVisible(true);
-            }
-        }
-    }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,20 +98,20 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoRelatorioEscolha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoRelatorioMensal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoRelatorioEscolha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoRelatorioMensal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoRelatorioEscolha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoRelatorioMensal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoRelatorioEscolha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoRelatorioMensal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoRelatorioEscolha dialog = new VisaoRelatorioEscolha(new javax.swing.JFrame(), true);
+                VisaoRelatorioMensal dialog = new VisaoRelatorioMensal(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -133,21 +125,9 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
-    private javax.swing.JComboBox cbOpcoesImpressao;
+    private javax.swing.JTextField edAno;
+    private javax.swing.JTextField edMes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
-
-    
-    private void carregaOpcoesRelatorio(){
-        Vector comboBoxItems = new Vector();
-        comboBoxItems.add(RELATORIO_MENSAL);
-        comboBoxItems.add(RELATORIO_HIPO_HIPER);
-        final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
-        this.cbOpcoesImpressao.setModel(model);
-    }
-    
-    @Override
-    public ControlePadrao getControle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
