@@ -1,9 +1,8 @@
 package com.gdcontrol.desktop.visao.consulta;
 
-import com.gdcontrol.desktop.controle.ControlePadrao;
-import com.gdcontrol.desktop.controle.consulta.ControleConsultaRefeicao;
-import com.gdcontrol.desktop.util.tablemodel.RefeicaoTableModel;
-import com.gdcontrol.entidade.Refeicao;
+import com.gdcontrol.desktop.controle.consulta.ControleConsultaAplicacao;
+import com.gdcontrol.desktop.util.tablemodel.AplicacaoTableModel;
+import com.gdcontrol.entidade.Aplicacao;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Vector;
@@ -13,20 +12,21 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author gustavo
  */
-public class VisaoConsultaRefeicao extends VisaoConsultaPadrao {
-
-    private static final String OPCAO_ID = "ID";
-    private static final String OPCAO_DATA = "Data";
-    private static final String OPCAO_HORA = "Hora";
-    private static final String OPCAO_TIPO = "Tipo Refeição";
+public class VisaoConsultaAplicacao extends VisaoConsultaPadrao {
     
+    private static final String OPCAO_ID = "ID Aplicação";
+    private static final String OPCAO_DATA = "Data";
+    private static final String OPCAO_DOSAGEM = "Dosagem";
+    private static final String OPCAO_LOCAL = "Local Aplicação";
+    private static final String OPCAO_MEDICACAO = "Medicação";
+
     /**
-     * Creates new form VisaoConsultaRefeicao
+     * Creates new form VisaoConsultaAplicacao
      */
-    public VisaoConsultaRefeicao(java.awt.Frame parent, boolean modal) {
+    public VisaoConsultaAplicacao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        carregaRefeicoes();
+        carregaAplicacoes();
         getOpcoesPesquisa();
     }
 
@@ -39,16 +39,16 @@ public class VisaoConsultaRefeicao extends VisaoConsultaPadrao {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cbCampoPesquisa = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbCampoPesquisa = new javax.swing.JComboBox();
         edPesquisa = new javax.swing.JTextField();
         btPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbRefeicao = new javax.swing.JTable();
+        tbAplicacoes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Consulta Refeições");
+        setTitle("Consulta Aplicações");
 
         jLabel1.setText("Campo Pesquisa:");
 
@@ -67,8 +67,8 @@ public class VisaoConsultaRefeicao extends VisaoConsultaPadrao {
             }
         });
 
-        tbRefeicao.setModel(tableModelRefeicao);
-        jScrollPane1.setViewportView(tbRefeicao);
+        tbAplicacoes.setModel(tableModelAplicacao);
+        jScrollPane1.setViewportView(tbAplicacoes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,20 +79,22 @@ public class VisaoConsultaRefeicao extends VisaoConsultaPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(cbCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(edPesquisa)
+                        .addGap(18, 18, 18)
                         .addComponent(btPesquisar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -102,7 +104,7 @@ public class VisaoConsultaRefeicao extends VisaoConsultaPadrao {
                     .addComponent(edPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -110,7 +112,7 @@ public class VisaoConsultaRefeicao extends VisaoConsultaPadrao {
 
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
         if(!edPesquisa.getText().isEmpty()){
-            tableModelRefeicao.limpar();
+            tableModelAplicacao.limpar();
             String pesquisa = (String) cbCampoPesquisa.getSelectedItem();
             switch(pesquisa){
                 case OPCAO_ID:
@@ -120,22 +122,27 @@ public class VisaoConsultaRefeicao extends VisaoConsultaPadrao {
                     break;
                 case OPCAO_DATA:
                     filtraData(edPesquisa.getText());
-                    break;  
-                case OPCAO_HORA:
-                    filtraHora(edPesquisa.getText());
-                    break;  
-                case OPCAO_TIPO:
-                    filtraDescricaoTipo(edPesquisa.getText());
+                    break;
+                case OPCAO_DOSAGEM:
+                    try{
+                        filtraDosagemAplicada(Double.parseDouble(edPesquisa.getText()));
+                    }catch(NumberFormatException e){}
+                    break;
+                case OPCAO_MEDICACAO:
+                    filtraNomeComercialMedicacao(edPesquisa.getText());
+                    break;
+                case OPCAO_LOCAL:
+                    filtraDescricaoLocalAplicacao(edPesquisa.getText());
                     break;
             }
-            tableModelRefeicao.fireTableDataChanged();
+            tableModelAplicacao.fireTableDataChanged();
         }else{
-            carregaRefeicoes();
+            carregaAplicacoes();
         }
     }//GEN-LAST:event_btPesquisarActionPerformed
 
     private void edPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPesquisaKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btPesquisarActionPerformed(null);
         }
     }//GEN-LAST:event_edPesquisaKeyPressed
@@ -157,20 +164,20 @@ public class VisaoConsultaRefeicao extends VisaoConsultaPadrao {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaRefeicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaRefeicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaRefeicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoConsultaRefeicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisaoConsultaAplicacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VisaoConsultaRefeicao dialog = new VisaoConsultaRefeicao(new javax.swing.JFrame(), true);
+                VisaoConsultaAplicacao dialog = new VisaoConsultaAplicacao(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -189,58 +196,64 @@ public class VisaoConsultaRefeicao extends VisaoConsultaPadrao {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbRefeicao;
+    private javax.swing.JTable tbAplicacoes;
     // End of variables declaration//GEN-END:variables
 
-    ControleConsultaRefeicao controle = new ControleConsultaRefeicao();
-    RefeicaoTableModel tableModelRefeicao = new RefeicaoTableModel();
-    
-    private void carregaRefeicoes() {
-        tableModelRefeicao.limpar();
-        for (Refeicao refeicao : (List<Refeicao>) getControle().listar()) {
-            tableModelRefeicao.addRefeicao(refeicao);
-        }
-        tableModelRefeicao.fireTableDataChanged();
-    }
-    
-    private void filtraId(int id){
-        Refeicao refeicao = getControle().filtraId(id);
-        if(refeicao != null){
-            tableModelRefeicao.addRefeicao(refeicao);
-        }
-    }
-    
-    private void filtraData(String data){
-        for (Refeicao refeicao : (List<Refeicao>) getControle().filtraData(data)) {
-            tableModelRefeicao.addRefeicao(refeicao);
-        }
-    }
-    
-    private void filtraHora(String hora){
-        for (Refeicao refeicao : (List<Refeicao>) getControle().filtraHora(hora)) {
-            tableModelRefeicao.addRefeicao(refeicao);
-        }
-    }
-    
-    private void filtraDescricaoTipo(String descricao){
-        for (Refeicao refeicao : (List<Refeicao>) getControle().filtraTipo(descricao)) {
-            tableModelRefeicao.addRefeicao(refeicao);
-        }
-    }
+    ControleConsultaAplicacao controle = new ControleConsultaAplicacao();
+    AplicacaoTableModel tableModelAplicacao = new AplicacaoTableModel();
     
     @Override
     public void getOpcoesPesquisa() {
         Vector comboBoxItems = new Vector();
         comboBoxItems.add(OPCAO_ID);
+        comboBoxItems.add(OPCAO_DOSAGEM);
         comboBoxItems.add(OPCAO_DATA);
-        comboBoxItems.add(OPCAO_HORA);
-        comboBoxItems.add(OPCAO_TIPO);
+        comboBoxItems.add(OPCAO_LOCAL);
+        comboBoxItems.add(OPCAO_MEDICACAO);
         final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
         this.cbCampoPesquisa.setModel(model);
     }
+    
+    private void carregaAplicacoes(){
+        for(Aplicacao p : this.controle.listar()){
+            tableModelAplicacao.addAplicacao(p);
+        }
+        tableModelAplicacao.fireTableDataChanged();
+    }
+    
+    private void filtraId(int id){
+        Aplicacao aplicacao = getControle().filtraId(id);
+        if(aplicacao != null){
+            tableModelAplicacao.addAplicacao(aplicacao);
+        }
+    }
+    
+    private void filtraDosagemAplicada(double dosagem){
+        for (Aplicacao aplicacao : (List<Aplicacao>) getControle().filtraDosagemAplicada(dosagem)) {
+            tableModelAplicacao.addAplicacao(aplicacao);
+        }
+    }
+    
+    private void filtraData(String dataInicio){
+        for (Aplicacao aplicacao : (List<Aplicacao>) getControle().filtraData(dataInicio)) {
+            tableModelAplicacao.addAplicacao(aplicacao);
+        }
+    }
+    
+    private void filtraDescricaoLocalAplicacao(String nome){
+        for (Aplicacao aplicacao : (List<Aplicacao>) getControle().filtraDescricaoLocalAplicacao(nome)) {
+            tableModelAplicacao.addAplicacao(aplicacao);
+        }
+    }
+    
+    private void filtraNomeComercialMedicacao(String nome){
+        for (Aplicacao aplicacao : (List<Aplicacao>) getControle().filtraNomeComercialMedicacao(nome)) {
+            tableModelAplicacao.addAplicacao(aplicacao);
+        }
+    }
 
     @Override
-    public ControleConsultaRefeicao getControle() {
+    public ControleConsultaAplicacao getControle() {
         return this.controle;
     }
 }

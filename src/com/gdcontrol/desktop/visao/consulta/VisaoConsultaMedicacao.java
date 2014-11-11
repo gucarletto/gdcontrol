@@ -294,7 +294,9 @@ public class VisaoConsultaMedicacao extends VisaoConsultaPadrao {
 
     private void filtraId(int id) {
         Medicacao med = getControle().filtraId(id);
-        tableModelMedicacao.addMedicacao(med);
+        if(med != null){
+            tableModelMedicacao.addMedicacao(med);
+        }
     }
 
     private void filtraMarca(String marca) {

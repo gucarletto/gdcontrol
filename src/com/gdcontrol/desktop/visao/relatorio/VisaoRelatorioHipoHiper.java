@@ -28,12 +28,8 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         edDataInicio = new javax.swing.JFormattedTextField();
         edDataFim = new javax.swing.JFormattedTextField();
-        edMaxHipo = new javax.swing.JTextField();
-        edMinHiper = new javax.swing.JTextField();
         btConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -42,10 +38,6 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
         jLabel1.setText("Data Início:");
 
         jLabel2.setText("Data Fim:");
-
-        jLabel3.setText("Hipo a partir de:");
-
-        jLabel4.setText("Hiper a partir de:");
 
         edDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
@@ -68,21 +60,14 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
                         .addContainerGap()
                         .addComponent(btConfirmar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(edDataInicio)
-                            .addComponent(edDataFim, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(edMaxHipo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edMinHiper, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(edDataFim, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -96,15 +81,7 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(edDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(edMaxHipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(edMinHiper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btConfirmar)
                 .addContainerGap())
         );
@@ -113,8 +90,6 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        this.controle.setValorHipo(Double.parseDouble(edMaxHipo.getText()));
-        this.controle.setValorHiper(Double.parseDouble(edMinHiper.getText()));
         this.controle.setDataInicio(edDataInicio.getText());
         this.controle.setDataFim(edDataFim.getText());
         this.controle.chamaRelatorio();
@@ -166,12 +141,8 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
     private javax.swing.JButton btConfirmar;
     private javax.swing.JFormattedTextField edDataFim;
     private javax.swing.JFormattedTextField edDataInicio;
-    private javax.swing.JTextField edMaxHipo;
-    private javax.swing.JTextField edMinHiper;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
     ControleRelatorioHipoHiper controle = new ControleRelatorioHipoHiper();
