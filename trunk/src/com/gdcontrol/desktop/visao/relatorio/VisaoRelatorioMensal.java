@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.gdcontrol.desktop.visao.relatorio;
+
+import com.gdcontrol.desktop.controle.ControlePadrao;
+import com.gdcontrol.desktop.controle.relatorio.ControleRelatorioMensal;
 
 /**
  *
  * @author gustavo
  */
-public class VisaoRelatorioMensal extends javax.swing.JDialog {
+public class VisaoRelatorioMensal extends VisaoRelatorioPadrao {
 
     /**
      * Creates new form VisaoRelatorioMensal
@@ -130,4 +127,11 @@ public class VisaoRelatorioMensal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+
+    private ControleRelatorioMensal controle = new ControleRelatorioMensal();
+    
+    @Override
+    public ControleRelatorioMensal getControle() {
+        return this.controle;
+    }
 }
