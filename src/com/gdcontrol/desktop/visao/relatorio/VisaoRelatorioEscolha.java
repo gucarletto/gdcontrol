@@ -81,10 +81,12 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
             case RELATORIO_HIPO_HIPER:{
                 VisaoRelatorioHipoHiper hipoHiper = new VisaoRelatorioHipoHiper(null, false);
                 hipoHiper.setVisible(true);
+                break;
             }
             case RELATORIO_MENSAL:{
                 VisaoRelatorioMensal mensal = new VisaoRelatorioMensal(null, false);
                 mensal.setVisible(true);
+                break;
             }
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
