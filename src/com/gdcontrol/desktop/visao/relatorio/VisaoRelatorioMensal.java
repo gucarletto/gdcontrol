@@ -40,6 +40,11 @@ public class VisaoRelatorioMensal extends VisaoRelatorioPadrao {
         jLabel2.setText("Ano:");
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,6 +82,12 @@ public class VisaoRelatorioMensal extends VisaoRelatorioPadrao {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        this.controle.setMes(Integer.parseInt(edMes.getText()));
+        this.controle.setAno(Integer.parseInt(edAno.getText()));
+        this.controle.chamaRelatorio();
+    }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
      * @param args the command line arguments

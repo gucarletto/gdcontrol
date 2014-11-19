@@ -1,12 +1,17 @@
 package com.gdcontrol.desktop.controle.relatorio;
 
+import com.gdcontrol.desktop.util.relatorio.RelatorioMensalUtil;
+import com.gdcontrol.entidade.Aplicacao;
+import com.gdcontrol.entidade.Prescricao;
 import com.gdcontrol.entidade.Teste;
+import com.gdcontrol.entidade.Usuario;
 import com.gdcontrol.util.DateUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import net.sf.jasperreports.engine.JRException;
@@ -37,11 +42,13 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao{
         try {
             InputStream fis = new FileInputStream(relatorio);
             JasperReport report = (JasperReport) JRLoader.loadObject(fis);
-            List<Teste> testes = filtraTestes();
+            List<RelatorioMensalUtil> testes = filtraTestes();
             
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(testes);
             
             HashMap parametro = new HashMap();
+            parametro.put("ano", getAno());
+            parametro.put("mes", getMes());
             
             JasperPrint printer = JasperFillManager.fillReport(report, parametro, dataSource);
             
@@ -51,13 +58,27 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao{
         }
     }
     
-    private List<Teste> filtraTestes(){
+    private List<RelatorioMensalUtil> filtraTestes(){
         List<Teste> testes = getDAOFactory().getTesteDAO().listar();
-        List<Teste> filtrados = new ArrayList<>();
+        List<RelatorioMensalUtil> filtrados = new ArrayList<>();
+        Usuario usu = getDAOFactory().getUsuarioDAO().carregaUnicoUsuario();
         DateUtil format = new DateUtil();
         for(Teste t : testes){
             if(format.getAno(t.getDataHora()) == getAno() && format.getMes(t.getDataHora()) == getMes()){
-                filtrados.add(t);
+                RelatorioMensalUtil util = new RelatorioMensalUtil();
+                Aplicacao a = getDAOFactory().getAplicacaoDAO().carregaAplicacoesPorDataHora(t.getDataHora());
+                Prescricao p = getDAOFactory().getPrescricaoDAO().filtraData(format.formataData(t.getDataHora()));
+                
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(t.getDataHora());
+                
+                util.setTeste(t);
+                util.setAplicacao(a);
+                util.setUsuario(usu);
+                util.setPrescricao(p);
+                util.setDiaDoMes(cal.get(Calendar.DAY_OF_MONTH));
+                util.setDataHoraFormatada(format.formataDataCompleta(t.getDataHora()));
+                filtrados.add(util);
             }
         }
         return filtrados;

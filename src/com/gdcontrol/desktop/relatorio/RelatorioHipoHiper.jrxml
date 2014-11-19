@@ -2,7 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="580d2762-957a-40a3-a011-241a5574ff99">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="54"/>
+	<parameter name="dataInicio" class="java.lang.String"/>
+	<parameter name="dataFinal" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -25,7 +27,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="31" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="e41294f8-8a40-48cb-ac30-0db7fb9f099e" x="0" y="0" width="555" height="30"/>
 				<textElement textAlignment="Center">
@@ -33,6 +35,16 @@
 				</textElement>
 				<text><![CDATA[Relatório de Quantidade de Hipo/Hiper Glicemia]]></text>
 			</staticText>
+			<staticText>
+				<reportElement uuid="d7e65c7f-e8b4-4215-b260-47daffa042db" x="0" y="30" width="46" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Período: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="88bc379e-7d31-4779-86c1-499708660cac" x="46" y="30" width="509" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{dataInicio} + " a " + $P{dataFinal}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -45,7 +57,7 @@
 		<band splitType="Stretch"/>
 	</detail>
 	<columnFooter>
-		<band height="600" splitType="Stretch">
+		<band height="506" splitType="Stretch">
 			<bar3DChart>
 				<chart>
 					<reportElement uuid="02e1cf49-50e6-4c14-82fc-4c52996270da" x="0" y="0" width="555" height="115"/>
@@ -56,7 +68,7 @@
 				<categoryDataset>
 					<categorySeries>
 						<seriesExpression><![CDATA[$F{hipoHiper}]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{dataHora}.getMonth()]]></categoryExpression>
+						<categoryExpression><![CDATA[($F{dataHora}.getMonth()+1)]]></categoryExpression>
 						<valueExpression><![CDATA[$F{qtde}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
