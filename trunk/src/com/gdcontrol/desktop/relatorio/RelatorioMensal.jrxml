@@ -1,20 +1,199 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="318d9386-70ae-433c-ae91-2c91628a3e80">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b496e5c8-1355-4a28-8996-0430d7419283">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="estiloGlicemia">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{valor} < $F{minimoGlicemia}]]></conditionExpression>
+			<style forecolor="#FF6666"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{valor} > $F{maximoGlicemia}]]></conditionExpression>
+			<style forecolor="#CC0000"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="mes" class="java.lang.Integer"/>
+	<parameter name="ano" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="dataHora" class="java.util.Date">
+		<fieldDescription><![CDATA[teste.dataHora]]></fieldDescription>
+	</field>
+	<field name="dosagemAplicada" class="java.lang.Double">
+		<fieldDescription><![CDATA[aplicacao.dosagemAplicada]]></fieldDescription>
+	</field>
+	<field name="nomeQuimico" class="java.lang.String">
+		<fieldDescription><![CDATA[aplicacao.medicacao.nomeQuimico]]></fieldDescription>
+	</field>
+	<field name="valor" class="java.lang.Double">
+		<fieldDescription><![CDATA[teste.valor]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[usuario.nome]]></fieldDescription>
+	</field>
+	<field name="fatorCarboidrato" class="java.lang.Double">
+		<fieldDescription><![CDATA[prescricao.fatorCarboidrato]]></fieldDescription>
+	</field>
+	<field name="fatorCorrecao" class="java.lang.Double">
+		<fieldDescription><![CDATA[prescricao.fatorCorrecao]]></fieldDescription>
+	</field>
+	<field name="fatorSensibilidade" class="java.lang.Double">
+		<fieldDescription><![CDATA[prescricao.fatorSensibilidade]]></fieldDescription>
+	</field>
+	<field name="maximoGlicemia" class="java.lang.Double">
+		<fieldDescription><![CDATA[prescricao.maximoGlicemia]]></fieldDescription>
+	</field>
+	<field name="minimoGlicemia" class="java.lang.Double">
+		<fieldDescription><![CDATA[prescricao.minimoGlicemia]]></fieldDescription>
+	</field>
+	<field name="diaDoMes" class="java.lang.Integer">
+		<fieldDescription><![CDATA[diaDoMes]]></fieldDescription>
+	</field>
+	<field name="dataHoraFormatada" class="java.lang.String">
+		<fieldDescription><![CDATA[dataHoraFormatada]]></fieldDescription>
+	</field>
+	<variable name="valor_1" class="java.lang.Double" resetType="Column" calculation="Average">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="57" splitType="Stretch">
+			<textField>
+				<reportElement uuid="95a4ea34-80f5-4023-a31c-4c9247870a01" x="0" y="0" width="555" height="57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Controle Glicemia " + $P{mes} + "/" + $P{ano}]]></textFieldExpression>
+			</textField>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement uuid="eb4f0d68-d40c-43db-bf7d-8820f5e26d6d" x="0" y="0" width="555" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
+	<columnHeader>
+		<band height="114" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="82865093-81fd-4b3b-95d6-79e957ea7150" x="0" y="94" width="62" height="20"/>
+				<textElement/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df2230a6-f18a-4581-897d-8ac7037b38fb" x="162" y="94" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1394773b-b0e1-4f74-964a-ade8ddb4b1e2" x="62" y="94" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[GHT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="96e9da75-8344-4661-8a43-6ee1c3072d54" x="233" y="94" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Medicamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="79c8a5ae-f340-4b77-ace6-e19a81b841ba" x="333" y="94" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Aplicação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cabfc3fe-8857-41b5-8b5a-f6e9d14b5543" x="0" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Fator Correção: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="599aa4e5-6e19-4e4b-af92-e0559c904dcc" x="100" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fatorCorrecao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="415c998e-4155-4b32-8fc1-df6c210e3b04" x="0" y="20" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Fator Sensibilidade: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="db775397-d310-4ff2-9b2e-0806cc6f644f" x="100" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fatorSensibilidade}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c54b01d8-cfd5-4aaf-a693-b5bde27fcd23" x="0" y="0" width="62" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{diaDoMes} + "/" + $P{mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="508fe661-e506-436c-a6fa-f7110ef061a4" x="333" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dosagemAplicada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6b97b7f8-2656-4ea1-9468-02fc27890153" x="233" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nomeQuimico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b0ed2349-cebe-4bf5-8b57-4db4aed73534" style="estiloGlicemia" x="62" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="047b2142-7405-46c4-9f4f-524315b68eb2" x="162" y="0" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dataHora}.getHours() + ":" + $F{dataHora}.getMinutes()]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
+	<columnFooter>
+		<band height="187" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a436cc63-5738-4695-9b9d-166185af1038" x="0" y="0" width="62" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Média: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="49b1835b-4faa-4f2d-bc2f-3f4c5a4de6cc" x="62" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{valor_1}]]></textFieldExpression>
+			</textField>
+			<lineChart>
+				<chart>
+					<reportElement uuid="4b6b2cf8-8c63-4b3f-b55d-2e236ea58ce3" x="0" y="35" width="555" height="152"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["GHT"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{dataHoraFormatada}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+				</linePlot>
+			</lineChart>
+		</band>
+	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>

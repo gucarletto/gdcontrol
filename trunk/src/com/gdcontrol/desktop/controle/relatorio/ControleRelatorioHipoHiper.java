@@ -47,6 +47,8 @@ public class ControleRelatorioHipoHiper extends ControleRelatorioPadrao{
             
             HashMap parametro = new HashMap();
             
+            parametro.put("dataInicio", getDataInicio());
+            parametro.put("dataFinal", getDataFim());
             JasperPrint printer = JasperFillManager.fillReport(report, parametro, dataSource);
             
             JasperViewer.viewReport(printer, false);
