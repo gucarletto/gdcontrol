@@ -12,6 +12,7 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
 
     private static final String RELATORIO_HIPO_HIPER = "Hipo/Hiper Mensal";
     private static final String RELATORIO_MENSAL = "Dados Mensais";
+    private static final String RELATORIO_MEDIA = "Média Diária";
     
     /**
      * Creates new form ViewManutencaoRelatorios
@@ -88,6 +89,11 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
                 mensal.setVisible(true);
                 break;
             }
+            case RELATORIO_MEDIA:{
+                VisaoRelatorioMediaDiaria diaria = new VisaoRelatorioMediaDiaria(null, false);
+                diaria.setVisible(true);
+                break;
+            }
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -143,6 +149,7 @@ public class VisaoRelatorioEscolha extends VisaoRelatorioPadrao {
     private void carregaOpcoesRelatorio(){
         Vector comboBoxItems = new Vector();
         comboBoxItems.add(RELATORIO_MENSAL);
+        comboBoxItems.add(RELATORIO_MEDIA);
         comboBoxItems.add(RELATORIO_HIPO_HIPER);
         final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
         this.cbOpcoesImpressao.setModel(model);
