@@ -38,8 +38,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="edDataInicio" max="32767" attributes="0"/>
                           <Component id="edDataFim" pref="130" max="32767" attributes="0"/>
+                          <Component id="edDataInicio" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

@@ -25,8 +25,6 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class ControleRelatorioHipoHiper extends ControleRelatorioPadrao{
     
-    private double valorHipo;
-    private double valorHiper;
     private String dataInicio;
     private String dataFim;
 
