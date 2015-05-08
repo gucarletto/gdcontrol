@@ -1,29 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-    <background>
-        <band/>
-    </background>
-    <title>
-        <band height="79"/>
-    </title>
-    <pageHeader>
-        <band height="35"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61"/>
-    </columnHeader>
-    <detail>
-        <band height="125"/>
-    </detail>
-    <columnFooter>
-        <band height="45"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54"/>
-    </pageFooter>
-    <summary>
-        <band height="42"/>
-    </summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d50c404d-2a19-4e3a-8b61-301841017389">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="49"/>
+	<parameter name="dataInicio" class="java.lang.String"/>
+	<parameter name="dataFinal" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="data" class="java.lang.String">
+		<fieldDescription><![CDATA[data]]></fieldDescription>
+	</field>
+	<field name="valor" class="java.lang.Double">
+		<fieldDescription><![CDATA[valor]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e41294f8-8a40-48cb-ac30-0db7fb9f099e" x="0" y="0" width="555" height="34"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Relatório de Média Diária dos Testes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d7e65c7f-e8b4-4215-b260-47daffa042db" x="0" y="34" width="46" height="24"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Período: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="751f56c8-5816-4c9b-a90f-d67ae855e340" x="46" y="34" width="509" height="24"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{dataInicio} +" a "+ $P{dataFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnFooter>
+		<band height="521" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement uuid="d252fcce-d8b0-4f6e-baab-668c927280ef" x="0" y="0" width="555" height="167"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Valor"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{data}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+				</barPlot>
+			</barChart>
+		</band>
+	</columnFooter>
 </jasperReport>

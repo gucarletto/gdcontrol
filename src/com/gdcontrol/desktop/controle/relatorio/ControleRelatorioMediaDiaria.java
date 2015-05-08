@@ -8,9 +8,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -59,11 +61,28 @@ public class ControleRelatorioMediaDiaria extends ControleRelatorioPadrao{
         List<Teste> testes = getDAOFactory().getTesteDAO().listar();
         List<RelatorioMediaDiariaUtil> filtrados = new ArrayList<>();
         DateUtil format = new DateUtil();
+        HashMap<String, ArrayList<Double>> dias = new HashMap<>();
                 
         for(Teste t : testes){
             if(validaPeriodoTeste(t)){
-                
+                ArrayList<Double> valores = dias.get(format.formataData(t.getDataHora()));
+                if(!(valores instanceof ArrayList)){
+                    valores = new ArrayList<>();
+                } 
+                valores.add(t.getValor());
+                dias.put(format.formataData(t.getDataHora()), valores);
             }
+        }
+        for (Map.Entry<String, ArrayList<Double>> entry : dias.entrySet()) {
+            ArrayList<Double> valores = entry.getValue();
+            double total = 0.0;
+            for(Double valor : valores){
+                total += valor;
+            }
+            RelatorioMediaDiariaUtil util = new RelatorioMediaDiariaUtil();
+            util.setData(entry.getKey());
+            util.setValor(total/valores.size());
+            filtrados.add(util);
         }
         return filtrados;
     }
@@ -71,8 +90,15 @@ public class ControleRelatorioMediaDiaria extends ControleRelatorioPadrao{
     private boolean validaPeriodoTeste(Teste t){
         DateUtil format = new DateUtil();
         if(!getDataInicio().isEmpty() && !getDataFim().isEmpty()){
+            Calendar cal = Calendar.getInstance();
             Date dataInicio = format.validaData(getDataInicio());
+            cal.setTime(dataInicio);
+            cal.add(Calendar.DATE, -1);
+            dataInicio = cal.getTime();
             Date dataFim = format.validaData(getDataFim());
+            cal.setTime(dataFim);
+            cal.add(Calendar.DATE, 1);
+            dataFim = cal.getTime();
             return (t.getDataHora().after(dataInicio) && t.getDataHora().before(dataFim));
         }
         return true;

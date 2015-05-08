@@ -8,22 +8,22 @@ import java.util.Date;
  */
 public class RelatorioMediaDiariaUtil {
 
-    private Date data;
-    private int qtde;
+    private String data;
+    private double valor;
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public int getQtde() {
-        return qtde;
+    public double getValor() {
+        return valor;
     }
 
-    public void setQtde(int qtde) {
-        this.qtde = qtde;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 }

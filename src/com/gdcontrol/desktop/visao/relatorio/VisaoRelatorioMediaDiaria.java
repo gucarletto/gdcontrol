@@ -39,16 +39,21 @@ public class VisaoRelatorioMediaDiaria extends VisaoRelatorioPadrao {
 
         jLabel2.setText("Data Fim:");
 
-        edDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MM/dd/yyyy"))));
+        edDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
         edDataInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 edDataInicioActionPerformed(evt);
             }
         });
 
-        edDataFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MM/dd/yyyy"))));
+        edDataFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,6 +95,12 @@ public class VisaoRelatorioMediaDiaria extends VisaoRelatorioPadrao {
     private void edDataInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edDataInicioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_edDataInicioActionPerformed
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        this.controle.setDataInicio(edDataInicio.getText());
+        this.controle.setDataFim(edDataFinal.getText());
+        this.controle.chamaRelatorio();
+    }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
