@@ -104,4 +104,9 @@ public class ControleRelatorioHipoHiper extends ControleRelatorioPadrao{
     public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
+
+    @Override
+    public void enviaEmail() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

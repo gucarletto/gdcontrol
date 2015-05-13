@@ -17,4 +17,6 @@ public abstract class ControleRelatorioPadrao extends ControlePadrao{
     }
     
     public abstract void chamaRelatorio();
+    
+    public abstract void enviaEmail();
 }
