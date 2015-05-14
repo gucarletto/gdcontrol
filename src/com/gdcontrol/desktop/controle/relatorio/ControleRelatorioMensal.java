@@ -11,17 +11,23 @@ import com.gdcontrol.util.DateUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
@@ -42,6 +48,11 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
 
     @Override
     public void chamaRelatorio() {
+        JasperPrint printer = this.getPrinter();
+        JasperViewer.viewReport(printer, false);
+    }
+    
+    private JasperPrint getPrinter() {
         File relatorio = new File(getCaminhoRelatorios() + getNomeArquivoRelatorio() + ".jasper");
         try {
             InputStream fis = new FileInputStream(relatorio);
@@ -55,10 +66,44 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
             parametro.put("mes", getMes());
 
             JasperPrint printer = JasperFillManager.fillReport(report, parametro, dataSource);
-
-            JasperViewer.viewReport(printer, false);
+            return printer;
         } catch (FileNotFoundException | JRException ex) {
             ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    @Override
+    public void enviaEmail() {
+        Email email = new Email();
+
+        email.setDe("no.reply.gdcontrol@gmail.com", "gdsis321654");
+        email.getPara().addAll(Arrays.asList(new String[]{this.getDestinatario()}));
+        
+        Usuario u = getDAOFactory().getUsuarioDAO().carregaUnicoUsuario();
+
+        String mensagem = "<b>Em anexo</b>";
+        
+        email.setMensagem(mensagem);
+        email.setAssunto("Relatório de Acompanhamento Mensal do Paciente " + u.getNome());
+        
+        JasperPrint printer = this.getPrinter();
+        JRExporter exporter = new JRPdfExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, printer);
+        try {
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(getCaminhoTempRelatorios() + getNomeArquivoRelatorio() + ".pdf"));
+            exporter.exportReport();
+            File arquivo = this.getRelatorioTemp();
+            email.addAnexo(arquivo);
+        } catch (FileNotFoundException | JRException ex) {
+            Logger.getLogger(ControleRelatorioMensal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        EnviarEmail enviar = new EnviarEmail(email);
+        if (!email.getPara().isEmpty()) {
+            enviar.start();
+            File arquivoTemp = this.getRelatorioTemp();
+            arquivoTemp.delete();
         }
     }
 
@@ -110,25 +155,6 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
 
     public void setDestinatario(String destinatario) {
         this.destinatario = destinatario;
-    }
-
-    @Override
-    public void enviaEmail() {
-        Email email = new Email();
-
-        email.setDe("no.reply.gdcontrol@gmail.com", "gdsis321654");
-        email.getPara().addAll(Arrays.asList(new String[]{this.getDestinatario()}));
-
-        String mensagem = "<b>Segue em anexo</b>";
-        DateUtil du = new DateUtil();
-        
-        email.setMensagem(mensagem);
-        email.setAssunto("Relatório de Acompanhamento Mensal");
-
-        EnviarEmail enviar = new EnviarEmail(email);
-        if (!email.getPara().isEmpty()) {
-            enviar.start();
-        }
     }
     
 }

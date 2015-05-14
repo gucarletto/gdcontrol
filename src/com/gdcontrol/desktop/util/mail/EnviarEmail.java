@@ -73,25 +73,24 @@ public class EnviarEmail extends Thread {
         props.put("mail.smtp.socketFactory.port", mailSMTPServerPort); //mesma porta para o socket
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
-		
 
         //Cria um autenticador que sera usado a seguir
         SimpleAuth auth = new SimpleAuth(email.getDe()[0], email.getDe()[1]);//Usuario e senha de quem esta enviando
 
-        //Session - objeto que ira realizar a conex�o com o servidor
+        //Session - objeto que ira realizar a conexão com o servidor
         /*
-         * Como h� necessidade de autentica��o � criada uma autenticacao que �
-         * responsavel por solicitar e retornar o usu�rio e senha para
-         * autentica��o
+         * Como ha necessidade de autenticação é criada uma autenticacao que o
+         * responsavel por solicitar e retornar o usuário e senha para
+         * autenticação
          */
         Session session = Session.getDefaultInstance(props, auth);
-        session.setDebug(true); //Habilita o LOG das a��es executadas durante o envio do email
+        session.setDebug(true); //Habilita o LOG das ações executadas durante o envio do email
 
-        //Objeto que cont�m a mensagem
+        //Objeto que contém a mensagem
         Message msg = new MimeMessage(session);
         
         try {
-            //Setando o destinat�rios
+            //Setando o destinatários
             int arrayLength = email.getPara().size();
             InternetAddress[] enderecosDestinatarios = new InternetAddress[arrayLength];
             for (int i = 0; i < arrayLength; i++) {
@@ -105,9 +104,9 @@ public class EnviarEmail extends Thread {
             
             //Setando o assunto
             msg.setSubject(email.getAssunto());
-            //Setando o conte�do/corpo do email
+            //Setando o conteúdo/corpo do email
             msg.setContent(email.getMensagem(), "text/html");
-//            Setando anexos
+            //Setando anexos
             MimeMultipart part = new MimeMultipart();
             
             MimeBodyPart body1 = new MimeBodyPart();

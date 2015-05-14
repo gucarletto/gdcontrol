@@ -1,5 +1,6 @@
 package com.gdcontrol.desktop.util.mail;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +11,14 @@ public class Email implements Serializable {
     private List<String> para;
     private String assunto;
     private String mensagem;
-    private List<String> anexos;
+    private List<File> anexos;
 
     public Email() {
         this.para = new ArrayList<String>();
         this.de = new String[2];
         this.assunto = "";
         this.mensagem = "";
-        this.anexos = new ArrayList<String>();
+        this.anexos = new ArrayList<File>();
     }
 
     public String getAssunto() {
@@ -55,26 +56,16 @@ public class Email implements Serializable {
         this.para = para;
     }
 
-    public List<String> getAnexos() {
+    public List<File> getAnexos() {
         return anexos;
     }
 
-    public void setAnexos(List<String> anexos) {
+    public void setAnexos(List<File> anexos) {
         this.anexos = anexos;
     }
-
-	/*@Override
-	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
-		return super.equals(o);
-	}
-
-	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
-	}*/
-
-   
+    
+    public void addAnexo(File anexo){
+        this.anexos.add(anexo);
+    }
 }
 
