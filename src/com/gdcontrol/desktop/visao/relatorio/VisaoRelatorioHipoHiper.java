@@ -31,6 +31,9 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
         edDataInicio = new javax.swing.JFormattedTextField();
         edDataFim = new javax.swing.JFormattedTextField();
         btConfirmar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        edDestinatario = new javax.swing.JTextField();
+        btEnviarEmail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório Hiper/Hipo Mensal");
@@ -50,6 +53,21 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
             }
         });
 
+        jLabel3.setText("Destinatário:");
+
+        edDestinatario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edDestinatarioActionPerformed(evt);
+            }
+        });
+
+        btEnviarEmail.setText("Enviar E-Mail");
+        btEnviarEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEnviarEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -58,7 +76,16 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btConfirmar))
+                        .addComponent(btConfirmar)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(160, 160, 160)
+                                .addComponent(btEnviarEmail))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(edDestinatario))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -68,7 +95,7 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(edDataFim, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(edDataInicio))))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,8 +108,15 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(edDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btConfirmar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btConfirmar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(edDestinatario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btEnviarEmail)))
                 .addContainerGap())
         );
 
@@ -94,6 +128,17 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
         this.controle.setDataFim(edDataFim.getText());
         this.controle.chamaRelatorio();
     }//GEN-LAST:event_btConfirmarActionPerformed
+
+    private void edDestinatarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edDestinatarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edDestinatarioActionPerformed
+
+    private void btEnviarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarEmailActionPerformed
+        this.controle.setDataInicio(edDataInicio.getText());
+        this.controle.setDataFim(edDataFim.getText());
+        this.controle.setDestinatario(edDestinatario.getText());
+        this.controle.enviaEmail();
+    }//GEN-LAST:event_btEnviarEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,10 +184,13 @@ public class VisaoRelatorioHipoHiper extends VisaoRelatorioPadrao {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
+    private javax.swing.JButton btEnviarEmail;
     private javax.swing.JFormattedTextField edDataFim;
     private javax.swing.JFormattedTextField edDataInicio;
+    private javax.swing.JTextField edDestinatario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
     ControleRelatorioHipoHiper controle = new ControleRelatorioHipoHiper();

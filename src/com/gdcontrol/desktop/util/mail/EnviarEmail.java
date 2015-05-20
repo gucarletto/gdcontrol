@@ -1,5 +1,6 @@
 package com.gdcontrol.desktop.util.mail;
 
+import java.io.File;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -117,8 +118,12 @@ public class EnviarEmail extends Thread {
             if (email.getAnexos().size() > 0) {
                 for (int i = 0; i < email.getAnexos().size(); i++) {
                     MimeBodyPart body = new MimeBodyPart();
-                    body.attachFile(email.getAnexos().get(i));
-                    part.addBodyPart(body);
+                    File arquivo = email.getAnexos().get(i);
+                    if(arquivo.isFile()){
+                        System.out.println("arquivo ok");
+                        body.attachFile(arquivo);
+                        part.addBodyPart(body);
+                    }
                 }
             }
             if (email.getAnexos().size() > 0) {

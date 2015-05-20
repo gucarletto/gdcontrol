@@ -31,6 +31,9 @@ public class VisaoRelatorioMediaDiaria extends VisaoRelatorioPadrao {
         edDataInicio = new javax.swing.JFormattedTextField();
         edDataFinal = new javax.swing.JFormattedTextField();
         btConfirmar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        edDestinatario = new javax.swing.JTextField();
+        btEnviarEmail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório de Médias Diárias");
@@ -55,6 +58,21 @@ public class VisaoRelatorioMediaDiaria extends VisaoRelatorioPadrao {
             }
         });
 
+        jLabel3.setText("Destinatário:");
+
+        edDestinatario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edDestinatarioActionPerformed(evt);
+            }
+        });
+
+        btEnviarEmail.setText("Enviar E-Mail");
+        btEnviarEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEnviarEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,8 +88,18 @@ public class VisaoRelatorioMediaDiaria extends VisaoRelatorioPadrao {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(edDataInicio)
                             .addComponent(edDataFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
-                    .addComponent(btConfirmar))
-                .addContainerGap(101, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btConfirmar)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(160, 160, 160)
+                                .addComponent(btEnviarEmail))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(edDestinatario)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,9 +112,16 @@ public class VisaoRelatorioMediaDiaria extends VisaoRelatorioPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(edDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btConfirmar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btConfirmar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(edDestinatario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btEnviarEmail)))
+                .addContainerGap())
         );
 
         pack();
@@ -101,6 +136,17 @@ public class VisaoRelatorioMediaDiaria extends VisaoRelatorioPadrao {
         this.controle.setDataFim(edDataFinal.getText());
         this.controle.chamaRelatorio();
     }//GEN-LAST:event_btConfirmarActionPerformed
+
+    private void edDestinatarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edDestinatarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edDestinatarioActionPerformed
+
+    private void btEnviarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarEmailActionPerformed
+        this.controle.setDataInicio(edDataInicio.getText());
+        this.controle.setDataFim(edDataFinal.getText());
+        this.controle.setDestinatario(edDestinatario.getText());
+        this.controle.enviaEmail();
+    }//GEN-LAST:event_btEnviarEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,10 +192,13 @@ public class VisaoRelatorioMediaDiaria extends VisaoRelatorioPadrao {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
+    private javax.swing.JButton btEnviarEmail;
     private javax.swing.JFormattedTextField edDataFinal;
     private javax.swing.JFormattedTextField edDataInicio;
+    private javax.swing.JTextField edDestinatario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
     private ControleRelatorioMediaDiaria controle = new ControleRelatorioMediaDiaria();

@@ -91,7 +91,7 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
         JRExporter exporter = new JRPdfExporter();
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, printer);
         try {
-            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(getCaminhoTempRelatorios() + getNomeArquivoRelatorio() + ".pdf"));
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(getNomeArquivoRelatorio() + ".pdf"));
             exporter.exportReport();
             File arquivo = this.getRelatorioTemp();
             email.addAnexo(arquivo);
@@ -102,8 +102,6 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
         EnviarEmail enviar = new EnviarEmail(email);
         if (!email.getPara().isEmpty()) {
             enviar.start();
-            File arquivoTemp = this.getRelatorioTemp();
-            arquivoTemp.delete();
         }
     }
 
