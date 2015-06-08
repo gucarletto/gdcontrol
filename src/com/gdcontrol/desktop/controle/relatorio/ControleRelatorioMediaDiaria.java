@@ -163,10 +163,10 @@ public class ControleRelatorioMediaDiaria extends ControleRelatorioPadrao{
         JRExporter exporter = new JRPdfExporter();
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, printer);
         try {
-            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(getCaminhoTempRelatorios() + getNomeArquivoRelatorio() + ".pdf"));
+            File temp = new File(this.getCaminhoTemp()+getNomeArquivoRelatorio()+".pdf");
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(temp));
             exporter.exportReport();
-            File arquivo = this.getRelatorioTemp();
-            email.addAnexo(arquivo);
+            email.addAnexo(temp);
         } catch (FileNotFoundException | JRException ex) {
             Logger.getLogger(ControleRelatorioMensal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -174,8 +174,6 @@ public class ControleRelatorioMediaDiaria extends ControleRelatorioPadrao{
         EnviarEmail enviar = new EnviarEmail(email);
         if (!email.getPara().isEmpty()) {
             enviar.start();
-            File arquivoTemp = this.getRelatorioTemp();
-            arquivoTemp.delete();
         }
     }
 }

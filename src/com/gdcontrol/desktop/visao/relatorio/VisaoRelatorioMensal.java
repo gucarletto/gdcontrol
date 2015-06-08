@@ -2,6 +2,8 @@ package com.gdcontrol.desktop.visao.relatorio;
 
 import com.gdcontrol.desktop.controle.ControlePadrao;
 import com.gdcontrol.desktop.controle.relatorio.ControleRelatorioMensal;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -15,6 +17,13 @@ public class VisaoRelatorioMensal extends VisaoRelatorioPadrao {
     public VisaoRelatorioMensal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Vector comboBoxItems = new Vector();
+        comboBoxItems.add(ControleRelatorioMensal.TIPO_IMPRESSAO_GERAL);
+        comboBoxItems.add(ControleRelatorioMensal.TIPO_IMPRESSAO_CAFE);
+        comboBoxItems.add(ControleRelatorioMensal.TIPO_IMPRESSAO_ALMOCO);
+        comboBoxItems.add(ControleRelatorioMensal.TIPO_IMPRESSAO_JANTA);
+        final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
+        this.cbPeriodo.setModel(model);
     }
 
     /**
@@ -34,6 +43,8 @@ public class VisaoRelatorioMensal extends VisaoRelatorioPadrao {
         btEnviarEmail = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         edDestinatario = new javax.swing.JTextField();
+        cbPeriodo = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Impressão");
@@ -64,33 +75,36 @@ public class VisaoRelatorioMensal extends VisaoRelatorioPadrao {
             }
         });
 
+        jLabel4.setText("Período:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(edMes, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                                    .addComponent(edAno))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btConfirmar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                                .addComponent(btEnviarEmail))))
+                        .addComponent(btConfirmar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                        .addComponent(btEnviarEmail))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(edMes, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                .addComponent(edAno)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edDestinatario)))
+                        .addComponent(edDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -104,10 +118,14 @@ public class VisaoRelatorioMensal extends VisaoRelatorioPadrao {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(edAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(edDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmar)
@@ -121,6 +139,7 @@ public class VisaoRelatorioMensal extends VisaoRelatorioPadrao {
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         this.controle.setMes(Integer.parseInt(edMes.getText()));
         this.controle.setAno(Integer.parseInt(edAno.getText()));
+        this.controle.setTipoImpressao((String) cbPeriodo.getSelectedItem());
         this.controle.chamaRelatorio();
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -180,12 +199,14 @@ public class VisaoRelatorioMensal extends VisaoRelatorioPadrao {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btEnviarEmail;
+    private javax.swing.JComboBox cbPeriodo;
     private javax.swing.JTextField edAno;
     private javax.swing.JTextField edDestinatario;
     private javax.swing.JTextField edMes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
     private ControleRelatorioMensal controle = new ControleRelatorioMensal();

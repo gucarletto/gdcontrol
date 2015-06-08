@@ -13,9 +13,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -40,6 +42,12 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
     private int mes;
     private int ano;
     private String destinatario;
+    private String tipoImpressao;
+
+    public static final String TIPO_IMPRESSAO_GERAL = "Geral";
+    public static final String TIPO_IMPRESSAO_CAFE = "Café da Manhã";
+    public static final String TIPO_IMPRESSAO_ALMOCO = "Almoço";
+    public static final String TIPO_IMPRESSAO_JANTA = "Janta";
 
     @Override
     public String getNomeArquivoRelatorio() {
@@ -51,7 +59,7 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
         JasperPrint printer = this.getPrinter();
         JasperViewer.viewReport(printer, false);
     }
-    
+
     private JasperPrint getPrinter() {
         File relatorio = new File(getCaminhoRelatorios() + getNomeArquivoRelatorio() + ".jasper");
         try {
@@ -72,29 +80,29 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
         }
         return null;
     }
-    
+
     @Override
     public void enviaEmail() {
         Email email = new Email();
 
         email.setDe("no.reply.gdcontrol@gmail.com", "gdsis321654");
         email.getPara().addAll(Arrays.asList(new String[]{this.getDestinatario()}));
-        
+
         Usuario u = getDAOFactory().getUsuarioDAO().carregaUnicoUsuario();
 
         String mensagem = "<b>Em anexo</b>";
-        
+
         email.setMensagem(mensagem);
         email.setAssunto("Relatório de Acompanhamento Mensal do Paciente " + u.getNome());
-        
+
         JasperPrint printer = this.getPrinter();
         JRExporter exporter = new JRPdfExporter();
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, printer);
         try {
-            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(getNomeArquivoRelatorio() + ".pdf"));
+            File temp = new File(this.getCaminhoTemp() + getNomeArquivoRelatorio() + ".pdf");
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(temp));
             exporter.exportReport();
-            File arquivo = this.getRelatorioTemp();
-            email.addAnexo(arquivo);
+            email.addAnexo(temp);
         } catch (FileNotFoundException | JRException ex) {
             Logger.getLogger(ControleRelatorioMensal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -119,16 +127,41 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(t.getDataHora());
 
-                util.setTeste(t);
-                util.setAplicacao(a);
-                util.setUsuario(usu);
-                util.setPrescricao(p);
-                util.setDiaDoMes(cal.get(Calendar.DAY_OF_MONTH));
-                util.setDataHoraFormatada(format.formataDataCompleta(t.getDataHora()));
-                filtrados.add(util);
+                if (this.filtraPeriodo(cal)) {
+
+                    util.setTeste(t);
+                    util.setAplicacao(a);
+                    util.setUsuario(usu);
+                    util.setPrescricao(p);
+                    util.setDiaDoMes(cal.get(Calendar.DAY_OF_MONTH));
+                    util.setDataHoraFormatada(format.formataDataCompleta(t.getDataHora()));
+                    filtrados.add(util);
+                }
             }
         }
         return filtrados;
+    }
+
+    private boolean filtraPeriodo(Calendar cal) {
+        long hora = cal.get(Calendar.HOUR_OF_DAY);
+        switch (this.getTipoImpressao()) {
+            case ControleRelatorioMensal.TIPO_IMPRESSAO_CAFE:
+                if(hora >= 6 && hora <= 10){
+                    return true;
+                }
+                return false;
+            case ControleRelatorioMensal.TIPO_IMPRESSAO_ALMOCO:
+                if(hora >= 11 && hora <= 14){
+                    return true;
+                }
+                return false;
+            case ControleRelatorioMensal.TIPO_IMPRESSAO_JANTA:
+                if(hora >= 17 && hora <= 23){
+                    return true;
+                }
+                return false;
+        }
+        return true;
     }
 
     public int getMes() {
@@ -154,5 +187,12 @@ public class ControleRelatorioMensal extends ControleRelatorioPadrao {
     public void setDestinatario(String destinatario) {
         this.destinatario = destinatario;
     }
-    
+
+    public String getTipoImpressao() {
+        return tipoImpressao;
+    }
+
+    public void setTipoImpressao(String tipoImpressao) {
+        this.tipoImpressao = tipoImpressao;
+    }
 }

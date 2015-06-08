@@ -1,6 +1,5 @@
 package com.gdcontrol.desktop.util.mail;
 
-import java.io.File;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -11,6 +10,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+
 
 public class EnviarEmail extends Thread {
     
@@ -74,20 +75,21 @@ public class EnviarEmail extends Thread {
         props.put("mail.smtp.socketFactory.port", mailSMTPServerPort); //mesma porta para o socket
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
+		
 
         //Cria um autenticador que sera usado a seguir
         SimpleAuth auth = new SimpleAuth(email.getDe()[0], email.getDe()[1]);//Usuario e senha de quem esta enviando
 
         //Session - objeto que ira realizar a conexão com o servidor
         /*
-         * Como ha necessidade de autenticação é criada uma autenticacao que o
+         * Como há necessidade de autenticação é criada uma autenticacao que
          * responsavel por solicitar e retornar o usuário e senha para
          * autenticação
          */
         Session session = Session.getDefaultInstance(props, auth);
         session.setDebug(true); //Habilita o LOG das ações executadas durante o envio do email
 
-        //Objeto que contém a mensagem
+        //Objeto que cont�m a mensagem
         Message msg = new MimeMessage(session);
         
         try {
@@ -107,7 +109,7 @@ public class EnviarEmail extends Thread {
             msg.setSubject(email.getAssunto());
             //Setando o conteúdo/corpo do email
             msg.setContent(email.getMensagem(), "text/html");
-            //Setando anexos
+//            Setando anexos
             MimeMultipart part = new MimeMultipart();
             
             MimeBodyPart body1 = new MimeBodyPart();
@@ -118,17 +120,11 @@ public class EnviarEmail extends Thread {
             if (email.getAnexos().size() > 0) {
                 for (int i = 0; i < email.getAnexos().size(); i++) {
                     MimeBodyPart body = new MimeBodyPart();
-                    File arquivo = email.getAnexos().get(i);
-                    if(arquivo.isFile()){
-                        System.out.println("arquivo ok");
-                        body.attachFile(arquivo);
-                        part.addBodyPart(body);
-                    }
+                    body.attachFile(email.getAnexos().get(i));
+                    part.addBodyPart(body);
                 }
             }
-            if (email.getAnexos().size() > 0) {
-                msg.setContent(part);
-            }
+            msg.setContent(part);
         } catch (Exception e) {
             System.out.println(">> Erro: Completar Mensagem");
             e.printStackTrace();

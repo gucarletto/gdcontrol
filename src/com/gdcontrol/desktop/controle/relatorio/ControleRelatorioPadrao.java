@@ -21,9 +21,9 @@ public abstract class ControleRelatorioPadrao extends ControlePadrao{
         return arquivo.getAbsolutePath();
     }
     
-    public File getRelatorioTemp(){
-        File arquivo = new File(getNomeArquivoRelatorio() + ".pdf");
-        return arquivo;
+    public String getCaminhoTemp(){
+        File arquivo = new File("");
+        return arquivo.getAbsolutePath()+"//temp//";
     }
     
     public abstract void chamaRelatorio();
